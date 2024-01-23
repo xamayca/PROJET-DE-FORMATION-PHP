@@ -1,0 +1,15 @@
+{
+    "name": "xamayca/francesurvival",
+    "authors": [
+        {
+            "name": "xamayca",
+            "email": "christopher.hariouat@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "francesurvival\\": "models/"
+        }
+    },
+    "require": {}
+}

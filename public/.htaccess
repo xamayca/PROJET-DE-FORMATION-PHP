@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteBase /
+
+# SUPPRIME LE SLASH FINAL SI PRÉSENT
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# LES RÈGLES EXISTANTES POUR REDIRIGER VERS INDEX.PHP
+RewriteRule ^public/ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [QSA,L]

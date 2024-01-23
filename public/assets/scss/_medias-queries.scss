@@ -1,0 +1,39 @@
+/********************************************************************************/
+/********************************* MÉDIAS QUERY *********************************/
+/********************************************************************************/
+@media screen and (min-width: 1024px) {
+    nav {
+        #menu-open, #menu-close {
+            display: none;
+        }
+
+        #navigation-links {
+            background: transparent;
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            transform: none;
+            height: auto;
+            width: 60%;
+        }
+    }
+}
+@media screen and (min-width: 1600px) {
+    nav {
+        #menu-open,
+        #menu-close {
+            display: none;
+        }
+        #navigation-links {
+            background: transparent;
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: auto;
+            padding-left: 0;
+        }
+    }
+}
