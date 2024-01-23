@@ -34,7 +34,7 @@ nav {
         width: 65%;
         background: linear-gradient(to bottom, $secondary-nav-color, darken($secondary-nav-color, 10%));
         overflow-y: auto;
-        padding-top: 1em;
+        padding: 1em ;
 
         .navigation-menu {
             width: 100%;
@@ -50,12 +50,10 @@ nav {
                     text-decoration: none;
                     padding: 1em;
                     width: 100%;
-
-                    &:hover, &.active {
-                        background-color: $hover-color;
-                    }
                 }
-
+                &:hover, &.active {
+                    background-color: $hover-color;
+                }
                 .nav-link-container {
                     display: flex;
                     align-items: center;
