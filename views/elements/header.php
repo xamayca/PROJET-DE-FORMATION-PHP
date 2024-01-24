@@ -18,12 +18,17 @@
     <!-- NAVIGATION BAR / NAVIGATION LINKS -->
     <nav>
         <a href="">France survival</a>
-        <ul class="navigation-links">
 
+        <img src="assets/img/navigation/menu-open.svg" class="menu-open" alt="">
+        <img src="assets/img/navigation/menu-close.svg" class="menu-close" alt="">
+
+        <ul class="navigation-links">
             <div class="navigation-menu">
                 <li class="dropdown">
                     <img src="assets/img/avatar-default.png" class="avatar" alt="">
-                    <a href=""><img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Compte</a>
+                    <button class="dropdown-toggle">
+                        <img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Compte
+                    </button>
                     <ul class="sub-items">
                         <li>
                             <a href="">Connexion</a>
@@ -37,7 +42,9 @@
                     <a href="">Accueil</a>
                 </li>
                 <li class="dropdown">
-                    <a href=""><img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Actualités</a>
+                    <button class="dropdown-toggle">
+                        <img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Actualités
+                    </button>
                     <ul class="sub-items">
                         <li>
                             <a href=""><img src="assets/img/navigation/icon-francesurvival.svg" class="game-logo" alt="ARK: Survival Ascended logo">Communauté</a>
@@ -54,7 +61,9 @@
                     <a href="">Forum</a>
                 </li>
                 <li class="dropdown">
-                    <a href=""><img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Guides</a>
+                    <button class="dropdown-toggle">
+                        <img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Guides
+                    </button>
                     <ul class="sub-items">
                         <li>
                             <a href="">Tutoriels</a>
@@ -66,6 +75,12 @@
                 </li>
                 <li>
                     <a href="">Boutique</a>
+                </li>
+                <li>
+                    <a href="">Nous contacter</a>
+                </li>
+                <li>
+                    <a href="">Faire un don</a>
                 </li>
             </div>
         </ul>
