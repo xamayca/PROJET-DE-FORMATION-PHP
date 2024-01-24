@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-    width: 0.5em;
+    width: 0.2em;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -18,10 +18,10 @@ $font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+    font-family: $font-family;
 }
 
 body {
-    font-family: $font-family;
     font-weight: bold;
     font-size: small;
 }

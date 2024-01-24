@@ -17,7 +17,7 @@
 
     <!-- NAVIGATION BAR / NAVIGATION LINKS -->
     <nav>
-        <a href="">France survival</a>
+        <a href="/">France survival</a>
 
         <img src="assets/img/navigation/menu-open.svg" class="menu-open" alt="">
         <img src="assets/img/navigation/menu-close.svg" class="menu-close" alt="">
@@ -34,7 +34,7 @@
                             <a href="">Connexion</a>
                         </li>
                         <li>
-                            <a href="">Inscription</a>
+                            <a href="/inscription">Inscription</a>
                         </li>
                     </ul>
                 </li>
@@ -54,6 +54,19 @@
                         </li>
                         <li>
                             <a href=""><img src="assets/img/navigation/icon-ARK2.png" class="game-logo" alt="ARK: II logo">ARK: II</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <button class="dropdown-toggle">
+                        <img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Clusters
+                    </button>
+                    <ul class="sub-items">
+                        <li>
+                            <a href="">Serveurs PVE</a>
+                        </li>
+                        <li>
+                            <a href="">Serveurs PVP</a>
                         </li>
                     </ul>
                 </li>
@@ -87,7 +100,4 @@
     </nav>
 
 
-
-    <!--<img id="menu-open" src="assets/img/navigation/menu-open.svg" alt="Icône pour ouvrir le menu">-->
-    <!--<img id="menu-close" src="assets/img/navigation/menu-close.svg" alt="Icône pour fermer le menu">-->
     <header>ICI MON HEADER POUR PAS PERDRE LA TETE</header>

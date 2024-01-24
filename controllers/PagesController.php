@@ -16,4 +16,9 @@ class PagesController
     {
         require_once '../views/pages/test/database-test.php';
     }
+
+    public function registration()
+    {
+        require_once '../views/pages/account/registration.php';
+    }
 };

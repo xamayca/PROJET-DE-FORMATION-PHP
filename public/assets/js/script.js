@@ -7,17 +7,17 @@ const toggleDropdown = (dropdown) => {
     if (subItemsHTML.style.maxHeight) {
         subItemsHTML.style.maxHeight = null;
         dropdownIcon.style.transform = "rotate(0deg)";
-        subItemsHTML.classList.remove("sub-items-open");
+        subItemsHTML.classList.remove("sub-items-border");
         dropdown.classList.remove("active");
     } else {
         subItemsHTML.style.maxHeight = subItemsHTML.scrollHeight + "px";
         dropdownIcon.style.transform = "rotate(180deg)";
-        subItemsHTML.classList.add("sub-items-open");
+        subItemsHTML.classList.add("sub-items-border");
         dropdown.classList.add("active");
     }
 };
 
-// Attacher l'événement click à tous les dropdowns
+
 dropdownsHTML.forEach(dropdown => {
     dropdown.addEventListener("click", function (event) {
         event.preventDefault();

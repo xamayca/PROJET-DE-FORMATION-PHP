@@ -49,12 +49,12 @@
                 $errors['password'] = $AlertsManager->getErrorMessages('password', 'invalid');
             }
 
-        // VALIDATION DE LA CONFIRMATION DU MOT DE PASSE
-        if (empty($password_confirm)) {
-            $errors['passwordConfirm'] = $AlertsManager->getErrorMessages('password_confirm', 'required');
-        } elseif ($password !== $password_confirm) {
-            $errors['passwordConfirm'] = $AlertsManager->getErrorMessages('password_confirm', 'invalid');
-        }
+            // VALIDATION DE LA CONFIRMATION DU MOT DE PASSE
+            if (empty($password_confirm)) {
+                $errors['passwordConfirm'] = $AlertsManager->getErrorMessages('password_confirm', 'required');
+            } elseif ($password !== $password_confirm) {
+                $errors['passwordConfirm'] = $AlertsManager->getErrorMessages('password_confirm', 'invalid');
+            }
 
             // VALIDATION DE LA DATE DE NAISSANCE
             if (!empty($birthdate) && !preg_match($RegexManager->getRegex('date'), $birthdate)) {
