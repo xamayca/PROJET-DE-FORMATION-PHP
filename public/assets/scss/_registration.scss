@@ -1,0 +1,83 @@
+// Variables
+$primary-color: #3498db; // Bleu
+$error-color: #e74c3c; // Rouge
+$form-background: #f7f7f7; // Gris clair
+$input-border-color: #bdc3c7; // Gris
+$label-color: #2c3e50; // Bleu foncé
+$submit-background: #1d1b31;
+$submit-color: white;
+$hover-color: rgba(158, 158, 158, 0.10);
+
+h1 {
+    text-align: center;
+    color: $primary-color;
+}
+
+#inscription-form {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+    margin: 0 auto;
+    padding: 1em;
+    height: 100%;
+
+    .image-container {
+        background-image: url(../img/registeration-wallpaper.jpg);
+        background-position: center;
+        background-size: cover;
+        width: 50%;
+        height: 100%;
+        flex-grow:1;
+    }
+
+    form {
+        margin: 0;
+        height: 100%;
+        background: linear-gradient(to bottom, $form-background, darken($form-background, 10%));
+        padding: 20px;
+        width: 50%;
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+        border: 1px solid $hover-color;
+    }
+}
+
+label {
+    color: #0e0e11;
+    text-align: left;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 2em;
+    border: 1px solid $input-border-color;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 1em;
+    border: none;
+    background-color: $submit-background;
+    color: $submit-color;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: darken($submit-background, 10%);
+    }
+}
+
+p {
+    color: $error-color;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}

@@ -1,30 +1,30 @@
 <?php
- require_once '../models/user.php';
- require_once '../private/database.php';
- require_once '../utils/clean-input.php';
- require_once '../utils/alerts-manager.php';
- require_once '../utils/regex-manager.php';
+require_once '../models/user.php';
+require_once '../private/database.php';
+require_once '../utils/clean-input.php';
+require_once '../utils/alerts-manager.php';
+require_once '../utils/regex-manager.php';
 
- class UsersController
- {
-     public function registration()
-     {
-         $AlertsManager = new AlertsManager();
-         $RegexManager = new RegexManager();
-         $errors = [];
+class UsersController
+{
+    public function registration()
+    {
+        $AlertsManager = new AlertsManager();
+        $RegexManager = new RegexManager();
+        $errors = [];
 
-         // NETTOYAGE DES DONNÉES REÇUES
-         foreach ($_POST as $key => $value) {
+        // NETTOYAGE DES DONNÉES REÇUES
+        foreach ($_POST as $key => $value) {
             $$key = cleanInput($value);
-         }
+        }
 
-         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $user = new Users();
 
             $user->setUsername($username);
-             // VALIDATION DU NOM D'UTILISATEUR
-             if (empty($username)) {
+            // VALIDATION DU NOM D'UTILISATEUR
+            if (empty($username)) {
                 $errors['username'] = $AlertsManager->getErrorMessages('username', 'required');
             } elseif (!preg_match($RegexManager->getRegex('username'), $username)) {
                 $errors['username'] = $AlertsManager->getErrorMessages('username', 'invalid');
@@ -32,7 +32,7 @@
                 $errors['username'] = $AlertsManager->getErrorMessages('username', 'exists');
             }
 
-             $user->setEmail($email);
+            $user->setEmail($email);
             // VALIDATION DE L'EMAIL
             if (empty($email)) {
                 $errors['email'] = $AlertsManager->getErrorMessages('email', 'required');
@@ -61,7 +61,7 @@
                 $errors['birthdate'] = $AlertsManager->getErrorMessages('birthdate', 'invalid');
             }
 
-             // ENREGISTREMENT DE L'UTILISATEUR DANS LA BASE DE DONNÉES
+            // ENREGISTREMENT DE L'UTILISATEUR DANS LA BASE DE DONNÉES
             if (empty($errors)) {
                 $user->setUsername($username);
                 $user->setEmail($email);

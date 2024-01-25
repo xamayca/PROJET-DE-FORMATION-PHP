@@ -18,7 +18,7 @@ class Users
     private string $registerDate;
     private int $id_roles;
 
-    /** CONSTRUCTEUR POUR INITIALISER LA CONNEXION PDO */
+    /** CONSTRUCTEUR POUR INITIALISER LA CONNEXION A LA BASE DE DONNÉES */
     public function __construct()
     {
         $database = new DatabaseConnection;
@@ -41,8 +41,7 @@ class Users
             return $req->execute();
         } catch (PDOException $e) {
             // AFFICHE L'ERREUR EN CAS D'ÉCHEC ET REDIRIGE VERS LA PAGE D'ACCUEIL //
-            var_dump($e);
-            header('Location: /index.php');
+            header('Location: /');
         }
     }
 
