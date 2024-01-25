@@ -2,7 +2,7 @@
 
 <?php if (isset($_SESSION['success'])) { ?>
     <p><?= $_SESSION['success'] ?></p>
-    <?php unset($_SESSION['success']);?>
+    <?php unset($_SESSION['success']); ?>
 <?php } ?>
 
 <form action="/inscription" method="post">
@@ -27,8 +27,8 @@
     <label for="password_confirm">Confirmation du mot de passe</label>
     <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirmez votre mot de passe ici">
     <?php if (isset($errors['passwordConfirm'])) { ?>
-    <p><?= $errors['passwordConfirm'] ?></p>
-<?php } ?>
+        <p><?= $errors['passwordConfirm'] ?></p>
+    <?php } ?>
 
     <label for="birthdate">Date de naissance</label>
     <input type="date" name="birthdate" id="birthdate">
@@ -38,7 +38,4 @@
 
     <input type="submit" name="submit" value="S'inscrire">
 
-
 </form>
-
-<?php var_dump($errors) ?>

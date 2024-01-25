@@ -19,10 +19,10 @@
     <nav>
         <a href="/">France survival</a>
 
-        <img src="assets/img/navigation/menu-open.svg" class="menu-open" alt="">
-        <img src="assets/img/navigation/menu-close.svg" class="menu-close" alt="">
+        <img src="assets/img/navigation/menu-open.svg" id="nav-open" alt="Icône du menu mobile ouverture">
+        <img src="assets/img/navigation/menu-close.svg" id="nav-close" alt="Icône du menu mobile fermeture">
 
-        <ul class="navigation-links">
+        <ul id="navigation-links">
             <div class="navigation-menu">
                 <li class="dropdown">
                     <img src="assets/img/avatar-default.png" class="avatar" alt="">
