@@ -1,9 +1,8 @@
-$primary-nav-color: #F5FFFA;
-$secondary-nav-color: #1d1b31;
-$third-nav-color: #0e0e11;
+$white-color: #f7f7f7;
+$dark-color: #13161A;
+$dark-purple-color: #1d1b31;
 $hover-color: rgba(158, 158, 158, 0.10);
-$text-white: #e0e0e0;
-$text-dark: #0e0e11;
+
 
 nav {
     position: absolute;
@@ -16,7 +15,7 @@ nav {
     padding-right:2em;
     width: 100%;
     height: 10vh;
-    background-color: $primary-nav-color;
+    background-color: $white-color;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
     font-weight: bold;
     text-transform: uppercase;
@@ -29,7 +28,7 @@ nav {
     }
 
     > a {
-        color: $text-dark;
+        color: $dark-color;
         text-decoration: none;
         font-weight: bold;
         font-size: 1.2em;
@@ -48,7 +47,7 @@ nav {
         width: 65%;
         height: 90vh;
         padding: 1em;
-        background: linear-gradient(to bottom, $secondary-nav-color, darken($secondary-nav-color, 10%));
+        background: linear-gradient(to bottom, $dark-purple-color, darken($dark-purple-color, 10%));
         overflow-y: auto;
 
         .navigation-menu {
@@ -57,7 +56,7 @@ nav {
             overflow: hidden;
 
             a {
-                color: $text-white;
+                color: $white-color;
                 text-decoration: none;
                 padding: 1em;
                 display: block;
@@ -68,7 +67,7 @@ nav {
                 }
             }
 
-            .dropdown:first-child {
+            li.dropdown:first-child {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -78,8 +77,7 @@ nav {
                 background-image: url('../img/navigation/banner.png');
                 background-size: cover;
                 background-position: center 20%;
-                background-color: $primary-nav_color;
-                border-radius: 5px;
+                background-color: $white-color;
                 box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
                 border: 1px solid $hover-color;
 
@@ -94,8 +92,8 @@ nav {
                 .dropdown-icon {
                     position: absolute;
                     right: 3em;
-                    width: 16px;
-                    height: 16px;
+                    width: 8px;
+                    height: 8px;
                     transition: transform 0.5s ease;
                 }
             }
@@ -105,10 +103,11 @@ nav {
                 flex-direction: column;
 
                 button.dropdown-toggle {
+                    position: relative;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: $text-white;
+                    color: $white-color;
                     background-color: transparent;
                     border: none;
                     padding: 1em;
@@ -122,14 +121,14 @@ nav {
                     &:hover, &.active {
                         background-color: darken($hover-color, 40%);
                     }
-                }
 
-                .dropdown-icon {
-                    position: absolute;
-                    right: 2em;
-                    width: 16px;
-                    height: 16px;
-                    transition: transform 0.5s ease;
+                    .dropdown-icon {
+                        position: absolute;
+                        right: 2em;
+                        width: 8px;
+                        height: 8px;
+                        transition: transform 0.5s ease;
+                    }
                 }
 
                 &:hover, &.active {
@@ -140,7 +139,7 @@ nav {
                     position: relative;
                     max-height: 0;
                     overflow: hidden;
-                    background-color: darken($secondary-nav-color, 5%);
+                    background-color: darken($dark-purple-color, 5%);
                     width: 100%;
                     transition: max-height 0.5s ease;
 
@@ -152,7 +151,6 @@ nav {
                         content: "";
                         display: block;
                         border: 1px solid $hover-color;
-                        margin: 0 1em;
                     }
 
                     a {
@@ -163,7 +161,7 @@ nav {
                         padding: 1.5em;
                         font-size: 75%;
                         font-weight: normal;
-                        color: $text-white;
+                        color: $white-color;
                         position: relative;
                         text-decoration: none;
 
@@ -174,7 +172,7 @@ nav {
                             left: 50%;
                             width: 50%;
                             height: 1px;
-                            background-color: $text-white;
+                            background-color: $white-color;
                             transform: translateX(-50%) scaleX(0);
                             transition: transform 0.3s ease-in-out;
                         }
@@ -186,9 +184,9 @@ nav {
 
                     .game-logo {
                         position: absolute;
-                        left: 0.5em;
-                        width: 20px;
-                        height: 20px;
+                        left: 1em;
+                        width: 16px;
+                        height: 16px;
                     }
 
                     .hidden-menu {

@@ -1,1 +1,1 @@
-<h1 style="margin-top:10vh;">PAGE 404 MAGGLE</h1>
+<h1>PAGE 404 MAGGLE</h1>

@@ -1,4 +1,4 @@
-<h1>Bienvenue sur la page d'inscription de FRANCE SURVIVAL</h1>
+<h1>Inscription ARK: FRANCE SURVIVAL</h1>
 
 <?php if (isset($_SESSION['success'])) { ?>
     <p><?= $_SESSION['success'] ?></p>

@@ -13,7 +13,7 @@
     <title>FRANCE SURVIVAL</title>
 </head>
 
-<body style="text-align: center;">
+<body>
 
     <!-- NAVIGATION BAR / NAVIGATION LINKS -->
     <nav>
@@ -25,13 +25,13 @@
         <ul id="navigation-links">
             <div class="navigation-menu">
                 <li class="dropdown">
-                    <img src="assets/img/avatar-default.png" class="avatar" alt="">
+                    <img src="assets/img/avatar-default.png" class="avatar" alt="Avatar par défaut">
                     <button class="dropdown-toggle">
                         <img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Compte
                     </button>
                     <ul class="sub-items">
                         <li>
-                            <a href="">Connexion</a>
+                            <a href="/connexion">Connexion</a>
                         </li>
                         <li>
                             <a href="/inscription">Inscription</a>
@@ -88,9 +88,6 @@
                 </li>
                 <li>
                     <a href="">Boutique</a>
-                </li>
-                <li>
-                    <a href="">Nous contacter</a>
                 </li>
                 <li>
                     <a href="">Faire un don</a>

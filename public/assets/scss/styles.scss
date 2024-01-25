@@ -3,3 +3,16 @@
 @use 'registration' as *;
 @use 'medias-queries' as *;
 
+// CLASSE POUR LE DÉVELOPPEMENT FRONT END //
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-yellow {
+    background-color: yellow;
+}
+
+.bg-green {
+    background-color: green;
+}

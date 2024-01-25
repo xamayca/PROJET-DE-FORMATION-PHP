@@ -1,0 +1,75 @@
+@media screen and (min-width:1600px) {
+
+    nav{
+        #nav-open,
+        #nav-close {
+            display: none;
+        }
+
+        #navigation-links {
+            background: none;
+            padding: 0;
+            position: initial;
+            transform: none;
+            height: initial;
+
+            .navigation-menu{
+                display:flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                a {
+                    font-size: 1.2em;
+                    color:black;
+                }
+
+                li.dropdown:first-child {
+                    order:1;
+                    position:relative;
+                    border:none;
+                    box-shadow: none;
+                    flex-direction: row;
+                    background: none;
+                    padding: 0;
+                    margin: 0;
+
+                   // background-color: red;
+
+                    .avatar {
+                        margin:0;
+                        width: 32px;
+                        height: 32px;
+                    }
+                }
+
+                li.dropdown {
+                    display: flex;
+                    flex-direction: column;
+
+                    button.dropdown-toggle {
+                        font-size: 1.2em;
+                        color:black;
+                        position:relative;
+                        .dropdown-icon {
+                            background-color: red;
+                            right: 0;
+                            width: 8px;
+                            height: 8px;
+                            transition: transform 0.5s ease;
+                        }
+
+                        .sub-items{
+                            max-height: 500px;
+                            background:green;
+                            position:absolute;
+                            top:10%;
+                            left:0;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}

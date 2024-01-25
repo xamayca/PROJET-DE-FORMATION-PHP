@@ -1,46 +1,67 @@
-// Variables
-$primary-color: #3498db; // Bleu
-$error-color: #e74c3c; // Rouge
-$form-background: #f7f7f7; // Gris clair
-$input-border-color: #bdc3c7; // Gris
-$label-color: #2c3e50; // Bleu foncé
-$submit-background: #1d1b31;
-$submit-color: white;
-$hover-color: rgba(158, 158, 158, 0.10);
+$blue-color: #3498db;
+$error-color: #e74c3c;
+$white-color: #f7f7f7;
+$dark-color: #13161A;
+$dark-purple-color: #1d1b31;
+
+.bg-white {
+    background-color: #F5FFFA;
+}
+
+.bg-light {
+    background-color: #5D6D7E;
+}
+
+.bg-light-grey {
+    background-color: #4A5765;
+}
+
+.bg-grey {
+    background-color: #d6d6d6;
+}
+
+.bg-light-dark {
+    background-color: #2C3A47;
+}
+
+
+.bg-blue {
+    background-color: #2c3e50;
+}
+
+.bg-blue-light {
+    background-color: #34495E;
+}
+
+.bg-dark {
+    background-color: #13161A;
+}
+
+.bg-dark-light {
+    background-color: #1A1D24;
+}
+
+.bg-dark-grey {
+    background-color: #282a35;
+}
+
 
 h1 {
     text-align: center;
-    color: $primary-color;
+    color: $blue-color;
 }
 
-#inscription-form {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    align-items: center;
-    margin: 0 auto;
-    padding: 1em;
-    height: 100%;
 
-    .image-container {
-        background-image: url(../img/registeration-wallpaper.jpg);
-        background-position: center;
-        background-size: cover;
-        width: 50%;
+form {
+        margin: 0 auto;
         height: 100%;
-        flex-grow:1;
-    }
-
-    form {
-        margin: 0;
-        height: 100%;
-        background: linear-gradient(to bottom, $form-background, darken($form-background, 10%));
-        padding: 20px;
-        width: 50%;
+        background: linear-gradient(to bottom, $white-color, darken($white-color, 10%));
+        padding: 2em;
+        width: 90%;
         box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
-        border: 1px solid $hover-color;
+        border: 1px solid secondary-nav-color;
     }
-}
+
 
 label {
     color: #0e0e11;
@@ -57,24 +78,28 @@ input[type="date"] {
     width: 100%;
     padding: 1em;
     margin-bottom: 2em;
-    border: 1px solid $input-border-color;
-    box-sizing: border-box;
+    border: 1px solid $dark-purple-color;
+
+    &:focus {
+        outline: 1px solid $dark-purple-color;
+    }
 }
 
 input[type="submit"] {
     width: 100%;
     padding: 1em;
     border: none;
-    background-color: $submit-background;
-    color: $submit-color;
+    background-color: $dark-purple-color;
+    color: $white-color;
     cursor: pointer;
-    font-size: 16px;
     transition: background-color 0.3s;
 
     &:hover {
-        background-color: darken($submit-background, 10%);
+        background-color: darken($dark-purple-color, 10%);
     }
 }
+
+
 
 p {
     color: $error-color;

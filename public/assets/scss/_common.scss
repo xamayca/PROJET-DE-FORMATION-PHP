@@ -1,13 +1,16 @@
+$dark-color: #13161A;
+$light-grey: #4A5765;
+
 ::-webkit-scrollbar {
     width: 0.2em;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #4A5765;
+    background-color: $light-grey;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #282a35;
+    background-color: $dark-color;
 }
 
 $font-family: 'Roboto', sans-serif;
@@ -20,6 +23,8 @@ $font-family: 'Roboto', sans-serif;
     list-style: none;
     font-family: $font-family;
     scroll-behavior: smooth;
+    font-weight: bold;
+    text-align: center;
 }
 
 body {
@@ -27,5 +32,5 @@ body {
     font-weight: bold;
     font-size: small;
     margin-top:10vh;
-    background-color: #282a35;
+    background-color: #13161A;
 }
