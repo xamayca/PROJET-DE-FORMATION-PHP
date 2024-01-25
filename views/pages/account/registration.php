@@ -1,4 +1,4 @@
-<h1 style="margin-top:10vh;">Bienvenue sur la page d'inscription de FRANCE SURVIVAL</h1>
+<h1>Bienvenue sur la page d'inscription de FRANCE SURVIVAL</h1>
 
 <?php if (isset($_SESSION['success'])) { ?>
     <p><?= $_SESSION['success'] ?></p>
