@@ -10,3 +10,6 @@ RewriteRule ^public/ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php [QSA,L]
+
+
+# L'ERREUR 404 EST GERER INTEGRALEMENT PAR LE ROUTEUR #

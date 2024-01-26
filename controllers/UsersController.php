@@ -13,14 +13,14 @@ class UsersController
         $RegexManager = new RegexManager();
         $errors = [];
 
-        // NETTOYAGE DES DONNÉES REÇUES
-        foreach ($_POST as $key => $value) {
-            $$key = cleanInput($value);
-        }
+        $user = new Users();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $user = new Users();
+            // NETTOYAGE DES DONNÉES REÇUES
+            foreach ($_POST as $key => $value) {
+                $$key = cleanInput($value);
+            }
 
             $user->setUsername($username);
             // VALIDATION DU NOM D'UTILISATEUR

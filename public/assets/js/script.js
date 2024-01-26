@@ -9,7 +9,7 @@ if (window.innerWidth <= 768) {
     /** FONCTION QUI GÈRE L'OUVERTURE & LA FERMETURE DES SOUS-MENUS DE LA NAVIGATION */
     const toggleDropdown = (dropdown) => {
         const subItemsHTML = dropdown.querySelector('.sub-items');
-        const dropdownIcon = dropdown.querySelector('.dropdown-icon');
+        const dropdownIcon = dropdown.querySelector('.fa-chevron-down');
 
         if (subItemsHTML.style.maxHeight) {
             subItemsHTML.style.maxHeight = null;

@@ -1,0 +1,85 @@
+@media screen and (min-width:1600px) {
+
+    nav{
+        #nav-open,
+        #nav-close {
+            display: none;
+        }
+
+        #navigation-links {
+            background: none;
+            padding: 0;
+            position: initial;
+            transform: none;
+            height: initial;
+
+            .navigation-menu{
+                display:inline-flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                a {
+                    font-size: 1.2em;
+                    color:black;
+                }
+
+                li.dropdown:first-child {
+                    display:inline-block;
+                    order:1;
+                    position:relative;
+                    border:none;
+                    box-shadow: none;
+                    background: none;
+                    padding: 0;
+                    margin: 0;
+                    width: max-content;
+
+                    button.dropdown-toggle{
+                        flex-direction:row;
+
+                        .avatar {
+                            margin:0;
+                            width: 32px;
+                            height: 32px;
+                        }
+
+                        .fa-chevron-down {
+                            position:absolute;
+                            z-index:1;
+                            background-color: red;
+                            color:black;
+                        }
+                    }
+
+                }
+
+                li.dropdown {
+                    display:block;
+                    width:100%;
+                    button.dropdown-toggle {
+                        width:fit-content;
+                        display:inline-block;
+                        font-size: 1.2em;
+                        color:black;
+
+                        .fa-chevron-down {
+                            z-index:1;
+                            color:black;
+                            order:1;
+                            background-color: red;
+                        }
+
+                        .sub-items{
+                            height: 500px;
+                            background:green;
+                            position:absolute;
+                            top:10%;
+                            left:0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

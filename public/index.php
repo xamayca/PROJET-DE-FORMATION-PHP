@@ -14,6 +14,10 @@ $router->addRoute('/', 'Pages', 'home');
 // CREATION DES ROUTES POUR ACCOUNT //
 $router->addRoute('/inscription', 'Users', 'registration');
 
+
+// CREATION D'UNE ROUTE POUR GÉRER LES ERREURS DE CONNEXION A LA BASE DE DONNÉES //
+$router->addRoute('/erreur-database', 'Errors', 'databaseError');
+
 // CREATION DES ROUTES POUR LE TEST //
 $router->addRoute('/test-php', 'Pages', 'testPhp');
 $router->addRoute('/test-database', 'Pages', 'testDatabase');

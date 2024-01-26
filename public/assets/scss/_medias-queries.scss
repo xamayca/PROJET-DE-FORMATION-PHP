@@ -1,6 +1,5 @@
-@media screen and (min-width:1600px) {
-
-    nav{
+@media screen and (min-width: 1600px) {
+    nav {
         #nav-open,
         #nav-close {
             display: none;
@@ -13,61 +12,67 @@
             transform: none;
             height: initial;
 
-            .navigation-menu{
-                display:flex;
+            .navigation-menu {
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
 
                 a {
-                    font-size: 1.2em;
-                    color:black;
+                    color: black;
                 }
 
-                li.dropdown:first-child {
-                    order:1;
-                    position:relative;
-                    border:none;
+                li.dropdown {
+                    position: relative; /* Position the dropdown relative to the navigation menu */
+                    order: 1;
+                    border: none;
                     box-shadow: none;
-                    flex-direction: row;
                     background: none;
                     padding: 0;
                     margin: 0;
 
-                   // background-color: red;
-
-                    .avatar {
-                        margin:0;
-                        width: 32px;
-                        height: 32px;
-                    }
-                }
-
-                li.dropdown {
-                    display: flex;
-                    flex-direction: column;
-
                     button.dropdown-toggle {
-                        font-size: 1.2em;
-                        color:black;
-                        position:relative;
-                        .dropdown-icon {
-                            background-color: red;
-                            right: 0;
-                            width: 8px;
-                            height: 8px;
-                            transition: transform 0.5s ease;
+                        position: relative;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        color: black;
+                        gap: 1em;
+
+                        .avatar {
+                            margin: 0;
+                            width: 32px;
+                            height: 32px;
+                            border: solid 2px grey;
                         }
 
-                        .sub-items{
-                            max-height: 500px;
-                            background:green;
-                            position:absolute;
-                            top:10%;
-                            left:0;
+                        .fa-chevron-down {
+                            order: 1;
+                            font-size: 1.5em;
+                            position: initial;
+                            z-index: 1;
+                            color: black;
                         }
                     }
 
+                    .sub-items {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        right: 0;
+                        width: auto; /* Adjust width to match the width of the dropdown-toggle button */
+                        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                        z-index: 100;
+                        display: none; /* Hide by default */
+
+                        li {
+                            width: 100%; /* Make the list items full width of the dropdown menu */
+                            white-space: nowrap; /* Prevent text wrapping */
+                        }
+                    }
+
+                    &:hover .sub-items {
+                        display: block; /* Show the dropdown menu on hover */
+                    }
                 }
             }
         }

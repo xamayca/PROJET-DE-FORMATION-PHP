@@ -9,15 +9,13 @@ class DatabaseConnection
     {
         try {
             // TENTE DE SE CONNECTER À LA BASE DE DONNÉES EN UTILISANT PDO //
-            $this->pdo = new PDO('mysql:host=localhost;dbname=francesurvival;charset=utf8', 'root', '');
+            $this->pdo = new PDO('mysql:host=localhost;dbname=fracesurvival;charset=utf8', 'root', '');
 
             // AFFICHE UN MESSAGE SI LA CONNEXION EST RÉUSSIE //
             echo ('[DATABASE.PHP] EST ACCESSIBLE');
         } catch (PDOException $e) {
             // REDIRIGE SUR LA RACINE DU SITE SI LA CONNECTION A LA BASE ÉCHOUE //
-            header('Location: /');
-            // AFFICHE UN MESSAGE SI LA CONNEXION ÉCHOUE //
-            echo ('[DATABASE.PHP] EST INACCESSIBLE');
+            header('Location: /erreur-database');
         }
     }
 

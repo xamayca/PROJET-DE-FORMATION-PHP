@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/c8066bb5d8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <link rel="stylesheet" href="assets/fonts/Roboto-Regular.ttf">
     <title>FRANCE SURVIVAL</title>
@@ -25,9 +26,9 @@
         <ul id="navigation-links">
             <div class="navigation-menu">
                 <li class="dropdown">
-                    <img src="assets/img/avatar-default.png" class="avatar" alt="Avatar par défaut">
                     <button class="dropdown-toggle">
-                        <img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Compte
+                        <img src="assets/img/avatar-default.png" class="avatar" alt="Avatar par défaut">
+                        <i class="fa-solid fa-chevron-down"></i>Compte
                     </button>
                     <ul class="sub-items">
                         <li>
@@ -43,7 +44,7 @@
                 </li>
                 <li class="dropdown">
                     <button class="dropdown-toggle">
-                        <img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Actualités
+                        <i class="fa-solid fa-chevron-down"></i>Actualités
                     </button>
                     <ul class="sub-items">
                         <li>
@@ -59,7 +60,7 @@
                 </li>
                 <li class="dropdown">
                     <button class="dropdown-toggle">
-                        <img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Clusters
+                        <i class="fa-solid fa-chevron-down"></i>Clusters
                     </button>
                     <ul class="sub-items">
                         <li>
@@ -75,7 +76,7 @@
                 </li>
                 <li class="dropdown">
                     <button class="dropdown-toggle">
-                        <img src="assets/img/navigation/submenu-icon.svg" class="dropdown-icon" alt="Icône de sous menu">Guides
+                        <i class="fa-solid fa-chevron-down"></i>Guides
                     </button>
                     <ul class="sub-items">
                         <li>
