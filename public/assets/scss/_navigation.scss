@@ -1,209 +1,205 @@
 $white-color: #f7f7f7;
 $dark-color: #13161A;
 $dark-purple-color: #1c1b33;
-$hover-color: rgba(158, 158, 158, 0.10);
+$hover-color: #9e9e9e0d;
 
+#nav-shadow{
+    position:absolute;
+    left:0;
+    width: 35vw;
+    height: 90dvh;
+    background-color: rgba(0, 0, 0, 0.500);
+    opacity: 0;
+}
 
 nav {
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left:2em;
-    padding-right:2em;
-    width: 100%;
+    width: 100vw;
     height: 10vh;
+    padding: 1em;
     background-color: $white-color;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
-    font-weight: bold;
-    text-transform: uppercase;
 
-    #nav-close{ display: none;}
+    .brand:first-child {
+        display:flex;
+        align-items: center;
+        gap:1em;
+        color: $dark-color;
+        text-transform: uppercase;
+        font-weight: bolder;
+        font-size: 1.5em;
 
-    #nav-close, #nav-open {
+        .brand-logo{
+            display:none;
+            width: 32px;
+            height: 32px;
+        };
+    };
+
+    #nav-close {
+        display: none;
+    };
+
+    #nav-open, #nav-close {
         width: 2em;
         cursor: pointer;
-    }
-
-    > a {
-        color: $dark-color;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.2em;
-    }
+    };
 
     #navigation-links.d-initial {
         transform: translateX(0%);
-    }
+    };
 
+    /* STYLE POUR LE CONTENEUR DES LIEN UL DE LA NAVIGATION */
     #navigation-links {
-        border-left:solid 1px lighten($hover-color, 100%);
-        transform: translateX(101%);
-        transition: transform 0.3s ease-in-out;
         position: fixed;
         top: 10vh;
         right: 0;
-        width: 65%;
+        width: 65vw;
         height: 90vh;
         padding: 1em;
-        background: linear-gradient(to bottom, $dark-purple-color, darken($dark-purple-color, 10%));
+        transform: translateX(101%);
+        transition: transform 0.3s ease-in-out;
         overflow-y: auto;
+        background: linear-gradient(to bottom, $dark-purple-color, darken($dark-purple-color, 10%));
+        border-left: solid 1px lighten($hover-color, 100%);
 
-        .navigation-menu {
+        li a {
+            position: relative;
             display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 1em;
+            color: $white-color;
+            text-transform: uppercase;
 
-            a {
-                color: $white-color;
-                text-decoration: none;
-                padding: 1em;
-                display: block;
-                width: 100%;
+            &:hover {
 
-                &:hover, &.active {
-                    background-color: darken($hover-color, 40%);
-                }
-            }
+                &::after {
+                    transform: translateX(-50%) scaleX(1);
+                };
+            };
 
-            li.dropdown:first-child {
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 20%;
+                left: 50%;
+                width: 20%;
+                height: 2px;
+                bottom:35%;
+                background-image: linear-gradient(to left, transparent, $white-color, transparent);
+                transform: translateX(-50%) scaleX(0);
+                transition: transform 0.3s ease-in-out;
+            };
+
+            .game-logo {
+                position: absolute;
+                left: 1em;
+                width: 16px;
+                height: 16px;
+            };
+        };
+
+        li.dropdown {
+            /* STYLE POUR LE PREMIER ELEMENT 'LI' DE 'NAVIGATION-LINKS' */
+            &:first-child {
+                position: relative;
                 padding: 1em;
                 margin-bottom: 1em;
-                z-index:1;
+                background: linear-gradient(to bottom, $dark-purple-color, lighten($dark-purple-color, 10%)) url('../img/navigation/banner.png') center / cover;
                 background-image: url('../img/navigation/banner.png');
                 background-size: cover;
-                background-position: center 20%;
-                background-color: $white-color;
+                background-position: center;
+                border-radius: 0.2em;
                 box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
                 border: 1px solid $hover-color;
 
-                button.dropdown-toggle{
-                    width:100%;
+                button.dropdown-toggle {
+                    position: relative;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    position:relative;
 
                     .avatar {
-                        border: solid 2px white;
-                        border-radius: 50%;
                         width: 64px;
                         height: 64px;
                         margin-bottom: 1em;
-                    }
+                        border: solid 2px white;
+                        border-radius: 50%;
+                        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+                    };
 
                     .fa-chevron-down {
-                        font-size:0.5em;
                         position: absolute;
-                        right:1.5em;
-                        bottom:2.5em;
-                        transition: transform 0.5s ease;
-                    }
-                }
-            }
+                        right: 1.5em;
+                        bottom: 2.5em;
+                        z-index: 1;
+                    };
+                };
+            };
 
-            li.dropdown {
+            &:hover, &.active {
+                background-color: lighten($hover-color, 30%);
+            };
+
+            /* STYLE POUR TOUT LES AUTRES ELEMENTS 'BUTTON-DROPDOWN' DE 'NAVIGATION-LINKS' */
+            button.dropdown-toggle {
+                position: relative;
                 display: flex;
-                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                padding: 1em;
+                background-color: transparent;
+                border: none;
+                color: $white-color;
+                font-weight: bold;
+                text-transform: uppercase;
+                cursor: pointer;
 
-                button.dropdown-toggle {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    position: relative;
-                    width: 100%;
-                    background-color: transparent;
-                    border: none;
-                    padding: 1em;
-                    font-size: 1em;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    text-decoration: none;
-                    cursor: pointer;
-                    color: $white-color;
+                .fa-chevron-down {
+                    position: absolute;
+                    right: 2em;
+                    font-size: 0.5em;
+                    z-index: -1;
+                    transition: transform 0.5s ease;
+                };
+            };
+        };
 
-                    &:hover, &.active {
-                        background-color: darken($hover-color, 40%);
-                    }
+        /* STYLES POUR LE SOUS MENUS DÉROULANT */
+        .sub-items {
+            position: relative;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background-color: darken($dark-purple-color, 5%);
 
-                    .fa-chevron-down {
-                        z-index: -1;
-                        position:absolute;
-                        right:2em;
-                        font-size: 0.5em;
-                        transition: transform 0.5s ease;
-                    }
-                }
+            li a{
+                font-size: 70%;
+                font-weight: normal;
+            };
 
+            &.sub-items-border {
+                border: 1px solid $hover-color;
+            };
 
-                &:hover, &.active {
-                    background-color: $hover-color;
-                }
+            .hidden-menu {
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+            };
 
-                .sub-items {
-                    position: relative;
-                    max-height: 0;
-                    overflow: hidden;
-                    background-color: darken($dark-purple-color, 5%);
-                    width: 100%;
-                    transition: max-height 0.5s ease;
-
-                    &.sub-items-border {
-                        border: 1px solid $hover-color;
-                    }
-
-                    li:not(:last-child)::after {
-                        content: "";
-                        display: block;
-                        margin: 0 1em;
-                        border: 1px solid $hover-color;
-                    }
-
-                    a {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 100%;
-                        padding: 1.5em;
-                        font-size: 75%;
-                        font-weight: normal;
-                        color: $white-color;
-                        position: relative;
-                        text-decoration: none;
-
-                        &::after {
-                            content: "";
-                            position: absolute;
-                            bottom: 20%;
-                            left: 50%;
-                            width: 20%;
-                            margin: 0 1em;
-                            height: 1px;
-                            background-color: $white-color;
-                            transform: translateX(-50%) scaleX(0);
-                            transition: transform 0.3s ease-in-out;
-                        }
-
-                        &:hover::after {
-                            transform: translateX(-50%) scaleX(1);
-                        }
-                    }
-
-                    .game-logo {
-                        position: absolute;
-                        left: 1em;
-                        width: 16px;
-                        height: 16px;
-                    }
-
-                    .hidden-menu {
-                        transform: translateX(100%);
-                        transition: transform 0.3s ease-in-out;
-                    }
-                }
-            }
-        }
-    }
-}
+            li:not(:last-child)::after {
+                content: "";
+                display: block;
+                margin: 0 1em;
+                border: 1px solid $hover-color;
+            };
+        };
+    };
+};

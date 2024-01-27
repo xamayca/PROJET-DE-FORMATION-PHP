@@ -77,6 +77,5 @@ class UsersController
                 }
             }
         }
-        require_once '../views/pages/account/registration.php';
     }
 }

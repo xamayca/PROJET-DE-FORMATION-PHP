@@ -16,15 +16,17 @@
 
 <body>
 
+<!-- CREE UNE OMBRE QUAND ON OUVRE LE MENU VERSION MOBILE & TABLETTE -->
+<div id="nav-shadow"></div>
+
     <!-- NAVIGATION BAR / NAVIGATION LINKS -->
     <nav>
-        <a href="/">France survival</a>
+        <a class="brand" href="/"><img src="assets/img/navigation/icon-francesurvival.svg" class="brand-logo" alt="ARK: France Survival logo">France survival</a>
 
         <img src="assets/img/navigation/menu-open.svg" id="nav-open" alt="Icône du menu mobile ouverture">
         <img src="assets/img/navigation/menu-close.svg" id="nav-close" alt="Icône du menu mobile fermeture">
 
         <ul id="navigation-links">
-            <div class="navigation-menu">
                 <li class="dropdown">
                     <button class="dropdown-toggle">
                         <img src="assets/img/avatar-default.png" class="avatar" alt="Avatar par défaut">
@@ -40,7 +42,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="">Accueil</a>
+                    <a href="/">Accueil</a>
                 </li>
                 <li class="dropdown">
                     <button class="dropdown-toggle">
@@ -48,7 +50,7 @@
                     </button>
                     <ul class="sub-items">
                         <li>
-                            <a href=""><img src="assets/img/navigation/icon-francesurvival.svg" class="game-logo" alt="ARK: Survival Ascended logo">Communauté</a>
+                            <a href=""><img src="assets/img/navigation/icon-francesurvival.svg" class="game-logo" alt="ARK: France Survival logo">Communauté</a>
                         </li>
                         <li>
                             <a href=""><img src="assets/img/navigation/icon-ASA.webp" class="game-logo" alt="ARK: Survival Ascended logo">ARK: Survival Ascended</a>
@@ -57,6 +59,9 @@
                             <a href=""><img src="assets/img/navigation/icon-ARK2.png" class="game-logo" alt="ARK: II logo">ARK: II</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="">Boutique</a>
                 </li>
                 <li class="dropdown">
                     <button class="dropdown-toggle">
@@ -88,12 +93,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="">Boutique</a>
-                </li>
-                <li>
                     <a href="">Faire un don</a>
                 </li>
-            </div>
         </ul>
     </nav>
 
