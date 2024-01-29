@@ -25,7 +25,7 @@ class Users
         $this->pdo = $database->getDatabase();
     }
 
-    /** MÉTHODE SAVE POUR ENREGISTRER L'UTILISATEUR DANS LA BASE DE DONNÉES */
+    /** MÉTHODE CREATE POUR ENREGISTRER L'UTILISATEUR DANS LA BASE DE DONNÉES */
     public function create()
     {
         try {
@@ -45,6 +45,7 @@ class Users
         }
     }
 
+    /** REQUÊTE POUR VERIFIER SI UN USERNAME EXISTE DANS LA BASE DE DONNÉES */
     public function checkUsernameAlreadyUse()
     {
         $sql = 'SELECT COUNT(`username`) FROM `gt3f5b_users` WHERE `username` = :username';
@@ -54,6 +55,8 @@ class Users
         return $req->fetch(PDO::FETCH_COLUMN);
     }
 
+
+    /** REQUÊTE POUR VERIFIER SI UN EMAIL EXISTE DANS LA BASE DE DONNÉES */
     public function checkEmailAlreadyUse()
     {
         $sql = 'SELECT COUNT(`email`) FROM `gt3f5b_users` WHERE `email` = :email';
@@ -61,6 +64,16 @@ class Users
         $req->bindValue(':email', $this->email, PDO::PARAM_STR);
         $req->execute();
         return $req->fetch(PDO::FETCH_COLUMN);
+    }
+
+    /** REQUÊTE POUR RÉCUPÉRER LES INFORMATIONS DE L'UTILISATEUR PAR SON EMAIL (id, username, email, id roles) */
+    public function getUserByEmail()
+    {
+        $sql = 'SELECT `id`, `username`, `email`, `id_roles` FROM `gt3f5b_users` WHERE `email` = :email';
+        $req = $this->pdo->prepare($sql);
+        $req->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $req->execute();
+        return $req->fetch(PDO::FETCH_ASSOC);
     }
 
     /** GETTER POUR USER ID */

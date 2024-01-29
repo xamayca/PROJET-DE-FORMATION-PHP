@@ -41,9 +41,11 @@ class AlertsManager
         ];
 
         $this->success = [
-            'registration' => 'Inscription réussie. Vous pouvez maintenant vous connecter.',
-            'login' => 'Connexion réussie. Bienvenue !',
-            'updateProfile' => 'Profil mis à jour avec succès.',
+            'account' => [
+                'registration' => 'Inscription réussie. Vous pouvez maintenant vous connecter.',
+                'login' => 'Connexion réussie. Bienvenue !',
+                'update' => 'Profil mis à jour avec succès.',
+            ],
         ];
 
     }
@@ -52,9 +54,9 @@ class AlertsManager
     {
         return $this->errors[$key][$type];
     }
-    public function getSuccessMessages($key)
+    public function getSuccessMessages($key, $type)
     {
-        return $this->success[$key];
+        return $this->success[$key][$type];
     }
 
 }

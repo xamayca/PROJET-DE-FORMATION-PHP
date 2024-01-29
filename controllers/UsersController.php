@@ -7,8 +7,12 @@ require_once '../utils/regex-manager.php';
 
 class UsersController
 {
+
+    /** LOGIQUE POUR ENREGISTRER L'UTILISATEUR DANS LA BASE DE DONNÉES & GÉRER LES ERREURS */
     public function registration()
     {
+        var_dump("registration called");
+        var_dump($_POST);
         $AlertsManager = new AlertsManager();
         $RegexManager = new RegexManager();
         $errors = [];
@@ -21,7 +25,7 @@ class UsersController
             foreach ($_POST as $key => $value) {
                 $$key = cleanInput($value);
             }
-
+            var_dump($_POST);
             $user->setUsername($username);
             // VALIDATION DU NOM D'UTILISATEUR
             if (empty($username)) {
@@ -69,13 +73,58 @@ class UsersController
                 $user->setBirthdate($birthdate);
 
                 $result = $user->create();
-
+                var_dump($result);
                 if ($result) {
-                    $_SESSION['success'] = $AlertsManager->getSuccessMessages('registration');
+                    $_SESSION['success'] = $AlertsManager->getSuccessMessages('account', 'registration');
                 } else {
                     $errors['global'] = $AlertsManager->getErrorMessages('other', 'global');
                 }
             }
         }
+        var_dump($errors);
+        require_once '../views/pages/account/registration.php';
+    }
+
+    /** LOGIQUE POUR CONNECTER L'UTILISATEUR & GÉRER LES ERREURS */
+    public function login()
+    {
+        $AlertsManager = new AlertsManager();
+        $errors = [];
+
+        $user = new Users();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = cleanInput($_POST['email'] ?? '');
+            $password = cleanInput($_POST['password'] ?? '');
+
+            if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $user->setEmail($email);
+                $userInfo = $user->getUserByEmail();
+
+                if ($userInfo) {
+                    if (password_verify($password, $userInfo['email'])) {
+                        if (isset($_POST['remember'])) {
+                            setcookie('email', $userInfo['email'], time() + 60, '/');
+                        }
+
+                        $_SESSION['user'] = $userInfo;
+                        header('Location: /');
+                        exit;
+                    } else {
+                        $errors['other'] = $AlertsManager->getErrorMessages('other', 'login');
+                    }
+                } else {
+                    $errors['email'] = $AlertsManager->getErrorMessages('email', 'invalid');
+                }
+            } else {
+                $errors['email'] = $AlertsManager->getErrorMessages('email', 'required');
+            }
+
+            if (empty($password)) {
+                $errors['password'] = $AlertsManager->getErrorMessages('password', 'required');
+            }
+        }
+        var_dump($errors);
+        require_once '../views/pages/account/login.php';
     }
 }

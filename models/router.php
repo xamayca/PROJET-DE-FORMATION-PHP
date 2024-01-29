@@ -19,6 +19,8 @@ class Router
         // OBTIENT L'URL DEMANDER //
         $requestedUri = $_SERVER['REQUEST_URI'];
 
+        // var_dump($requestedUri);
+
         // SI LA ROUTE EST DANS LE TABLEAU DES ROUTES, RÉCUPÈRE LE CONTROLLER ET LA FONCTION LIER //
         if (array_key_exists($requestedUri, $this->routeMappings)) {
             $controllerName = $this->routeMappings[$requestedUri]['controller'];

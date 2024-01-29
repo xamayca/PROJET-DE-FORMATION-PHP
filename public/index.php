@@ -12,8 +12,8 @@ $router = new Router();
 $router->addRoute('/', 'Pages', 'home');
 
 // CREATION DES ROUTES POUR ACCOUNT REGISTRATION //
-$router->addRoute('/inscription', 'Pages', 'registration');
-
+$router->addRoute('/inscription', 'Users', 'registration');
+$router->addRoute('/connexion', 'Users', 'login');
 
 // CREATION D'UNE ROUTE POUR GÉRER LES ERREURS DE CONNEXION A LA BASE DE DONNÉES //
 $router->addRoute('/erreur-database', 'Errors', 'databaseError');

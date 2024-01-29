@@ -6,7 +6,7 @@
 <?php } ?>
 
 
-<form action="/inscription" method="post">
+<form action="/inscription" method="POST">
     <label for="email">Adresse mail</label>
     <input type="email" name="email" id="email" placeholder="jean.dupont@gmail.com">
     <?php if (isset($errors['email'])) { ?>
@@ -38,5 +38,5 @@
     <?php } ?>
 
     <input type="submit" name="submit" value="S'inscrire">
-
 </form>
+

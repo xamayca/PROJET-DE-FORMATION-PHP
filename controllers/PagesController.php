@@ -21,4 +21,9 @@ class PagesController
     {
         require_once '../views/pages/account/registration.php';
     }
+
+    public function login()
+    {
+        require_once '../views/pages/account/login.php';
+    }
 };
