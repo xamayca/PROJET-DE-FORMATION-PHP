@@ -91,38 +91,53 @@ class UsersController
         $AlertsManager = new AlertsManager();
         $errors = [];
 
-        $user = new Users();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user = new Users();
+            $email = cleanInput($_POST['email']);
+            $password = cleanInput($_POST['password']);
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email = cleanInput($_POST['email'] ?? '');
-            $password = cleanInput($_POST['password'] ?? '');
+            // VALIDATION DE L'EMAIL
+            if (empty($email)) {
+                $errors['email'] = $AlertsManager->getErrorMessages('email', 'required');
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors['email'] = $AlertsManager->getErrorMessages('email', 'invalid');
+            }
 
-            if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            // VALIDATION DU MOT DE PASSE
+            if (empty($password)) {
+                $errors['password'] = $AlertsManager->getErrorMessages('password', 'required');
+            }
+
+            // CONNEXION DE L'UTILISATEUR
+            if (empty($errors)) {
                 $user->setEmail($email);
-                $userPassword = $user->getPassword();
-                $userInfo = $user->getUserByEmail();
+                $result = $user->getUserByEmail();
 
-                if ($userInfo) {
-                    if (password_verify($password, $userPassword)) {
-                        $_SESSION['user'] = $userInfo;
+                if ($result) {
+                    if (password_verify($password, $user->getPassword())) {
+                        $_SESSION['user'] = [
+                            'id' => $user->getId(),
+                            'username' => $user->getUsername(),
+                            'email' => $user->getEmail(),
+                        ];
+                        $_SESSION['success'] = $AlertsManager->getSuccessMessages('account', 'login');
                         header('Location: /');
+                        exit;
                     } else {
-                        $errors['password'] = $AlertsManager->getErrorMessages('password', 'invalid');
+                        $errors['other'] = $AlertsManager->getErrorMessages('other', 'login');
                     }
                 } else {
-                    $errors['email'] = $AlertsManager->getErrorMessages('email', 'invalid');
+                    $errors['other'] = $AlertsManager->getErrorMessages('other', 'login');
                 }
-            } else {
-                $errors['email'] = $AlertsManager->getErrorMessages('email', 'invalid');
             }
         }
         require_once '../views/pages/account/login.php';
     }
 
-    /** LOGIQUE POUR DÉCONNECTER L'UTILISATEUR */
     public function logout()
     {
         session_destroy();
         header('Location: /');
+        exit;
     }
 }
