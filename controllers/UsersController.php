@@ -104,26 +104,25 @@ class UsersController
 
                 if ($userInfo) {
                     if (password_verify($password, $userPassword)) {
-                        if (isset($_POST['remember'])) {
-                            setcookie('email', $userInfo['email'], time() + 60, '/');
-                            $_SESSION['user'] = $userInfo;
-                            header('Location: /');
-                            exit;
-                        }
+                        $_SESSION['user'] = $userInfo;
+                        header('Location: /');
                     } else {
-                        $errors['other'] = $AlertsManager->getErrorMessages('other', 'login');
+                        $errors['password'] = $AlertsManager->getErrorMessages('password', 'invalid');
                     }
                 } else {
                     $errors['email'] = $AlertsManager->getErrorMessages('email', 'invalid');
                 }
             } else {
-                $errors['email'] = $AlertsManager->getErrorMessages('email', 'required');
-            }
-
-            if (empty($password)) {
-                $errors['password'] = $AlertsManager->getErrorMessages('password', 'required');
+                $errors['email'] = $AlertsManager->getErrorMessages('email', 'invalid');
             }
         }
         require_once '../views/pages/account/login.php';
+    }
+
+    /** LOGIQUE POUR DÉCONNECTER L'UTILISATEUR */
+    public function logout()
+    {
+        session_destroy();
+        header('Location: /');
     }
 }

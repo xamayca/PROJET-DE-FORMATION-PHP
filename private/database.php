@@ -9,7 +9,7 @@ class DatabaseConnection
     {
         try {
             // TENTE DE SE CONNECTER À LA BASE DE DONNÉES EN UTILISANT PDO //
-            $this->pdo = new PDO('mysql:host=localhost;dbname=francesurvival;charset=utf8', 'root', '');
+            $this->pdo = new PDO('mysql:host=192.168.1.47:;dbname=francesurvival;charset=utf8', 'groot', 'root');
 
             // AFFICHE UN MESSAGE SI LA CONNEXION EST RÉUSSIE //
             echo ('[DATABASE.PHP] EST ACCESSIBLE');
