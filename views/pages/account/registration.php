@@ -39,4 +39,3 @@
 
     <input type="submit" name="submit" value="S'inscrire">
 </form>
-

@@ -76,6 +76,16 @@ class Users
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
+    /** REQUÊTE POUR RÉCUPÉRER LE MOT DE PASSE D'UN UTILISATEUR */
+    public function getPassword()
+    {
+        $sql = 'SELECT `password` FROM `gt3f5b_users` WHERE `email` = :email';
+        $req = $this->pdo->prepare($sql);
+        $req->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $req->execute();
+        return $req->fetch(PDO::FETCH_COLUMN);
+    }
+
     /** GETTER POUR USER ID */
     public function getId()
     {
@@ -110,12 +120,6 @@ class Users
     public function setEmail($email)
     {
         $this->email = $email;
-    }
-
-    /** GETTER POUR USER Password */
-    public function getPassword()
-    {
-        return $this->password;
     }
 
     /** SETTER POUR USER Password */

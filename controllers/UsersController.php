@@ -73,7 +73,7 @@ class UsersController
                 $user->setBirthdate($birthdate);
 
                 $result = $user->create();
-                var_dump($result);
+
                 if ($result) {
                     $_SESSION['success'] = $AlertsManager->getSuccessMessages('account', 'registration');
                 } else {
@@ -99,17 +99,17 @@ class UsersController
 
             if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $user->setEmail($email);
+                $userPassword = $user->getPassword();
                 $userInfo = $user->getUserByEmail();
 
                 if ($userInfo) {
-                    if (password_verify($password, $userInfo['email'])) {
+                    if (password_verify($password, $userPassword)) {
                         if (isset($_POST['remember'])) {
                             setcookie('email', $userInfo['email'], time() + 60, '/');
+                            $_SESSION['user'] = $userInfo;
+                            header('Location: /');
+                            exit;
                         }
-
-                        $_SESSION['user'] = $userInfo;
-                        header('Location: /');
-                        exit;
                     } else {
                         $errors['other'] = $AlertsManager->getErrorMessages('other', 'login');
                     }
@@ -124,7 +124,6 @@ class UsersController
                 $errors['password'] = $AlertsManager->getErrorMessages('password', 'required');
             }
         }
-        var_dump($errors);
         require_once '../views/pages/account/login.php';
     }
 }

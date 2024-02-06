@@ -64,7 +64,7 @@ nav {
         transform: translateX(101%);
         transition: transform 0.3s ease-in-out;
         overflow-y: auto;
-        background: linear-gradient(to bottom, $dark-purple-color, darken($dark-purple-color, 10%));
+        background: linear-gradient(to bottom, #111827, darken(#111827, 10%));
         border-left: solid 1px lighten($hover-color, 100%);
 
         li a {
@@ -91,7 +91,7 @@ nav {
                 left: 50%;
                 width: 20%;
                 height: 2px;
-                bottom:35%;
+                bottom:20%;
                 background-image: linear-gradient(to left, transparent, $white-color, transparent);
                 transform: translateX(-50%) scaleX(0);
                 transition: transform 0.3s ease-in-out;
@@ -137,8 +137,8 @@ nav {
                     .fa-chevron-down {
                         position: absolute;
                         right: 1.5em;
+                        font-size: 0.5em;
                         bottom: 2.5em;
-                        z-index: 1;
                     };
                 };
             };
@@ -162,11 +162,10 @@ nav {
                 text-transform: uppercase;
                 cursor: pointer;
 
-                .fa-chevron-down {
+                & i.fa-chevron-down {
                     position: absolute;
                     right: 2em;
                     font-size: 0.5em;
-                    z-index: -1;
                     transition: transform 0.5s ease;
                 };
             };
