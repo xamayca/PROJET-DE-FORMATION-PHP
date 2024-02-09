@@ -66,10 +66,10 @@ class Users
         return $req->fetch(PDO::FETCH_COLUMN);
     }
 
-    /** REQUÊTE POUR RÉCUPÉRER LES INFORMATIONS DE L'UTILISATEUR PAR SON EMAIL (id, username, email, id roles) */
+    /** REQUÊTE POUR RÉCUPÉRER LES INFORMATIONS DE L'UTILISATEUR PAR SON EMAIL (id, username, email, password, id roles) */
     public function getUserByEmail()
     {
-        $sql = 'SELECT `id`, `username`, `email`, `id_roles` FROM `gt3f5b_users` WHERE `email` = :email';
+        $sql = 'SELECT `id`, `username`, `email`, `password`, `id_roles` FROM `gt3f5b_users` WHERE `email` = :email';
         $req = $this->pdo->prepare($sql);
         $req->bindValue(':email', $this->email, PDO::PARAM_STR);
         $req->execute();
@@ -221,6 +221,6 @@ class Users
     /** SETTER POUR USER id_roles */
     public function setid_roles($id_roles)
     {
-        return $this->$id_roles;
+        $this->id_roles = $id_roles;
     }
 }

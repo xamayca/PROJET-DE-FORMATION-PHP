@@ -24,22 +24,36 @@
 
         <ul id="navigation-links">
                 <li class="dropdown">
+
                     <button class="dropdown-toggle">
-                        <img src="assets/img/avatar-default.png" class="avatar" alt="Avatar par défaut">
-                        <i class="fa-solid fa-chevron-down"></i>Compte
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <!-- SI L'UTILISATEUR EST CONNECTER ON AFFICHE SON PSEUDONYME -->
+                            <img src="assets/img/avatar-default.png" class="avatar" alt="Avatar de l'utilisateur">
+                            <i class="fa-solid fa-chevron-down"></i><?= htmlspecialchars($_SESSION['user']['username']) ?>
+                        <?php else: ?>
+                            <!-- SINON ON AFFICHE SEULEMENT COMPTE -->
+                            <img src="assets/img/avatar-default.png" class="avatar" alt="Avatar par défaut">
+                            <i class="fa-solid fa-chevron-down"></i>Compte
+                        <?php endif; ?>
                     </button>
+
                     <ul class="sub-items">
-                        <li>
-                            <a href="/connexion">Connexion</a>
-                        </li>
-                        <li>
-                            <a href="/inscription">Inscription</a>
-                        </li>
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <!-- SI L'UTILISATEUR EST CONNECTER ON AFFICHE LES LIENS SUIVANTS -->
+                            <li><a href="/profil">Mon Profil</a></li>
+                            <li><a href="/deconnexion">Déconnexion</a></li>
+                        <?php else: ?>
+                            <!-- SINON ON AFFICHE LES LIENS CONNEXION & INSCRIPTION -->
+                            <li><a href="/connexion">Connexion</a></li>
+                            <li><a href="/inscription">Inscription</a></li>
+                        <?php endif; ?>
                     </ul>
+
                 </li>
                 <li>
                     <a href="/">Accueil</a>
                 </li>
+
                 <li class="dropdown">
                     <button class="dropdown-toggle">
                         <i class="fa-solid fa-chevron-down"></i>Actualités
@@ -56,9 +70,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="">Boutique</a>
-                </li>
+
                 <li class="dropdown">
                     <button class="dropdown-toggle">
                         <i class="fa-solid fa-chevron-down"></i>Clusters
@@ -72,9 +84,11 @@
                         </li>
                     </ul>
                 </li>
+
                 <li>
                     <a href="">Forum</a>
                 </li>
+
                 <li class="dropdown">
                     <button class="dropdown-toggle">
                         <i class="fa-solid fa-chevron-down"></i>Guides
@@ -88,9 +102,11 @@
                         </li>
                     </ul>
                 </li>
+
                 <li>
                     <a href="">Faire un don</a>
                 </li>
+
         </ul>
     </nav>
 

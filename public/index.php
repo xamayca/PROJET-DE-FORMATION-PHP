@@ -11,18 +11,15 @@ $router = new Router();
 // CREATION DES ROUTES POUR LES DIFFÉRENTES PAGES //
 $router->addRoute('/', 'Pages', 'home');
 
-// CREATION DES ROUTES POUR ACCOUNT REGISTRATION //
-$router->addRoute('/inscription', 'Users', 'registration');
-$router->addRoute('/connexion', 'Users', 'login');
-
-// CREATION D'UNE ROUTE POUR GÉRER LES ERREURS DE CONNEXION A LA BASE DE DONNÉES //
-$router->addRoute('/erreur-database', 'Errors', 'databaseError');
+// CREATION DES ROUTES POUR L'UTILISATEUR (INSCRIPTION, CONNEXION, DECONNEXION) //
+$router->addRoute('/inscription', 'Registration', 'registration');
+$router->addRoute('/connexion', 'Login', 'login');
+$router->addRoute('/deconnexion', 'Logout', 'logout');
 
 // CREATION DES ROUTES POUR LE TEST //
 $router->addRoute('/test-php', 'Pages', 'testPhp');
 $router->addRoute('/test-database', 'Pages', 'testDatabase');
 
-// APPEL LES VUES HEADER & FOOTER + VUE INTERMÉDIAIRE //
-require_once "../views/elements/header.php";
+// ROUTE LA REQUETE HTTP VERS LE CONTROLEUR ET L'ACTION CORRESPONDANTS //
 $router->dispatch();
-require_once "../views/elements/footer.php";
+

@@ -19,17 +19,16 @@ class Router
         // OBTIENT L'URL DEMANDER //
         $requestedUri = $_SERVER['REQUEST_URI'];
 
-        // var_dump($requestedUri);
-
         // SI LA ROUTE EST DANS LE TABLEAU DES ROUTES, RÉCUPÈRE LE CONTROLLER ET LA FONCTION LIER //
         if (array_key_exists($requestedUri, $this->routeMappings)) {
             $controllerName = $this->routeMappings[$requestedUri]['controller'];
             $methodName = $this->routeMappings[$requestedUri]['method'];
         } else {
-            $controllerName = 'Errors';
+            $controllerName = 'Pages';
             $methodName = 'error404';
         };
 
+        // INSTANCIE LE CONTROLLER ET APPEL LA FONCTION DEMANDER //
         require_once __DIR__ . '/../controllers/' . $controllerName . 'Controller.php';
         $controllerInstance = $controllerName . 'Controller';
         $controllerInstance = new $controllerInstance();
