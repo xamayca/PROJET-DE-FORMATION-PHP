@@ -16,7 +16,7 @@
 
 
 <!-- FORMULAIRE D'INSCRIPTION -->
-<form id="registration" action="/inscription" method="POST">
+<form id="registration-form" action="/inscription" method="POST">
     <h1>Crée un compte</h1>
     <!-- CHAMP EMAIL -->
     <label for="email">Adresse mail</label>

@@ -7,8 +7,12 @@ require_once '../utils/regex-manager.php';
 
 class LogoutController
 {
+    // LOGIQUE POUR SE DÉCONNECTER DE L'APPLICATION //
     public function logout()
     {
+        // ON INSTANCIE LES CLASSES MessageManager POUR GERER LES MESSAGES //
+        $messageManager = new MessageManager();
+
         // NETTOIE TOUTES LES DONNÉES DE LA SESSION //
         $_SESSION = [];
 
@@ -18,12 +22,12 @@ class LogoutController
         // REDEMARRE LA SESSION POUR STOCKER LE MESSAGE DE SUCCÈS //
         session_start();
 
-        // INITIALISE LE MESSAGE DE SUCCÈS //
-        $messageManager = new MessageManager();
+        // MESSAGE DE SUCCÈS SI L'UTILISATEUR EST DÉCONNECTÉ //
         $_SESSION['success'] = $messageManager->getMessage('success', 'logged_out');
 
         // REDIRECTION VERS LA PAGE D'ACCUEIL //
         header('Location: /');
+        // FIN DE L'EXECUTION DU SCRIPT //
         exit;
     }
 }

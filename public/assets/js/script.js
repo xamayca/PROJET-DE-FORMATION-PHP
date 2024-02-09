@@ -13,6 +13,7 @@ const toggleDropdown = (dropdown) => {
     const dropdownIcon = dropdown.querySelector('.fa-chevron-down');
 
     if (subItemsHTML.style.maxHeight) {
+
         subItemsHTML.style.maxHeight = null;
         subItemsHTML.classList.remove('sub-items-border');
         dropdownIcon.style.transform = 'rotate(0deg)';
@@ -22,7 +23,7 @@ const toggleDropdown = (dropdown) => {
         subItemsHTML.classList.add('sub-items-border');
         dropdownIcon.style.transform = 'rotate(180deg)';
         dropdown.classList.add('active');
-    };
+    }
 };
 
 
@@ -31,7 +32,7 @@ dropdownsHTML.forEach(dropdown => {
         // SI LE CLIC EST FAIT SUR AUTRE CHOSE QU'UN DROPDOWN MENU, NE RIEN FAIRE //
         if (!event.target.classList.contains('dropdown-toggle')) {
             return;
-        };
+        }
         // ANNULE LE COMPORTEMENT PAR DÉFAUT DES ELEMENTS HTML LORS D'INTERACTION //
         event.preventDefault();
         toggleDropdown(dropdown);
@@ -57,4 +58,3 @@ navCloseHTML.addEventListener('click', function () {
     navShadowHTML.style.opacity = '0';
     navShadowHTML.style.transition = 'opacity 0.1s ease-in-out';
 });
-//};

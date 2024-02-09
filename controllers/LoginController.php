@@ -10,10 +10,14 @@ class LoginController
 {
     public function login()
     {
+        // INSTANCIATION DE LA CLASSES MessageManager POUR GERER LES MESSAGES //
         $messageManager = new MessageManager();
+        // INSTANCIATION DE LA CLASSE RegexManager POUR UTILISER LES EXPRESSIONS RÉGULIÈRES //
         $regexManager = new RegexManager();
+        // ON INITIALISE LE TABLEAU DES ERREURS //
         $errors = [];
 
+        // SI LE SERVEUR REÇOIT UNE REQUÊTE POST //
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // INITIALISE UNE NOUVELLE SESSION //
@@ -53,6 +57,7 @@ class LoginController
                     // SI LA CONNEXION EST REUSSIE, ON REDIRIGE VERS LA PAGE D'ACCUEIL //
                     $_SESSION['success'] = $messageManager->getMessage('success', 'logged_in');
                     header('Location: /');
+                    // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
                     exit;
                 } else {
                     // ON VERIFIE SI LE MOT DE PASSE EST INCORRECT //
@@ -65,7 +70,7 @@ class LoginController
         if (!empty($errors)) {
             $_SESSION['errors'] = $errors;
         }
-
+        // ON AFFICHE LA VUE DE LA PAGE DE CONNEXION //
         require_once '../views/elements/header.php';
         require_once '../views/pages/account/login.php';
         require_once "../views/elements/footer.php";

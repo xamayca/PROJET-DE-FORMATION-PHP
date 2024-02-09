@@ -10,38 +10,46 @@ class RegistrationController
     // LOGIQUE POUR ENREGISTRER L'UTILISATEUR DANS LA BASE DE DONNÉES & GÉRER LES ERREURS //
     public function registration()
     {
+        // INSTANCIATION DE LA CLASSES MessageManager POUR GERER LES MESSAGES //
         $messageManager = new MessageManager();
+        // INSTANCIATION DE LA CLASSE RegexManager POUR UTILISER LES EXPRESSIONS RÉGULIÈRES //
         $regexManager = new RegexManager();
+        // TABLEAU POUR STOCKER LES ERREURS //
         $errors = [];
 
+        // INSTANCIATION DE LA CLASSE Users POUR UTILISER LES MÉTHODES DE LA CLASSE //
         $user = new Users();
 
+        // SI LE SERVEUR REÇOIT UNE REQUÊTE POST //
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // NETTOYAGE DES DONNÉES REÇUES
             foreach ($_POST as $key => $value) {
                 $$key = cleanInput($value);
             }
+
+            // AFFECTATION DES DONNÉES NETTOYÉES AUX PROPRIÉTÉS DE L'OBJET USER
             $user->setUsername($username);
             // VALIDATION DU NOM D'UTILISATEUR //
             if (empty($username)) {
-                $errors['username'] = $messageManager->getMessage('error', 'required');
+                $errors['username'] = $messageManager->getMessage('error', 'username_required');
             } elseif (!preg_match($regexManager->getRegex('username'), $username)) {
-                $errors['username'] = $messageManager->getMessage('error', 'invalid');
+                $errors['username'] = $messageManager->getMessage('error', 'username_invalid');
             } elseif ($user->checkUsernameAlreadyUse()) {
                 $errors['username'] = $messageManager->getMessage('error', 'username_exists');
             } elseif (strlen($username) < 3) {
-                $errors['username'] = $messageManager->getMessage('error', 'minlength');
+                $errors['username'] = $messageManager->getMessage('error', 'username_minlength');
             } elseif (strlen($username) > 30) {
-                $errors['username'] = $messageManager->getMessage('error', 'maxlength');
+                $errors['username'] = $messageManager->getMessage('error', 'username_maxlength');
             }
 
+            // AFFECTATION DES DONNÉES NETTOYÉES AUX PROPRIÉTÉS DE L'OBJET USER
             $user->setEmail($email);
             // VALIDATION DE L'EMAIL //
             if (empty($email)) {
-                $errors['email'] = $messageManager->getMessage('error', 'email_exists');
+                $errors['email'] = $messageManager->getMessage('error', 'email_required');
             } elseif (!preg_match($regexManager->getRegex('email'), $email)) {
-                $errors['email'] = $messageManager->getMessage('error', 'invalid');
+                $errors['email'] = $messageManager->getMessage('error', 'email_invalid');
             } elseif ($user->checkEmailAlreadyUse()) {
                 $errors['email'] = $messageManager->getMessage('error', 'email_exists');
             }
@@ -50,9 +58,9 @@ class RegistrationController
             if (empty($password)) {
                 $errors['password'] = $messageManager->getMessage('error', 'password_required');
             } elseif (!preg_match($regexManager->getRegex('password'), $password)) {
-                $errors['password'] = $messageManager->getMessage('error', 'invalid');
+                $errors['password'] = $messageManager->getMessage('error', 'password_invalid');
             } elseif (strlen($password) < 8) {
-                $errors['password'] = $messageManager->getMessage('error', 'minlength');
+                $errors['password'] = $messageManager->getMessage('error', 'password_minlength');
             }
 
             // VALIDATION DE LA CONFIRMATION DU MOT DE PASSE //
@@ -86,21 +94,25 @@ class RegistrationController
                 $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
                 $user->setBirthdate($birthdate);
 
+                // APPEL DE LA MÉTHODE create() POUR ENREGISTRER L'UTILISATEUR DANS LA BASE DE DONNÉES //
                 $result = $user->create();
 
                 if ($result) {
                     // SI L'UTILISATEUR S'ENREGISTRE AVEC SUCCÈS ON LE REDIRIGE VERS LA PAGE DE CONNEXION //
                     $_SESSION['success'] = $messageManager->getMessage('success', 'registered');
                     header('Location: /connexion');
+                    // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
                     exit();
                 } else {
                     // SINON ON AFFICHE UN MESSAGE D'ERREUR ET ON LE REDIRIGE VERS LA PAGE D'ACCUEIL //
                     $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                     header('Location: /');
+                    // FIN DE L'EXECUTION DU SCRIPT //
                     exit();
                 }
             }
         }
+        // AFFICHAGE DE LA PAGE D'ENREGISTREMENT //
         require_once "../views/elements/header.php";
         require_once '../views/pages/account/registration.php';
     }
