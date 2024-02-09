@@ -6,6 +6,7 @@ class MessageManager {
     public function __construct() {
         $this->messages = [
             'error' => [
+                'user_not_found' => 'L\'utilisateur saisi n\'éxiste pas dans notre système.',
                 'invalid_credentials' => 'Identifiant ou mot de passe incorrect.',
                 'username_exists' => 'Le nom d\'utilisateur existe déjà.',
                 'email_exists' => 'L\'adresse e-mail existe déjà.',
@@ -26,6 +27,7 @@ class MessageManager {
         ];
     }
 
+    // GETTER POUR RECUPERER LES MESSAGES D'ERREURS ET DE SUCCES //
     public function getMessage($type, $key): string
     {
         return $this->messages[$type][$key] ?? '';

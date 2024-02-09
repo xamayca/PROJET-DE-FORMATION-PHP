@@ -1,6 +1,6 @@
 <!-- AFFICHAGE DU MESSAGE DE SUCCÈS -->
 <?php if (isset($_SESSION['success'])): ?>
-    <div class="alert-success">
+    <div class="alert alert-success">
         <p><?= $_SESSION['success'] ?></p>
     </div>
     <?php unset($_SESSION['success']); ?>
@@ -8,7 +8,7 @@
 
 <!-- AFFICHAGE DE L'ERREUR GLOBALE (AVERTISSEMENT) -->
 <?php if (isset($_SESSION['warning'])): ?>
-    <div class="alert-warning">
+    <div class="alert alert-warning">
         <p><?= $_SESSION['warning'] ?></p>
     </div>
     <?php unset($_SESSION['warning']); ?>
@@ -17,7 +17,7 @@
 
 <!-- FORMULAIRE D'INSCRIPTION -->
 <form id="registration" action="/inscription" method="POST">
-    <h1>Inscription</h1>
+    <h1>Crée un compte</h1>
     <!-- CHAMP EMAIL -->
     <label for="email">Adresse mail</label>
     <input type="email" name="email" id="email" placeholder="exemple@mail.fr" value="<?= htmlspecialchars($email ?? '') ?>">
@@ -66,5 +66,5 @@
         </div>
     <?php endif; ?>
 
-    <input type="submit" name="submit" value="S'inscrire">
+    <input class="form-button" type="submit" name="submit" value="S'enregistré">
 </form>

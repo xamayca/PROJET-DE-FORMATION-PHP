@@ -22,6 +22,7 @@ $hover-color: rgba(158, 158, 158, 0.050);
         }
 
         #navigation-links {
+            width: 65%;
             position: initial;
             background: none;
             padding: 0;
@@ -67,8 +68,8 @@ $hover-color: rgba(158, 158, 158, 0.050);
                         }
                     }
 
-                    .sub-items {
-                        transform: translateX(0.7em);
+                    .sub-items{
+                        transform: translateX(-1.5em);
                     }
                 }
 
@@ -92,6 +93,7 @@ $hover-color: rgba(158, 158, 158, 0.050);
                     border-left: 1px solid darken($white-color, 60%);
                     border-right: 1px solid darken($white-color, 60%);
                     border-bottom: 1px solid darken($white-color, 60%);
+
 
                     li a {
                         position: relative;
@@ -121,7 +123,10 @@ $hover-color: rgba(158, 158, 158, 0.050);
                         }
                     }
                 }
-
+                /* STYLE POUR LE SOUS MENU 'COMPTE' CENTRAGE DU SOUS MENU */
+                &:nth-child(1) .sub-items {
+                    transform: translateX(-1em);
+                }
                 /* STYLE POUR LE SOUS MENU 'ACTUALITÉS' CENTRAGE DU SOUS MENU */
                 &:nth-child(3) .sub-items {
                     transform: translateX(-4em);
@@ -204,10 +209,6 @@ $hover-color: rgba(158, 158, 158, 0.050);
                             bottom: initial;
                         }
                     }
-
-                    .sub-items {
-                        transform: translateX(0.7em);
-                    }
                 }
 
                 button.dropdown-toggle {
@@ -259,17 +260,20 @@ $hover-color: rgba(158, 158, 158, 0.050);
                         }
                     }
                 }
-
+                /* STYLE POUR LE SOUS MENU 'COMPTE' CENTRAGE DU SOUS MENU */
+                &:nth-child(1) .sub-items {
+                    transform: translateX(-1em);
+                }
                 /* STYLE POUR LE SOUS MENU 'ACTUALITÉS' CENTRAGE DU SOUS MENU */
                 &:nth-child(3) .sub-items {
-                    transform: translateX(-5em);
+                    transform: translateX(-4em);
                 }
                 /* STYLE POUR LE SOUS MENU 'CLUSTERS' CENTRAGE DU SOUS MENU */
-                &:nth-child(4) .sub-items {
-                    transform: translateX(-2em);
+                &:nth-child(5) .sub-items {
+                    transform: translateX(-1.5em);
                 }
                 /* STYLE POUR LE SOUS MENU 'GUIDES' CENTRAGE DU SOUS MENU */
-                &:nth-child(6) .sub-items {
+                &:nth-child(7) .sub-items {
                     transform: translateX(-2.5em);
                 }
             }

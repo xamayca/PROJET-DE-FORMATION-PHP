@@ -45,7 +45,7 @@
                         <?php else: ?>
                             <!-- SINON ON AFFICHE LES LIENS CONNEXION & INSCRIPTION -->
                             <li><a href="/connexion">Connexion</a></li>
-                            <li><a href="/inscription">Inscription</a></li>
+                            <li><a href="/inscription">Crée un compte</a></li>
                         <?php endif; ?>
                     </ul>
 
@@ -71,6 +71,10 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="">Forum</a>
+                </li>
+
                 <li class="dropdown">
                     <button class="dropdown-toggle">
                         <i class="fa-solid fa-chevron-down"></i>Clusters
@@ -86,7 +90,7 @@
                 </li>
 
                 <li>
-                    <a href="">Forum</a>
+                    <a href="">Boutique</a>
                 </li>
 
                 <li class="dropdown">
@@ -110,5 +114,20 @@
         </ul>
     </nav>
 
+    <!-- AFFICHAGE DU MESSAGE DE SUCCÈS -->
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success">
+            <p><?= $_SESSION['success'] ?></p>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <!-- AFFICHAGE DE L'ERREUR GLOBALE (AVERTISSEMENT) -->
+    <?php if (isset($_SESSION['warning'])): ?>
+        <div class="alert alert-warning">
+           <p><?= $_SESSION['warning'] ?></p>
+        </div>
+        <?php unset($_SESSION['warning']); ?>
+    <?php endif; ?>
 
     <header>ICI MON HEADER POUR PAS PERDRE LA TETE</header>

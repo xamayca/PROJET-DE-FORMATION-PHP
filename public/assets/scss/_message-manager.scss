@@ -1,15 +1,41 @@
-.form-error {
-  color:#721c24;
+$error-color: #721c24;
+$error-background: #f8d7da;
+$error-border: #f5c6cb;
+
+$success-color: #856404;
+$success-background: #fff3cd;
+$success-border: #ffeeba;
+
+
+// STYLE POUR LES ALERTES //
+.alert {
+  position: relative;
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & p {
+    padding: 1em;
+  }
 }
 
+// STYLES POUR LES ALERTES D'ERREURS //
 .alert-warning {
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-  color: #721c24;
+  background-color: $error-background;
+  border-color: $error-border;
+  color: $error-color;
 }
 
+// STYLE POUR LES ALERTES DE SUCCES //
 .alert-success {
-  background-color: #fff3cd;
-  border-color: #ffeeba;
-  color: #856404;
+  background-color: $success-background;
+  border-color: $success-border;
+  color: $success-color;
+}
+
+.form-error p {
+  color: $error-color;
 }
