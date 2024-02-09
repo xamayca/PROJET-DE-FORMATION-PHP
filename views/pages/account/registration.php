@@ -21,6 +21,7 @@
     <!-- CHAMP EMAIL -->
     <label for="email">Adresse mail</label>
     <input type="email" name="email" id="email" placeholder="exemple@mail.fr" value="<?= htmlspecialchars($email ?? '') ?>">
+
     <?php if (isset($errors['email'])): ?>
         <div class="form-error">
             <p><?= $errors['email'] ?></p>

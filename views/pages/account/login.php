@@ -1,3 +1,21 @@
+<!-- AFFICHAGE DU MESSAGE DE SUCCÈS -->
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="alert-success">
+        <p><?= $_SESSION['success'] ?></p>
+    </div>
+    <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
+<!-- AFFICHAGE DE L'ERREUR GLOBALE (AVERTISSEMENT) -->
+<?php if (isset($_SESSION['warning'])): ?>
+    <div class="alert-warning">
+        <p><?= $_SESSION['warning'] ?></p>
+    </div>
+    <?php unset($_SESSION['warning']); ?>
+<?php endif; ?>
+
+
+<!-- FORMULAIRE DE CONNEXION -->
 <form id="connexion" action="/connexion" method="POST">
     <h1>Connexion</h1>
     <label for="email">Adresse mail</label>

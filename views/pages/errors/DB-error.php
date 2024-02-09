@@ -1,1 +1,1 @@
-<h1>Erreur de connexion a la base de données</h1>
+<h1 style="color: #9e9e9e">Erreur de connexion a la base de données</h1>

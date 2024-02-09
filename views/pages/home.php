@@ -1,1 +1,1 @@
-<h1>Bienvenue sur la page d'accueil de FRANCE SURVIVAL</h1>
+<h1 style="color: #9e9e9e">Bienvenue sur la page d'accueil de FRANCE SURVIVAL</h1>

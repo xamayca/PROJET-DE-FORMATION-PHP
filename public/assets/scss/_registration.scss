@@ -27,7 +27,8 @@ label {
     color: #0e0e11;
     text-align: left;
     display: block;
-    margin-bottom: 5px;
+    margin-top: 1.5em;
+    margin-bottom: 0.2em;
     font-weight: bold;
 }
 
@@ -37,7 +38,6 @@ input[type="password"],
 input[type="date"] {
     width: 100%;
     padding: 1em;
-    margin-bottom: 2em;
     border: 1px solid $dark-purple-color;
 
     &:focus {
@@ -46,6 +46,7 @@ input[type="date"] {
 }
 
 input[type="submit"] {
+    margin-top: 3em;
     width: 100%;
     padding: 1em;
     border: none;

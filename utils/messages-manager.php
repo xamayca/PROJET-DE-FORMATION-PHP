@@ -18,6 +18,7 @@ class MessageManager {
                 'unexpected_error' => 'Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.',
             ],
             'success' => [
+                // A VERIFIER DANS LES CONTROLLER//
                 'logged_in' => 'Connexion réussie. Bienvenue !',
                 'logged_out' => 'Déconnexion réussie. À bientôt !',
                 'registered' => 'Inscription réussie. Vous pouvez maintenant vous connecter.',
