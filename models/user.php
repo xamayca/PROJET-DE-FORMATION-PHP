@@ -1,6 +1,7 @@
 <?php
 
 require_once '../private/database.php';
+require_once '../utils/messages-manager.php';
 
 class Users
 {
@@ -25,6 +26,18 @@ class Users
         $this->pdo = $database->getDatabase();
     }
 
+    /** FONCTION POUR GÉRER LES ERREURS DE LA BASE DE DONNÉES POUR PAS REECRIRE LE CODE À CHAQUE FOIS */
+    private function handleDatabaseError(PDOException $e)
+    {
+        // ON INSTANCIE MESSAGE MANAGER POUR AFFICHER LES MESSAGES D'ERREURS //
+        $messageManager = new MessageManager();
+
+        // AFFICHE L'ERREUR EN CAS D'ÉCHEC ET REDIRIGE VERS LA PAGE D'ACCUEIL //
+        $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
+        header('Location: /');
+    }
+
+
     /** MÉTHODE CREATE POUR ENREGISTRER L'UTILISATEUR DANS LA BASE DE DONNÉES */
     public function create()
     {
@@ -32,64 +45,109 @@ class Users
             // PRÉPARE UNE REQUÊTE SQL POUR INSÉRER LES INFORMATIONS DE L'UTILISATEUR //
             $req = $this->pdo->prepare("INSERT INTO `gt3f5b_users` (username, email, password, birthdate, registerDate, id_roles)
             VALUES (:username, :email, :password, :birthdate, NOW(), 1 )");
+
             // LIE LES VALEURS AUX PARAMÈTRES DE LA REQUÊTE
             $req->bindValue(':username', $this->username, PDO::PARAM_STR);
             $req->bindValue(':email', $this->email, PDO::PARAM_STR);
             $req->bindValue(':password', $this->password, PDO::PARAM_STR);
             $req->bindValue(':birthdate', $this->birthdate, PDO::PARAM_STR);
+
             // EXÉCUTE LA REQUÊTE //
             return $req->execute();
+
         } catch (PDOException $e) {
-            // AFFICHE L'ERREUR EN CAS D'ÉCHEC ET REDIRIGE VERS LA PAGE D'ACCUEIL //
-            header('Location: /');
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
         }
     }
 
     /** REQUÊTE POUR VERIFIER SI UN USERNAME EXISTE DANS LA BASE DE DONNÉES */
     public function checkUsernameAlreadyUse()
     {
-        $sql = 'SELECT COUNT(`username`) FROM `gt3f5b_users` WHERE `username` = :username';
-        $req = $this->pdo->prepare($sql);
-        $req->bindValue(':username', $this->username, PDO::PARAM_STR);
-        $req->execute();
-        return $req->fetch(PDO::FETCH_COLUMN);
-    }
+        try {
+            $sql = 'SELECT COUNT(`username`) FROM `gt3f5b_users` WHERE `username` = :username';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':username', $this->username, PDO::PARAM_STR);
+            $req->execute();
+            return $req->fetch(PDO::FETCH_COLUMN);
 
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
 
     /** REQUÊTE POUR VERIFIER SI UN EMAIL EXISTE DANS LA BASE DE DONNÉES */
     public function checkEmailAlreadyUse()
     {
-        $sql = 'SELECT COUNT(`email`) FROM `gt3f5b_users` WHERE `email` = :email';
-        $req = $this->pdo->prepare($sql);
-        $req->bindValue(':email', $this->email, PDO::PARAM_STR);
-        $req->execute();
-        return $req->fetch(PDO::FETCH_COLUMN);
+        try {
+            $sql = 'SELECT COUNT(`email`) FROM `gt3f5b_users` WHERE `email` = :email';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $req->execute();
+            return $req->fetch(PDO::FETCH_COLUMN);
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
     }
 
     /** REQUÊTE POUR RÉCUPÉRER LES INFORMATIONS DE L'UTILISATEUR PAR SON EMAIL (id, username, email, password, id roles) */
     public function getUserByEmail()
     {
-        $sql = 'SELECT `id`, `username`, `email`, `password`, `id_roles` FROM `gt3f5b_users` WHERE `email` = :email';
-        $req = $this->pdo->prepare($sql);
-        $req->bindValue(':email', $this->email, PDO::PARAM_STR);
-        $req->execute();
-        return $req->fetch(PDO::FETCH_ASSOC);
+        try {
+            $sql = 'SELECT `id`, `username`, `email`, `password`, `id_roles` FROM `gt3f5b_users` WHERE `email` = :email';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $req->execute();
+            return $req->fetch(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            exit();
+        }
     }
 
     /** REQUÊTE POUR RÉCUPÉRER LE MOT DE PASSE D'UN UTILISATEUR */
-    public function getPassword()
+    public function getUserPassword()
     {
-        $sql = 'SELECT `password` FROM `gt3f5b_users` WHERE `email` = :email';
-        $req = $this->pdo->prepare($sql);
-        $req->bindValue(':email', $this->email, PDO::PARAM_STR);
-        $req->execute();
-        return $req->fetch(PDO::FETCH_COLUMN);
+        try {
+            $sql = 'SELECT `password` FROM `gt3f5b_users` WHERE `email` = :email';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $req->execute();
+            return $req->fetch(PDO::FETCH_COLUMN);
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            exit();
+        }
     }
 
     /** GETTER POUR USER ID */
-    public function getId()
+    public function getUserById()
     {
-        return $this->id;
+        try {
+            $sql = 'SELECT u.`id`, u.`username`, u.`email`, 
+                DATE_FORMAT(u.`birthdate`, "né le %e/%m/%Y") AS birthdate_fr,
+                u.`tribe`, u.`phone`, u.`description`, u.`avatar`, u.`signature`, 
+                DATE_FORMAT(u.`registerDate`, "le %d/%m/%Y à %Hh%i") AS registerDate_fr,
+                r.`name` AS role_name
+                FROM `gt3f5b_users` u 
+                INNER JOIN `gt3f5b_roles` r ON u.`id_roles` = r.`id` 
+                WHERE u.`id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $req->execute();
+            return $req->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            exit();
+        }
     }
 
     /** SETTER POUR USER ID */
@@ -99,7 +157,7 @@ class Users
     }
 
     /** GETTER POUR USER Username */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -111,7 +169,7 @@ class Users
     }
 
     /** GETTER POUR USER Email */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -129,7 +187,7 @@ class Users
     }
 
     /** GETTER POUR USER Birthdate */
-    public function getBirthdate()
+    public function getBirthdate(): string
     {
         return $this->birthdate;
     }
@@ -141,7 +199,7 @@ class Users
     }
 
     /** GETTER POUR USER Tribe */
-    public function getTribe()
+    public function getTribe(): string
     {
         return $this->tribe;
     }
@@ -153,7 +211,7 @@ class Users
     }
 
     /** GETTER POUR USER Phone */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
@@ -165,7 +223,7 @@ class Users
     }
 
     /** GETTER POUR USER Description */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -177,7 +235,7 @@ class Users
     }
 
     /** GETTER POUR USER Avatar */
-    public function getAvatar()
+    public function getAvatar(): string
     {
         return $this->avatar;
     }
@@ -189,7 +247,7 @@ class Users
     }
 
     /** GETTER POUR USER Signature */
-    public function getSignature()
+    public function getSignature(): string
     {
         return $this->signature;
     }
@@ -201,7 +259,7 @@ class Users
     }
 
     /** GETTER POUR USER RegisterDate */
-    public function getRegisterDate()
+    public function getRegisterDate(): string
     {
         return $this->registerDate;
     }
@@ -213,7 +271,7 @@ class Users
     }
 
     /** GETTER POUR USER id_roles */
-    public function getid_roles()
+    public function getid_roles(): int
     {
         return $this->id_roles;
     }

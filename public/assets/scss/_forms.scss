@@ -1,65 +1,83 @@
-$blue-color: #3498db;
-$error-color: #e74c3c;
-$white-color: #f7f7f7;
-$dark-color: #13161A;
-$dark-purple-color: #1d1b31;
+@use "colors" as *;
+@use 'buttons' as *;
 
+// STYLE DU FORMULAIRE //
+#registration-form, #login-form, #update-form {
 
-h1 {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 0 auto;
+  width: 90%;
+  background-color: darken($dark-light-color, 5%);
+  padding: 2em;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
+  border: solid 1px darken($hover-color, 50%);
+
+  h1 {
     text-transform: uppercase;
+    font-weight: bolder;
     text-align: center;
-    color: $dark-color;
-    margin-bottom: 1em;
-}
+    color: $white-color;
+    margin-bottom: 0.5em;
+  }
 
+  // STYLE DES CHAMPS ET DES LABELS //
+  .form-group {
+    position: relative;
+    margin-bottom: 1.5em;
 
-form {
-        margin: 0 auto;
-        height: 100%;
-        background: linear-gradient(to bottom, $white-color, darken($white-color, 10%));
-        padding: 2em;
-        width: 90%;
-        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
-        border: 1px solid $dark-purple-color;
+    label {
+      display: block;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+      color: $white-color;
+      text-align: left;
+      opacity: 0.6;
+    }
 
-      & .form-button {
-        text-transform: uppercase;
+    .input-with-icon {
+      position: relative;
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="date"] {
+        width: 100%;
+        padding: 0.8em;
+        font-size: 1.1em;
+        border: none;
+        color: $dark-color;
+        box-sizing: border-box;
+
+        &:focus {
+          outline: solid 3px darken($blue-color, 30%);
+        }
+      }
+
+      i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0.8em;
+        color: $dark-light-color;
       }
     }
 
-label {
-    color: $dark-color;
-    text-align: left;
-    display: block;
-    margin-top: 1.5em;
-    margin-bottom: 0.2em;
-    font-weight: bold;
-}
-
-input[type="email"],
-input[type="text"],
-input[type="password"],
-input[type="date"] {
-    width: 100%;
-    padding: 1em;
-    border: 1px solid $dark-purple-color;
-
-    &:focus {
-        outline: 1px solid $dark-purple-color;
+    .form-error {
+      position: absolute;
+      margin: 0 auto;
+      bottom: -1.5em;
+      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: $error-color;
+      font-size: 0.9em;
     }
-}
+  }
 
-input[type="submit"] {
-    margin-top: 3em;
-    width: 100%;
-    padding: 1em;
-    border: none;
-    background-color: $dark-purple-color;
-    color: $white-color;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-        background-color: darken($dark-purple-color, 10%);
-    }
+  // STYLE DU BOUTON //
+  .form-button {
+    @include form-button($dark-light-color, $white-color, lighten($dark-light-color, 10%));
+  }
 }

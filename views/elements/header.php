@@ -23,8 +23,8 @@
         <img src="assets/img/navigation/menu-close.svg" id="nav-close" alt="Icône du menu mobile fermeture">
 
         <ul id="navigation-links">
-                <li class="dropdown">
 
+            <li class="dropdown">
                     <button class="dropdown-toggle">
                         <?php if (isset($_SESSION['user'])): ?>
                             <!-- SI L'UTILISATEUR EST CONNECTER ON AFFICHE SON PSEUDONYME -->
@@ -107,10 +107,6 @@
                     </ul>
                 </li>
 
-                <li>
-                    <a href="">Faire un don</a>
-                </li>
-
         </ul>
     </nav>
 
@@ -129,5 +125,6 @@
         </div>
         <?php unset($_SESSION['warning']); ?>
     <?php endif; ?>
+
 
     <header>ICI MON HEADER POUR PAS PERDRE LA TETE</header>

@@ -1,0 +1,91 @@
+@use "colors" as *;
+@use "buttons" as *;
+
+#user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1em;
+  padding-bottom: 2em;
+  width: 90%;
+  background: linear-gradient(to bottom, $dark-light-color, darken($dark-light-color, 10%));
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
+  border: solid 1px darken($hover-color, 50%);
+  position: relative;
+  margin: 0 auto;
+
+
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1em;
+    border-bottom: solid 1px darken($hover-color, 50%);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
+    position: relative;
+
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: url('../img/profil-banner-default.png') center/cover;
+      opacity: 0.5;
+    }
+
+    & span:first-child {
+      position: absolute;
+      top: 0.5em;
+      left: 0.5em;
+      text-transform: uppercase;
+      font-weight: bolder;
+      width: 20%;
+      opacity: 1;
+      color: $success-color;
+    }
+    .avatar {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 1em;
+      border: solid 2px white;
+      border-radius: 50%;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+
+
+
+  .profile-section{
+    width: 90%;
+    padding: 1em;
+    background-color: darken($dark-light-color, 5%);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
+    border: solid 1px darken($hover-color, 50%);
+
+    &:nth-child(2){
+      background-color: darken($dark-color, 5%);
+    }
+    &:nth-child(4){
+      background: transparent;
+      box-shadow: none;
+      border:none;
+    }
+  }
+
+  .profil-button {
+    @include form-button($dark-light-color, $white-color, lighten($dark-light-color, 10%));
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+
+
+

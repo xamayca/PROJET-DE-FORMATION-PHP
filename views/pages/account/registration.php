@@ -1,70 +1,78 @@
-<!-- AFFICHAGE DU MESSAGE DE SUCCÈS -->
-<?php if (isset($_SESSION['success'])): ?>
-    <div class="alert alert-success">
-        <p><?= $_SESSION['success'] ?></p>
-    </div>
-    <?php unset($_SESSION['success']); ?>
-<?php endif; ?>
-
-<!-- AFFICHAGE DE L'ERREUR GLOBALE (AVERTISSEMENT) -->
-<?php if (isset($_SESSION['warning'])): ?>
-    <div class="alert alert-warning">
-        <p><?= $_SESSION['warning'] ?></p>
-    </div>
-    <?php unset($_SESSION['warning']); ?>
-<?php endif; ?>
-
+<div class="container">
 
 <!-- FORMULAIRE D'INSCRIPTION -->
 <form id="registration-form" action="/inscription" method="POST">
-    <h1>Crée un compte</h1>
+    <h1>Créer un compte</h1>
     <!-- CHAMP EMAIL -->
-    <label for="email">Adresse mail</label>
-    <input type="email" name="email" id="email" placeholder="exemple@mail.fr" value="<?= htmlspecialchars($email ?? '') ?>">
-
-    <?php if (isset($errors['email'])): ?>
-        <div class="form-error">
-            <p><?= $errors['email'] ?></p>
+    <div class="form-group">
+        <label for="email">Adresse mail</label>
+        <div class="input-with-icon">
+            <input type="email" name="email" id="email" placeholder="Entrez votre adresse mail" value="<?= htmlspecialchars($email ?? '') ?>">
+            <i class="fas fa-envelope"></i> <!-- Icone Font Awesome -->
         </div>
-    <?php endif; ?>
+        <?php if (isset($errors['email'])): ?>
+            <div class="form-error">
+                <p><?= $errors['email'] ?></p>
+            </div>
+        <?php endif; ?>
+    </div>
 
     <!-- CHAMP NOM D'UTILISATEUR -->
-    <label for="username">Nom d'utilisateur</label>
-    <input type="text" name="username" id="username" placeholder="Entrer votre nom d'utilisateur ici" value="<?= htmlspecialchars($username ?? '') ?>">
-    <?php if (isset($errors['username'])): ?>
-        <div class="form-error">
-            <p><?= $errors['username'] ?></p>
+    <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
+        <div class="input-with-icon">
+            <input type="text" name="username" id="username" placeholder="Entrez votre nom d'utilisateur" value="<?= htmlspecialchars($username ?? '') ?>">
+            <i class="fas fa-user"></i> <!-- Icone Font Awesome -->
         </div>
-    <?php endif; ?>
+        <?php if (isset($errors['username'])): ?>
+            <div class="form-error">
+                <p><?= $errors['username'] ?></p>
+            </div>
+        <?php endif; ?>
+    </div>
 
     <!-- CHAMP MOT DE PASSE -->
-    <label for="password">Mot de passe</label>
-    <input type="password" name="password" id="password" placeholder="Entrer votre mot de passe ici">
-    <?php if (isset($errors['password'])): ?>
-        <div class="form-error">
-            <p><?= $errors['password'] ?></p>
+    <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <div class="input-with-icon">
+            <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe">
+            <i class="fas fa-lock"></i> <!-- Icone Font Awesome -->
         </div>
-    <?php endif; ?>
+        <?php if (isset($errors['password'])): ?>
+            <div class="form-error">
+                <p><?= $errors['password'] ?></p>
+            </div>
+        <?php endif; ?>
+    </div>
 
     <!-- CHAMP CONFIRMATION DU MOT DE PASSE -->
-    <label for="password_confirm">Confirmation du mot de passe</label>
-    <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirmez votre mot de passe">
-    <?php if (isset($errors['password_confirm'])): ?>
-        <div class="form-error">
-            <p><?= $errors['password_confirm'] ?></p>
+    <div class="form-group">
+        <label for="password_confirm">Confirmation du mot de passe</label>
+        <div class="input-with-icon">
+            <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirmez votre mot de passe">
+            <i class="fas fa-lock"></i> <!-- Icone Font Awesome -->
         </div>
-    <?php endif; ?>
+        <?php if (isset($errors['password_confirm'])): ?>
+            <div class="form-error">
+                <p><?= $errors['password_confirm'] ?></p>
+            </div>
+        <?php endif; ?>
+    </div>
 
     <!-- CHAMP DATE DE NAISSANCE -->
-    <label for="birthdate">Date de naissance</label>
-
-    <!-- htmlspecialchars() ECHAPPE LES CARACTERES SPECIAUX -->
-    <input type="date" name="birthdate" id="birthdate" value="<?= htmlspecialchars($birthdate ?? '') ?>">
-    <?php if (isset($errors['birthdate'])): ?>
-        <div class="form-error">
-            <p><?= $errors['birthdate'] ?></p>
+    <div class="form-group">
+        <label for="birthdate">Date de naissance</label>
+        <div class="input-with-icon">
+            <input type="date" name="birthdate" id="birthdate" placeholder="Entrez votre date de naissance" value="<?= htmlspecialchars($birthdate ?? '') ?>">
         </div>
-    <?php endif; ?>
+        <?php if (isset($errors['birthdate'])): ?>
+            <div class="form-error">
+                <p><?= $errors['birthdate'] ?></p>
+            </div>
+        <?php endif; ?>
+    </div>
 
-    <input class="form-button" type="submit" name="submit" value="S'enregistré">
+    <input class="form-button" type="submit" name="submit" value="S'enregistrer">
 </form>
+
+</div>

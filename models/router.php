@@ -34,4 +34,4 @@ class Router
         $controllerInstance = new $controllerInstance();
         $controllerInstance->$methodName();
     }
-};
+}

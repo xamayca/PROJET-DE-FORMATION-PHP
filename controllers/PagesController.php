@@ -23,20 +23,6 @@ class PagesController
         require_once "../views/elements/footer.php";
     }
 
-    public function registration()
-    {
-        require_once "../views/elements/header.php";
-        require_once '../views/pages/account/registration.php';
-        require_once "../views/elements/footer.php";
-    }
-
-    public function login()
-    {
-        require_once "../views/elements/header.php";
-        require_once '../views/pages/account/login.php';
-        require_once "../views/elements/footer.php";
-    }
-
     public function error404()
     {
         require_once "../views/elements/header.php";
@@ -44,10 +30,4 @@ class PagesController
         require_once "../views/elements/footer.php";
     }
 
-    public function databaseError()
-    {
-        require_once "../views/elements/header.php";
-        require_once '../views/pages/errors/DB-error.php';
-        require_once "../views/elements/footer.php";
-    }
 };

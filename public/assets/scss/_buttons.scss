@@ -1,0 +1,17 @@
+@use  'colors' as *;
+
+@mixin form-button($bg-color, $text-color, $hover-bg-color) {
+  text-transform: uppercase;
+  display: block;
+  width: 100%;
+  padding: 1em;
+  background-color: $bg-color;
+  color: $text-color;
+  border: solid 1px darken($blue-color, 40%);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+}

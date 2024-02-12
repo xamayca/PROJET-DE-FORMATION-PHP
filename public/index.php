@@ -14,11 +14,13 @@ $router->addRoute('/', 'Pages', 'home');
 // CREATION DES ROUTES POUR L'UTILISATEUR (INSCRIPTION, CONNEXION, DECONNEXION) //
 $router->addRoute('/inscription', 'Registration', 'registration');
 $router->addRoute('/connexion', 'Login', 'login');
+$router->addRoute('/profil', 'Profile', 'profile');
+
 $router->addRoute('/deconnexion', 'Logout', 'logout');
 
 // CREATION DES ROUTES POUR LE TEST //
-$router->addRoute('/test-php', 'Pages', 'testPhp');
-$router->addRoute('/test-database', 'Pages', 'testDatabase');
+$router->addRoute('/php-test', 'Pages', 'testPhp');
+$router->addRoute('/database-test', 'Pages', 'testDatabase');
 
 // ROUTE LA REQUETE HTTP VERS LE CONTROLEUR ET L'ACTION CORRESPONDANTS //
 $router->dispatch();

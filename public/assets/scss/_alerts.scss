@@ -1,21 +1,10 @@
-$error-color: #721c24;
-$error-background: #f8d7da;
-$error-border: #f5c6cb;
-
-$success-color: #856404;
-$success-background: #fff3cd;
-$success-border: #ffeeba;
-
+@use "colors" as *;
 
 // STYLE POUR LES ALERTES //
 .alert {
   position: absolute;
-  top: 7vh;
-  left: 0;
-  margin-top: 2em;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100vw;
+  top: 10vh;
+  width: 100%;
 
   & p {
     padding: 1em;
@@ -38,4 +27,32 @@ $success-border: #ffeeba;
 
 .form-error p {
   color: $error-color;
+}
+
+// ANIMATION POUR FAIRE APPARAÎTRE LES MESSAGES D'ERREURS ET DE SUCCÈS //
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// ANIMATION POUR FAIRE DISPARAÎTRE LES MESSAGES D'ERREURS ET DE SUCCÈS //
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
