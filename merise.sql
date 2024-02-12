@@ -29,7 +29,7 @@ CREATE TABLE gt3f5b_users(
                              signature       Varchar (150) ,
                              avatar          Varchar (255) ,
                              description     Varchar (150) ,
-                             tribe           Varchar (24) NOT NULL ,
+                             tribe           Varchar (24)  ,
                              id_roles Int NOT NULL
     ,CONSTRAINT users_PK PRIMARY KEY (id)
 

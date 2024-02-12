@@ -1,7 +1,4 @@
-$white-color: #f7f7f7;
-$dark-color: #1f2927;
-$dark-purple-color: #111827;
-$hover-color: #9e9e9e;
+@use "colors" as *;
 
 #nav-shadow{
     position:absolute;
@@ -10,21 +7,25 @@ $hover-color: #9e9e9e;
     height: 90dvh;
     background-color: rgba(0, 0, 0, 0.500);
     opacity: 0;
+    z-index: 1;
+
 }
 
 nav {
+    z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100vw;
+    width: 100%;
     height: 10vh;
     padding-left: 2em;
     padding-right: 2em;
-    background-color: $white-color;
-    //box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(to bottom, $white-color, darken($white-color, 10%));
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
+
     .brand:first-child {
         display:flex;
         align-items: center;
@@ -68,8 +69,9 @@ nav {
         transform: translateX(101%);
         transition: transform 0.3s ease-in-out;
         overflow-y: auto;
-        background: linear-gradient(to bottom, #111827, darken(#111827, 10%));
+        background: linear-gradient(to bottom, $dark-light-color, darken($dark-light-color, 10%));
         border-left: solid 1px darken($hover-color, 50%);
+        z-index: 1;
 
 
         li a {
@@ -83,28 +85,9 @@ nav {
             font-weight: bolder;
             text-transform: uppercase;
 
-            &:hover {
-
-                &::after {
-                    transform: translateX(-50%) scaleX(1);
-                };
-            };
-
-            &::after {
-                content: "";
-                position: absolute;
-                bottom: 20%;
-                left: 50%;
-                width: 20%;
-                height: 2px;
-                background-image: linear-gradient(to left, transparent, $white-color, transparent);
-                transform: translateX(-50%) scaleX(0);
-                transition: transform 0.3s ease-in-out;
-            };
-
             .game-logo {
                 position: absolute;
-                left: 2em;
+                left: 5%;
                 width: 16px;
                 height: 16px;
             };
@@ -116,9 +99,21 @@ nav {
                 position: relative;
                 padding: 1em;
                 margin-bottom: 1em;
-                background: url('../img/navigation/banner.png') center / cover;
                 border-radius: 0.2em;
                 box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+                border: solid 1px darken($hover-color, 50%);
+                background: linear-gradient(to top, $dark-light-color, darken($dark-color, 10%)),;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background: url('../img/profil-banner-default.png') center/cover;
+                    opacity: 0.3;
+                }
 
                 button.dropdown-toggle {
                     position: relative;
@@ -133,16 +128,16 @@ nav {
                         border: solid 2px white;
                         border-radius: 50%;
                         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-                    };
+                    }
 
                     .fa-chevron-down {
                         position: absolute;
                         right: 1.5em;
                         font-size: 0.5em;
                         bottom: 2.5em;
-                    };
-                };
-            };
+                    }
+                }
+            }
 
             /* STYLE POUR TOUT LES AUTRES ELEMENTS 'BUTTON-DROPDOWN' DE 'NAVIGATION-LINKS' */
             button.dropdown-toggle {
@@ -164,9 +159,9 @@ nav {
                     right: 2em;
                     font-size: 0.5em;
                     transition: transform 0.5s ease;
-                };
-            };
-        };
+                }
+            }
+        }
 
         /* STYLES POUR LE SOUS MENUS DÉROULANT */
         .sub-items {
@@ -174,11 +169,27 @@ nav {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
-            background-color: darken($dark-purple-color, 5%);
+            background-color: darken($dark-light-color, 5%);
 
             li a{
                 font-size: 80%;
                 font-weight: normal;
+
+                /* STYLE POUR LA BARRE DE SURVOL DES LIEN DE SOUS MENU */
+                &:hover::after {
+                    transform: translateX(-50%) scaleX(1);
+                };
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 30%;
+                    left: 50%;
+                    width: 20%;
+                    height: 2px;
+                    background-image: linear-gradient(to left, transparent, $blue-color, transparent);
+                    transform: translateX(-50%) scaleX(0);
+                    transition: transform 0.3s ease-in-out;
+                };
             };
 
             &.sub-items-border {

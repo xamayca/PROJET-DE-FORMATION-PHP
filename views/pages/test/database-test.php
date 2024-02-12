@@ -1,5 +1,5 @@
 <?php
-require_once '../private/DB-error.php';
+require_once '../private/database.php';
 
 $dbConnection = new DatabaseConnection();
 $pdo = $dbConnection->getDatabase();

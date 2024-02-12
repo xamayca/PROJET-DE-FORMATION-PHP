@@ -1,12 +1,9 @@
-$white-color: #f7f7f7;
-$dark-color: #13161A;
-$dark-purple-color: #1c1b33;
-$hover-color: rgba(158, 158, 158, 0.050);
+@use "colors" as *;
 
-@media screen and (min-width:1600px) {
+@media screen and (min-width: 1600px) {
 
     #nav-shadow {
-        display: none
+        display: none;
     }
 
     nav {
@@ -44,7 +41,7 @@ $hover-color: rgba(158, 158, 158, 0.050);
                     margin-bottom: 0;
                     background-image: none;
                     box-shadow: none;
-                    border:0;
+                    border: none;
 
                     button.dropdown-toggle {
                         position: initial;
@@ -68,8 +65,9 @@ $hover-color: rgba(158, 158, 158, 0.050);
                         }
                     }
 
+                    /* STYLE POUR LE SOUS MENU 'COMPTE' CENTRAGE DU SOUS MENU */
                     .sub-items{
-                        transform: translateX(-1.5em);
+                        transform: translateX(-1em);
                     }
                 }
 
@@ -89,10 +87,7 @@ $hover-color: rgba(158, 158, 158, 0.050);
                 .sub-items {
                     position: absolute;
                     top: 100%;
-                    background: linear-gradient(to bottom, $dark-purple-color, darken($dark-purple-color, 10%));
-                    border-left: 1px solid darken($white-color, 60%);
-                    border-right: 1px solid darken($white-color, 60%);
-                    border-bottom: 1px solid darken($white-color, 60%);
+                    background: linear-gradient(to bottom, $dark-light-color, darken($dark-light-color, 10%));
 
 
                     li a {
@@ -123,10 +118,7 @@ $hover-color: rgba(158, 158, 158, 0.050);
                         }
                     }
                 }
-                /* STYLE POUR LE SOUS MENU 'COMPTE' CENTRAGE DU SOUS MENU */
-                &:nth-child(1) .sub-items {
-                    transform: translateX(-1em);
-                }
+
                 /* STYLE POUR LE SOUS MENU 'ACTUALITÉS' CENTRAGE DU SOUS MENU */
                 &:nth-child(3) .sub-items {
                     transform: translateX(-4em);
@@ -144,11 +136,10 @@ $hover-color: rgba(158, 158, 158, 0.050);
     }
 }
 
-
-@media screen and (min-width:1400px) {
+@media screen and (min-width: 1400px) {
 
     #nav-shadow {
-        display: none
+        display: none;
     }
 
     nav {
@@ -209,6 +200,10 @@ $hover-color: rgba(158, 158, 158, 0.050);
                             bottom: initial;
                         }
                     }
+
+                    &::before {
+                        content: none;
+                    }
                 }
 
                 button.dropdown-toggle {
@@ -227,10 +222,8 @@ $hover-color: rgba(158, 158, 158, 0.050);
                 .sub-items {
                     position: absolute;
                     top: 100%;
-                    background: linear-gradient(to bottom, $dark-purple-color, darken($dark-purple-color, 10%));
-                    border-left: 1px solid darken($white-color, 60%);
-                    border-right: 1px solid darken($white-color, 60%);
-                    border-bottom: 1px solid darken($white-color, 60%);
+                    background: linear-gradient(to bottom, $dark-light-color, darken($dark-light-color, 10%));
+
 
                     li a {
                         position: relative;
@@ -254,15 +247,16 @@ $hover-color: rgba(158, 158, 158, 0.050);
                         }
 
                         &:hover .game-logo {
-                            opacity: 0.4;
+                            opacity: 0.3;
                             transform: rotate(30deg) scale(3) translateX(0%);
                             transition: all 1s ease-in-out;
                         }
                     }
                 }
+
                 /* STYLE POUR LE SOUS MENU 'COMPTE' CENTRAGE DU SOUS MENU */
                 &:nth-child(1) .sub-items {
-                    transform: translateX(-1em);
+                    transform: translateX(-0.5em);
                 }
                 /* STYLE POUR LE SOUS MENU 'ACTUALITÉS' CENTRAGE DU SOUS MENU */
                 &:nth-child(3) .sub-items {

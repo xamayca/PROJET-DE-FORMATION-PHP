@@ -25,28 +25,30 @@ class LoginController
             $email = cleanInput($_POST['email']);
             $password = cleanInput($_POST['password']);
 
-            // SI L'EMAIL EST VIDE OU INVALIDE, ON GERE L'ERREUR //
+            // VALIDATION DE L'EMAIL //
             if (empty($email)) {
                 $errors['email'] = $messageManager->getMessage('error', 'email_required');
+            } elseif (!preg_match($regexManager->getRegex('email'), $email)) {
+                $errors['email'] = $messageManager->getMessage('error', 'email_invalid');
             }
 
-            // SI LE MOT DE PASSE EST VIDE, ON GERE L'ERREUR //
+            // VALIDATION DU MOT DE PASSE //
             if (empty($password)) {
                 $errors['password'] = $messageManager->getMessage('error', 'password_required');
+            } elseif (!preg_match($regexManager->getRegex('password'), $password)) {
+                $errors['password'] = $messageManager->getMessage('error', 'password_invalid');
             }
 
             // S'IL N'Y A PAS D'ERREURS, ON CONTINUE //
             if (empty($errors)) {
+
+                // ON RECUPERE LES INFOS DE L'UTILISATEUR AVEC SON EMAIL //
                 $user->setEmail($email);
                 $userData = $user->getUserByEmail();
 
-                // ON VERIFIE SI L'UTILISATEUR EXISTE //
-                if (!$userData) {
-                    // SI L'UTILISATEUR N'EXISTE PAS, ON AFFICHE UN AVERTISSEMENT //
-                    $_SESSION['warning'] = $messageManager->getMessage('error', 'user_not_found');
-                }
-
+                // SI LE MOT DE PASSE CORRESPOND, ON CONNECTE L'UTILISATEUR //
                 if (isset($userData['password']) && password_verify($password, $userData['password'])) {
+
                     // ON STOCKE LES INFOS DE L'UTILISATEUR DANS LA SESSION //
                     $_SESSION['user'] = [
                         'id' => $userData['id'],
@@ -54,14 +56,14 @@ class LoginController
                         'email' => $userData['email'],
                     ];
 
-                    // SI LA CONNEXION EST REUSSIE, ON REDIRIGE VERS LA PAGE D'ACCUEIL //
-                    $_SESSION['success'] = $messageManager->getMessage('success', 'logged_in');
+                    // SI LA CONNEXION EST REUSSIE, ON REDIRIGE VERS LA PAGE D'ACCUEIL AVEC UN MESSAGE ET SON NOM D'UTILISATEUR //
+                    $_SESSION['success'] = str_replace('{{username}}', $userData['username'], $messageManager->getMessage('success', 'logged_in'));
                     header('Location: /');
                     // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
                     exit;
                 } else {
                     // ON VERIFIE SI LE MOT DE PASSE EST INCORRECT //
-                    $errors['invalid_credentials'] = $messageManager->getMessage('error', 'invalid_credentials');
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'invalid_credentials');
                 }
             }
         }

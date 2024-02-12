@@ -10,9 +10,8 @@ class RegistrationController
     // LOGIQUE POUR ENREGISTRER L'UTILISATEUR DANS LA BASE DE DONNÉES & GÉRER LES ERREURS //
     public function registration()
     {
-        // INSTANCIATION DE LA CLASSES MessageManager POUR GERER LES MESSAGES //
+        // ON INSTANCIE LES MANAGERS POUR LES MESSAGES ET LES REGEX //
         $messageManager = new MessageManager();
-        // INSTANCIATION DE LA CLASSE RegexManager POUR UTILISER LES EXPRESSIONS RÉGULIÈRES //
         $regexManager = new RegexManager();
         // TABLEAU POUR STOCKER LES ERREURS //
         $errors = [];
@@ -115,5 +114,6 @@ class RegistrationController
         // AFFICHAGE DE LA PAGE D'ENREGISTREMENT //
         require_once "../views/elements/header.php";
         require_once '../views/pages/account/registration.php';
+        require_once "../views/elements/footer.php";
     }
 }
