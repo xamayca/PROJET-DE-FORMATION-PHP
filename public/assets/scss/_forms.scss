@@ -2,7 +2,7 @@
 @use 'buttons' as *;
 
 // STYLE DU FORMULAIRE //
-#registration-form, #login-form, #update-form {
+#registration-form, #login-form, #edit-profile-form {
 
   display: flex;
   flex-direction: column;
@@ -42,7 +42,8 @@
       input[type="text"],
       input[type="email"],
       input[type="password"],
-      input[type="date"] {
+      input[type="date"],
+      textarea{
         width: 100%;
         padding: 0.8em;
         font-size: 1.1em;

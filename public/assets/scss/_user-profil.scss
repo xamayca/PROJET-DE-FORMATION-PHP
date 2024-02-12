@@ -1,34 +1,33 @@
 @use "colors" as *;
 @use "buttons" as *;
 
+
 #user-profile {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
-  gap: 1em;
-  padding-bottom: 2em;
   width: 90%;
-  background: linear-gradient(to bottom, $dark-light-color, darken($dark-light-color, 10%));
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to bottom, $dark-light-color, darken($dark-light-color, 10%));  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
   border: solid 1px darken($hover-color, 50%);
-  position: relative;
+  position:relative;
   margin: 0 auto;
-
+  gap:1em;
 
   .profile-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100%;
-    padding: 1em;
+    position: relative;
+    padding:1em;
+    background: linear-gradient(to top, $dark-light-color, darken($dark-color, 10%));
     border-bottom: solid 1px darken($hover-color, 50%);
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
-    position: relative;
+    z-index: 1;
 
 
-    &:after {
+    &:before {
       content: "";
       position: absolute;
       top: 0;
@@ -36,19 +35,37 @@
       bottom: 0;
       left: 0;
       background: url('../img/profil-banner-default.png') center/cover;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .profile-button {
+      background: transparent;
+      border:none;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      padding:1.5em;
+      align-items: center;
+      width:10%;
+      top: 0.5em;
+      right: 0.5em;
+      color: $white-color;
+    }
+
+    .tribe{
       opacity: 0.5;
     }
 
-    & span:first-child {
-      position: absolute;
+    .role{
+      text-transform: uppercase;
+      position:absolute;
+      font-weight: bolder;
       top: 0.5em;
       left: 0.5em;
-      text-transform: uppercase;
-      font-weight: bolder;
-      width: 20%;
-      opacity: 1;
       color: $success-color;
     }
+
     .avatar {
       width: 100px;
       height: 100px;
@@ -59,33 +76,62 @@
     }
   }
 
-
-
-
-  .profile-section{
-    width: 90%;
-    padding: 1em;
+  .desc{
     background-color: darken($dark-light-color, 5%);
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px darken($hover-color, 50%);
-
-    &:nth-child(2){
-      background-color: darken($dark-color, 5%);
-    }
-    &:nth-child(4){
-      background: transparent;
-      box-shadow: none;
-      border:none;
-    }
-  }
-
-  .profil-button {
-    @include form-button($dark-light-color, $white-color, lighten($dark-light-color, 10%));
-    width: 80%;
+    padding:0.5em;
+    width: 90%;
     margin: 0 auto;
   }
+
+  ul {
+    width: 90%;
+    position: relative;
+    background-color: darken($dark-light-color, 5%);
+    border: solid 1px darken($hover-color, 50%);
+
+    li {
+      padding: 1em;
+      position: relative;
+
+      i{
+        position: absolute;
+        left: 1em;
+      }
+
+      &:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        background-color: darken($hover-color, 50%);
+        transform: translateX(-50%);
+        width:80%;
+        height: 2px;
+      }
+    }
+  }
+
+  .sign{
+    background-color: darken($dark-light-color, 5%);
+    border: solid 1px darken($hover-color, 50%);
+    padding:0.5em;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .profile-footer{
+    font-size: small;
+    border-top: solid 1px darken($hover-color, 50%);
+    padding:0.5em;
+    width:100%;
+    background-color: darken($dark-color, 5%);
+    span{
+      opacity: 0.5;
+    }
+  }
+
+  .default-opacity {
+    opacity: 0.5;
+  }
 }
-
-
-
-
