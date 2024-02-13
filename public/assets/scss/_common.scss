@@ -42,3 +42,19 @@ body {
     //height: 90dvh;
     overflow-y: hidden;
 }
+
+.transform-x-100 {
+    transform: translateX(100%);
+}
+
+.transform-x-0 {
+    transform: translateX(0%);
+}
+
+.transform-y-100 {
+    transform: translateY(100%);
+}
+
+.transform-y-0 {
+    transform: translateY(0%);
+}

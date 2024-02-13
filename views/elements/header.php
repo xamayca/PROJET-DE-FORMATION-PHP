@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- AUTRES META TAGS -->
+    <meta name="author" content="France Survival">
+    <meta name="keywords" content="France Survival, ARK: Survival Evolved, ARK: Survival Ascended, Communauté ARK, The Island, Taming, Breeding, Rates, PVE, PVP, Serveurs, Serveur ARK, Communauté ARK France, ARK Dinosaures, Stratégies ARK, ARK Mods, ARK Raids, ARK Communauté Française, ARK Serveurs FR, ARK Guides FR, ARK Tutoriels, ARK Cartes, ARK Événements, ARK Mises à jour, Fjordur, The center, Ragnarok, Scorched earth, lost island, crystal isles, aberration, Tribu ARK, Discord ARK, ARK Conseils, ARK Crafting, ARK Construction, ARK Exploration, Dinosaures">
+    <meta name="description" content="Site de la communauté France Survival basée sur le jeu ARK: Survival Evolved et ARK: Survival Ascended. Serveurs ARK: Survival Evolved PVE en Cluster &amp; serveur ARK: Survival Ascended PVE. [Playstation, Xbox, Nintendo Switch, PC, Mobile]">
     <script src="https://kit.fontawesome.com/c8066bb5d8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <link rel="stylesheet" href="assets/fonts/Roboto-Regular.ttf">
@@ -19,8 +24,8 @@
     <nav>
         <a class="brand" href="/"><img src="assets/img/navigation/icon-francesurvival.svg" class="brand-logo" alt="ARK: France Survival logo">France survival</a>
 
-        <img src="assets/img/navigation/menu-open.svg" id="nav-open" alt="Icône du menu mobile ouverture">
-        <img src="assets/img/navigation/menu-close.svg" id="nav-close" alt="Icône du menu mobile fermeture">
+        <i class="fa fa-2xl fa-bars" id="nav-open" aria-label="Ouvrir le menu de navigation"></i>
+        <i class="fa fa-2xl fa-times" id="nav-close" aria-label="Fermer le menu de navigation"></i>
 
         <ul id="navigation-links">
 

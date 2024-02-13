@@ -6,6 +6,11 @@ const navCloseHTML = document.getElementById('nav-close');
 const navigationLinksHTML = document.getElementById('navigation-links');
 const navShadowHTML = document.getElementById('nav-shadow');
 
+// ITEM DU FORMULAIRE DE MODIFICATION DE PROFIL //
+const EditProfilbuttonHTML = document.getElementById('profile-button');
+const EditProfilFormHTML = document.getElementById('edit-profile-form');
+const BackToProfilButtonHTML = document.getElementById('form-profile-button');
+
 /** VARIABLE QUI GÈRE L'OUVERTURE & LA FERMETURE DES SOUS-MENUS DE LA NAVIGATION */
 const toggleDropdown = (dropdown) => {
     const subItemsHTML = dropdown.querySelector('.sub-items');
@@ -32,33 +37,47 @@ document.querySelectorAll('.dropdown').forEach(dropdown => {
     });
 });
 
-// AJOUTE DES STYLES / CLASS A L'OUVERTURE DU MENU MOBILE //
-navOpenHTML.addEventListener('click', function () {
-    console.log('jai cliqué sur la fermeture du menu mobile');
+
+// ANIMATION DU MENU MOBILE A L'OUVERTURE //
+navOpenHTML.addEventListener('click', () => {
     navOpenHTML.style.display = 'none';
     navCloseHTML.style.display = 'block';
-    navigationLinksHTML.classList.add('d-initial');
-    bodyHTML.style.overflow = 'hidden';
+    navigationLinksHTML.classList.add('transform-x-0');
     navShadowHTML.style.opacity = '1';
     navShadowHTML.style.transition = 'opacity 1s ease-in-out';
 });
 
-// RETIRE DES STYLES / CLASS A L'OUVERTURE DU MENU MOBILE //
-navCloseHTML.addEventListener('click', function () {
-    console.log('jai cliqué sur louverture du menu mobile');
+// ANIMATION DU MENU MOBILE A LA FERMETURE //
+navCloseHTML.addEventListener('click', () => {
     navCloseHTML.style.display = 'none';
     navOpenHTML.style.display = 'block';
-    navigationLinksHTML.classList.remove('d-initial');
-    bodyHTML.style.overflow = '';
+    navigationLinksHTML.classList.toggle('transform-x-0');
     navShadowHTML.style.opacity = '0';
-    navShadowHTML.style.transition = 'opacity 0.1s ease-in-out';
 });
+
+// FERMETURE DU MENU MOBILE AU CLIQUE SUR L'OMBRE //
+navShadowHTML.addEventListener('click', () => {
+    navOpenHTML.style.display = 'block';
+    navCloseHTML.style.display = 'none';
+    navigationLinksHTML.classList.remove('transform-x-0');
+    navShadowHTML.style.opacity = '0';
+});
+
+// FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION DE PROFIL //
+EditProfilbuttonHTML.addEventListener('click', () => {
+    EditProfilFormHTML.classList.add('transform-x-0');
+});
+
+// FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION DE PROFIL //
+BackToProfilButtonHTML.addEventListener('click', () => {
+    EditProfilFormHTML.classList.remove('transform-x-100');
+});
+
 
 
 
 // ITEMS DE MESSAGES DE SUCCÈS & D'AVERTISSEMENT HTML //
 const messagesHTML = document.querySelectorAll('.alert-success, .alert-warning');
-
 /** FONCTION POUR AFFICHER LES MESSAGES DE SUCCÈS & D'AVERTISSEMENT PENDANT 3 SECONDES */
 function displayMessage(alerts) {
     alerts.classList.add('fade-in');
@@ -72,7 +91,6 @@ function displayMessage(alerts) {
         }, 500);
     }, 3000);
 }
-
 // POUR CHAQUE MESSAGE, APPELEZ LA FONCTION POUR AFFICHER LE MESSAGE //
 for (const alert of messagesHTML) {
     displayMessage(alert);

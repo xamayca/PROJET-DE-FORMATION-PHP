@@ -1,9 +1,8 @@
 @use "colors" as *;
-@use 'buttons' as *;
+@use 'mixins' as *;
 
 // STYLE DU FORMULAIRE //
 #registration-form, #login-form, #edit-profile-form {
-
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -14,12 +13,14 @@
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
   border: solid 1px darken($hover-color, 50%);
 
-  h1 {
+  h1, h2 {
     text-transform: uppercase;
     font-weight: bolder;
     text-align: center;
     color: $white-color;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
+    font-size:110%;
+    letter-spacing: 0.2em;
   }
 
   // STYLE DES CHAMPS ET DES LABELS //
@@ -31,9 +32,8 @@
       display: block;
       margin-bottom: 0.5em;
       font-weight: bold;
-      color: $white-color;
+      color: $blue-color;
       text-align: left;
-      opacity: 0.6;
     }
 
     .input-with-icon {
@@ -52,7 +52,7 @@
         box-sizing: border-box;
 
         &:focus {
-          outline: solid 3px darken($blue-color, 30%);
+          outline: solid 3px $blue-color;
         }
       }
 
@@ -79,6 +79,6 @@
 
   // STYLE DU BOUTON //
   .form-button {
-    @include form-button($dark-light-color, $white-color, lighten($dark-light-color, 10%));
+    @include form-button($dark-light-color, $blue-color, lighten($dark-light-color, 10%));
   }
 }

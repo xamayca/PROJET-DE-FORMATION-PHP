@@ -7,9 +7,10 @@
   padding: 1em;
   background-color: $bg-color;
   color: $text-color;
-  border: solid 1px darken($blue-color, 40%);
+  border: solid 1px $blue-color;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  letter-spacing: 0.2em;
 
   &:hover {
     background-color: $hover-bg-color;
