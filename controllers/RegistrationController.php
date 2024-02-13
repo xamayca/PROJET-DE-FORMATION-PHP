@@ -27,8 +27,6 @@ class RegistrationController
                 $$key = cleanInput($value);
             }
 
-            // AFFECTATION DES DONNÉES NETTOYÉES AUX PROPRIÉTÉS DE L'OBJET USER
-            $user->setUsername($username);
             // VALIDATION DU NOM D'UTILISATEUR //
             if (empty($username)) {
                 $errors['username'] = $messageManager->getMessage('error', 'username_required');
@@ -42,8 +40,6 @@ class RegistrationController
                 $errors['username'] = $messageManager->getMessage('error', 'username_maxlength');
             }
 
-            // AFFECTATION DES DONNÉES NETTOYÉES AUX PROPRIÉTÉS DE L'OBJET USER
-            $user->setEmail($email);
             // VALIDATION DE L'EMAIL //
             if (empty($email)) {
                 $errors['email'] = $messageManager->getMessage('error', 'email_required');

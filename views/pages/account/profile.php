@@ -64,8 +64,7 @@
     </div>
 
 
-
-    <form id="edit-profile-form" action="/profile" method="post" class="form-group">
+    <form id="edit-profile-form" action="/modifier-profil" method="post" class="form-group" enctype="multipart/form-data">
         <div class="profile-edit-form-header">
             <button id="form-profile-button" type="button" name="Retour au profil">
                 <i class="fa fa-lg fa-chevron-left"></i> Retour au profil
@@ -76,71 +75,85 @@
         <div class="form-group">
             <label for="username">Pseudo d'utilisateur:</label>
             <div class="input-with-icon">
-                <input type="text" id="username" name="username" placeholder="Entrez votre pseudo d'utilisateur" value="<?= isset($userData['username']) ? htmlspecialchars($userData['username']) : ''; ?>">
+                <input type="text" id="username" name="username" placeholder="Entrez votre pseudo d'utilisateur" value="<?= @$userData['username']?>">
                 <i class="fas fa-user"></i>
             </div>
+            <?php if (isset($errors['username'])): ?>
+                <div class="form-error">
+                    <p><?= $errors['username'] ?></p>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label for="email">Adresse email:</label>
             <div class="input-with-icon">
-                <input type="email" id="email" name="email" placeholder="Entrez votre adresse email" value="<?= isset($userData['email']) ? htmlspecialchars($userData['email']) : ''; ?>">
+                <input type="email" id="email" name="email" placeholder="Entrez votre adresse email" value="<?= @$userData['email'] ?>">
                 <i class="fas fa-envelope"></i>
             </div>
+            <?php if (isset($errors['email'])): ?>
+                <div class="form-error">
+                    <p><?= $errors['email'] ?></p>
+                </div>
+            <?php endif; ?>
         </div>
 
-        <div class="form-group">
-            <label for="password">Nouveau mot de passe:</label>
-            <div class="input-with-icon">
-                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
-                <i class="fas fa-lock"></i>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="confirm-password">Confirmez votre mot de passe:</label>
-            <div class="input-with-icon">
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez votre mot de passe">
-                <i class="fas fa-lock"></i>
-            </div>
-        </div>
 
         <div class="form-group">
             <label for="tribe">Tribu:</label>
             <div class="input-with-icon">
-                <input type="text" id="tribe" name="tribe" placeholder="Entrez votre tribu" value="<?= isset($userData['tribe']) ? htmlspecialchars($userData['tribe']) : ''; ?>">
+                <input type="text" id="tribe" name="tribe" placeholder="Entrez votre tribu" value="<?= @$userData['tribe']?>"">
                 <i class="fas fa-users"></i>
             </div>
+            <?php if (isset($errors['tribe'])): ?>
+                <div class="form-error">
+                    <p><?= $errors['tribe'] ?></p>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label for="description">Description:</label>
             <div class="input-with-icon">
-                <textarea id="description" name="description" placeholder="Entrez votre description"><?= isset($userData['description']) ? htmlspecialchars($userData['description']) : ''; ?></textarea>
+                <textarea id="description" name="description" placeholder="Entrez votre description"><?= @$userData['description']?></textarea>
                 <i class="fas fa-align-left"></i>
             </div>
+            <?php if (isset($errors['description'])): ?>
+                <div class="form-error">
+                    <p><?= $errors['description'] ?></p>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label for="phone">Numéro de téléphone:</label>
             <div class="input-with-icon">
-                <input type="text" id="phone" name="phone" placeholder="Entrez votre numéro" value="<?= isset($userData['phone']) ? htmlspecialchars($userData['phone']) : ''; ?>">
+                <input type="text" id="phone" name="phone" placeholder="Entrez votre numéro" value="<?= @$userData['phone']?>">
                 <i class="fas fa-phone"></i>
             </div>
+            <?php if (isset($errors['phone'])): ?>
+                <div class="form-error">
+                    <p><?= $errors['phone'] ?></p>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label for="signature">Signature:</label>
             <div class="input-with-icon">
-                <input type="text" id="signature" name="signature" placeholder="Entrez votre signature" value="<?= isset($userData['signature']) ? htmlspecialchars($userData['signature']) : ''; ?>">
+                <input type="text" id="signature" name="signature" placeholder="Entrez votre signature" value="<?= @$userData['signature']?>">
                 <i class="fas fa-signature"></i>
             </div>
+            <?php if (isset($errors['signature'])): ?>
+                <div class="form-error">
+                    <p><?= $errors['signature'] ?></p>
+                </div>
+            <?php endif; ?>
         </div>
 
         <button type="submit" class="form-button">Mettre à jour le profil</button>
-        <button type="submit" class="form-button">Supprimer mon compte</button>
+        <button type="button" class="form-button">Supprimer mon compte</button>
     </form>
-
 
 </div>
 

@@ -26,10 +26,10 @@ CREATE TABLE gt3f5b_users(
                              password        Varchar (255) NOT NULL ,
                              phone           Varchar (15) NOT NULL ,
                              registerDate    Datetime NOT NULL ,
-                             signature       Varchar (150) ,
+                             signature       Varchar (50) ,
                              avatar          Varchar (255) ,
                              description     Varchar (150) ,
-                             tribe           Varchar (24)  ,
+                             tribe           Varchar (25)  ,
                              id_roles Int NOT NULL
     ,CONSTRAINT users_PK PRIMARY KEY (id)
 

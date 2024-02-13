@@ -51,7 +51,7 @@ navOpenHTML.addEventListener('click', () => {
 navCloseHTML.addEventListener('click', () => {
     navCloseHTML.style.display = 'none';
     navOpenHTML.style.display = 'block';
-    navigationLinksHTML.classList.toggle('transform-x-0');
+    navigationLinksHTML.classList.remove('transform-x-0');
     navShadowHTML.style.opacity = '0';
 });
 
@@ -70,7 +70,7 @@ EditProfilbuttonHTML.addEventListener('click', () => {
 
 // FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION DE PROFIL //
 BackToProfilButtonHTML.addEventListener('click', () => {
-    EditProfilFormHTML.classList.remove('transform-x-100');
+    EditProfilFormHTML.classList.remove('transform-x-0');
 });
 
 

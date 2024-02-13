@@ -26,7 +26,11 @@ class MessageManager {
                 'age_invalid' => 'Vous devez entrer une date de naissance valide.',
                 'unexpected_error' => 'Une erreur s\'est produite, veuillez réessayer plus tard.',
                 'must_be_logged_in' => 'Vous devez être connecté pour accéder à cette page.',
-            ],
+                'phone_invalid' => 'Le numéro de téléphone est invalide.',
+                'tribe_maxlength' => 'La tribu est trop longue.',
+                'description_maxlength' => 'La description est trop longue.',
+                'signature_maxlength' => 'La signature est trop longue.',
+                ],
             'success' => [
                 'logged_in' => 'Connexion réussie, bienvenue {{username}} !',
                 'logged_out' => 'Déconnexion réussie, à bientôt !',

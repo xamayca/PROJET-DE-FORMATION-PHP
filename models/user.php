@@ -46,7 +46,7 @@ class Users
             $req = $this->pdo->prepare("INSERT INTO `gt3f5b_users` (username, email, password, birthdate, registerDate, id_roles)
             VALUES (:username, :email, :password, :birthdate, NOW(), 1 )");
 
-            // LIE LES VALEURS AUX PARAMÈTRES DE LA REQUÊTE
+            // LIE LES VALEURS AUX PARAMÈTRES DE LA REQUÊTE //
             $req->bindValue(':username', $this->username, PDO::PARAM_STR);
             $req->bindValue(':email', $this->email, PDO::PARAM_STR);
             $req->bindValue(':password', $this->password, PDO::PARAM_STR);
@@ -61,6 +61,48 @@ class Users
             exit();
         }
     }
+
+    public function updateProfile()
+    {
+        try{
+            // REQUETE POUR METTRE A JOUR LES INFORMATIONS DE L'UTILISATEUR //
+            $sql = "UPDATE gt3f5b_users SET 
+                    username = :username, 
+                    email = :email, 
+                    password = :password, 
+                    birthdate = :birthdate, 
+                    tribe = :tribe, 
+                    phone = :phone, 
+                    description = :description, 
+                    avatar = :avatar, 
+                    signature = :signature 
+                    WHERE id = :id                                                          ";
+
+            // PREPARATION DE LA REQUETE //
+            $req = $this->pdo->prepare($sql);
+
+            // LIE LES VALEURS AUX PARAMÈTRES DE LA REQUÊTE //
+            $req->bindParam(':username', $this->username, PDO::PARAM_STR);
+            $req->bindParam(':email', $this->email, PDO::PARAM_STR);
+            $req->bindParam(':password', $this->password, PDO::PARAM_STR);
+            $req->bindParam(':birthdate', $this->birthdate, PDO::PARAM_STR);
+            $req->bindParam(':tribe', $this->tribe, PDO::PARAM_STR);
+            $req->bindParam(':phone', $this->phone, PDO::PARAM_STR);
+            $req->bindParam(':description', $this->description, PDO::PARAM_STR);
+            $req->bindParam(':avatar', $this->avatar, PDO::PARAM_STR);
+            $req->bindParam(':signature', $this->signature, PDO::PARAM_STR);
+            $req->bindParam(':id', $this->id, PDO::PARAM_INT);
+
+            // EXÉCUTE LA REQUÊTE //
+            return $req->execute();
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
+
 
     /** REQUÊTE POUR VERIFIER SI UN USERNAME EXISTE DANS LA BASE DE DONNÉES */
     public function checkUsernameAlreadyUse()
