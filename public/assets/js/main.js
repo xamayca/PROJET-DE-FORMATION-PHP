@@ -7,7 +7,7 @@ const navigationLinksHTML = document.getElementById('navigation-links');
 const navShadowHTML = document.getElementById('nav-shadow');
 
 // ITEM DU FORMULAIRE DE MODIFICATION DE PROFIL //
-const EditProfilbuttonHTML = document.getElementById('profile-button');
+const EditAvatarbuttonHTML = document.getElementById('edit-avatar-btn');
 const EditProfilFormHTML = document.getElementById('edit-profile-form');
 const BackToProfilButtonHTML = document.getElementById('form-profile-button');
 
@@ -64,7 +64,7 @@ navShadowHTML.addEventListener('click', () => {
 });
 
 // FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION DE PROFIL //
-EditProfilbuttonHTML.addEventListener('click', () => {
+EditAvatarbuttonHTML.addEventListener('click', () => {
     EditProfilFormHTML.classList.add('transform-x-0');
 });
 

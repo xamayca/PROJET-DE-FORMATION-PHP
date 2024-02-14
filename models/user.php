@@ -84,12 +84,11 @@ class Users
             // LIE LES VALEURS AUX PARAMÈTRES DE LA REQUÊTE //
             $req->bindParam(':username', $this->username, PDO::PARAM_STR);
             $req->bindParam(':email', $this->email, PDO::PARAM_STR);
-            $req->bindParam(':password', $this->password, PDO::PARAM_STR);
-            $req->bindParam(':birthdate', $this->birthdate, PDO::PARAM_STR);
+            //$req->bindParam(':password', $this->password, PDO::PARAM_STR);
             $req->bindParam(':tribe', $this->tribe, PDO::PARAM_STR);
             $req->bindParam(':phone', $this->phone, PDO::PARAM_STR);
             $req->bindParam(':description', $this->description, PDO::PARAM_STR);
-            $req->bindParam(':avatar', $this->avatar, PDO::PARAM_STR);
+            //$req->bindParam(':avatar', $this->avatar, PDO::PARAM_STR);
             $req->bindParam(':signature', $this->signature, PDO::PARAM_STR);
             $req->bindParam(':id', $this->id, PDO::PARAM_INT);
 

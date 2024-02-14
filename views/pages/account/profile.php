@@ -1,11 +1,9 @@
 <div id="user-profile">
-
     <div class="profile-header">
 
-        <button id="profile-button" name="Edition du profil">
-            <i class="fa fa-xl fa-edit"></i>
+        <button id="edit-avatar-btn" name="Modifier l'avatar du profil">
+            <i class="fa fa-xl fa-image"></i>
         </button>
-
 
         <img class="avatar" src="<?= isset($userData['avatar']) ? htmlspecialchars($userData['avatar']) : 'assets/img/avatar-default.png'; ?>" alt="Avatar de l'utilisateur">
 
@@ -14,48 +12,125 @@
         </h1>
 
         <span class="tribe <?= isset($userData['tribe']) ? '' : 'default-opacity'; ?>">
-            <?= isset($userData['tribe']) ? htmlspecialchars($userData['tribe']) : 'Tribu non définie'; ?>
+            <?= isset($userData['tribe']) ?  htmlspecialchars('Tribu ' . $userData['tribe']) : 'Tribu non définie'; ?>
         </span>
+    </div>
+
+
+    <!-- NOM D'UTILISATEUR -->
+    <div class="profile-section">
+        <div class="profile-section-header">
+            <h2>Nom d'utilisateur</h2>
+            <button id="edit-account-info-btn" name="Modifier le nom d'utilisateur">
+                <i class="fa fa-lg fa-edit"></i>
+            </button>
+        </div>
+
+        <ul class="profile-info">
+            <li>
+                <i class="fa fa-user"></i>
+                <span class="<?= isset($userData['username']) ? '' : 'default-opacity'; ?>">
+                    <?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'Username non défini'; ?>
+                </span>
+                <form id="edit-username-form" action="/profil" method="post">
+                    <div class="test">
+                        <input type="text" id="username" name="username" placeholder="Entrez votre pseudo d'utilisateur" value="<?= @$userData['username']?>">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </form>
+            </li>
+        </ul>
 
     </div>
 
-    <div class="desc <?= isset($userData['description']) ? '' : 'default-opacity'; ?>">
-        <?= isset($userData['description']) ? htmlspecialchars($userData['description']) : 'Description non définie'; ?>
+
+    <!-- NOM DE LA TRIBU -->
+    <div class="profile-section">
+        <div class="profile-section-header">
+            <h2>Nom de la tribu</h2>
+            <button id="edit-account-info-btn" name="Modifier le nom de la tribu">
+                <i class="fa fa-lg fa-edit"></i>
+            </button>
+        </div>
+        <ul class="profile-info">
+            <li>
+                <i class="fa fa-users"></i>
+                <span class="<?= isset($userData['tribe']) ? '' : 'default-opacity'; ?>">
+                    <?= isset($userData['tribe']) ? htmlspecialchars($userData['tribe']) : 'Tribu non défini'; ?>
+                </span>
+            </li>
+        </ul>
     </div>
 
-    <ul>
-        <li>
-            <i class="fa fa-user"></i>
-            <span class="<?= isset($userData['username']) ? '' : 'default-opacity'; ?>">
-                <?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'Username non défini'; ?>
-            </span>
-        </li>
-        <li>
-            <i class="fa fa-envelope"></i>
-            <span class="<?= isset($userData['email']) ? '' : 'default-opacity'; ?>">
-                <?= isset($userData['email']) ? htmlspecialchars($userData['email']) : 'Email non défini'; ?>
-            </span>
-        </li>
-        <li>
-            <i class="fa fa-calendar"></i>
-            <span class="<?= isset($userData['birthdate_fr']) ? '' : 'default-opacity'; ?>">
-                <?= isset($userData['birthdate_fr']) ? ucfirst(htmlspecialchars($userData['birthdate_fr'])) : 'Date de naissance non définie'; ?>
-            </span>
-        </li>
+    <!-- INFORMATION PERSONNELLE -->
+    <div class="profile-section">
+        <div class="profile-section-header">
+            <h2>Informations personnelles</h2>
+            <button id="edit-account-info-btn" name="Modifier l'avatar du profil">
+                <i class="fa fa-lg fa-edit"></i>
+            </button>
+        </div>
+        <ul class="profile-info">
+            <li>
+                <i class="fa fa-phone"></i>
+                <span class="<?= !empty($userData['phone']) ? '' : 'default-opacity'; ?>">
+                    <?= !empty($userData['phone']) ? htmlspecialchars($userData['phone']) : 'Numéro non défini'; ?>
+                </span>
+            </li>
+            <li>
+                <i class="fa fa-envelope"></i>
+                <span class="<?= isset($userData['email']) ? '' : 'default-opacity'; ?>">
+                    <?= isset($userData['email']) ? htmlspecialchars($userData['email']) : 'Email non défini'; ?>
+                </span>
+            </li>
+            <li>
+                <i class="fa fa-calendar"></i>
+                <span class="<?= isset($userData['birthdate_fr']) ? '' : 'default-opacity'; ?>">
+                    <?= isset($userData['birthdate_fr']) ? ucfirst(htmlspecialchars($userData['birthdate_fr'])) : 'Date de naissance non définie'; ?>
+                </span>
+            </li>
+        </ul>
+    </div>
 
-        <li>
-            <i class="fa fa-phone"></i>
-            <span class="<?= !empty($userData['phone']) ? '' : 'default-opacity'; ?>">
-                <?= !empty($userData['phone']) ? htmlspecialchars($userData['phone']) : 'Numéro non défini'; ?>
-            </span>
-        </li>
-        <li>
-            <i class="fa fa-pencil"></i>
-            <span class="<?= isset($userData['signature']) ? '' : 'default-opacity'; ?>">
-                <?= isset($userData['signature']) ? htmlspecialchars($userData['signature']) : 'Signature non définie'; ?>
-            </span>
-        </li>
-    </ul>
+
+    <!-- DESCRIPTION -->
+    <div class="profile-section">
+        <div class="profile-section-header">
+            <h2>Description</h2>
+            <button id="edit-account-info-btn" name="Modifier la description de l'utilisateur">
+                <i class="fa fa-lg fa-edit"></i>
+            </button>
+        </div>
+        <ul class="profile-info">
+            <li>
+                <i class="fa fa-message"></i>
+                <span class="<?= !empty($userData['description']) ? '' : 'default-opacity'; ?>">
+                    <?= !empty($userData['description']) ? htmlspecialchars($userData['description']) : 'Description non défini'; ?>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- SIGNATURE -->
+    <div class="profile-section">
+        <div class="profile-section-header">
+            <h2>Signature</h2>
+            <button id="edit-account-info-btn" name="Modifier la signature de l'utilisateur">
+                <i class="fa fa-lg fa-edit"></i>
+            </button>
+        </div>
+        <ul class="profile-info">
+            <li>
+                <i class="fa fa-signature"></i>
+                <span class="<?= isset($userData['signature']) ? '' : 'default-opacity'; ?>">
+                    <?= isset($userData['signature']) ? htmlspecialchars($userData['signature']) : 'Signature non définie'; ?>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <button type="submit" class="profil-pass-button">Modifier le mot de passe</button>
+    <button type="submit" class="profil-delete-button">Supprimer mon compte</button>
 
     <div class="profile-footer">
         <span class="<?= isset($userData['registerDate_fr']) && isset($userData['role_name']) ? '' : 'default-opacity'; ?>">
@@ -63,8 +138,10 @@
         </span>
     </div>
 
+</div>
 
-    <form id="edit-profile-form" action="/modifier-profil" method="post" class="form-group" enctype="multipart/form-data">
+
+    <form id="edit-profile-form" action="/profil" method="post" class="form-group">
         <div class="profile-edit-form-header">
             <button id="form-profile-button" type="button" name="Retour au profil">
                 <i class="fa fa-lg fa-chevron-left"></i> Retour au profil

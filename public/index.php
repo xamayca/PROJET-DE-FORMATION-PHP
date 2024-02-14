@@ -12,13 +12,10 @@ $router = new Router();
 $router->addRoute('/', 'Pages', 'home');
 
 // CREATION DES ROUTES POUR L'UTILISATEUR (INSCRIPTION, CONNEXION, DECONNEXION) //
-$router->addRoute('/inscription', 'Registration', 'registration');
-$router->addRoute('/connexion', 'Login', 'login');
-$router->addRoute('/profil', 'Profile', 'profile');
-
-$router->addRoute('/modifier-profil', 'Profile', 'updateProfile');
-
-$router->addRoute('/deconnexion', 'Logout', 'logout');
+$router->addRoute('/inscription', 'User', 'registration');
+$router->addRoute('/connexion', 'User', 'login');
+$router->addRoute('/profil', 'User', 'profile');
+$router->addRoute('/deconnexion', 'User', 'logout');
 
 // CREATION DES ROUTES POUR LE TEST //
 $router->addRoute('/php-test', 'Pages', 'testPhp');
