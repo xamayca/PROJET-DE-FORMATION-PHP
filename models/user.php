@@ -141,7 +141,7 @@ class Users
     public function getUserByEmail()
     {
         try {
-            $sql = 'SELECT `id`, `username`, `email`, `password`, `id_roles` FROM `gt3f5b_users` WHERE `email` = :email';
+            $sql = 'SELECT `id`, `username`, `email`, `id_roles` FROM `gt3f5b_users` WHERE `email` = :email';
             $req = $this->pdo->prepare($sql);
             $req->bindValue(':email', $this->email, PDO::PARAM_STR);
             $req->execute();

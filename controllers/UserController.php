@@ -157,11 +157,11 @@ class UserController
 
                 // ON RECUPERE LES INFOS DE L'UTILISATEUR AVEC SON EMAIL //
                 $user->setEmail($email);
-                $userData = $user->getUserByEmail();
+                $user_password = $user->getUserPassword();
 
                 // SI LE MOT DE PASSE CORRESPOND, ON CONNECTE L'UTILISATEUR //
-                if (isset($userData['password']) && password_verify($password, $userData['password'])) {
-
+                if (isset($user_password) && password_verify($password, $user_password)) {
+                    $userData = $user->getUserByEmail();
                     // ON STOCKE LES INFOS DE L'UTILISATEUR DANS LA SESSION //
                     $_SESSION['user'] = [
                         'id' => $userData['id'],
@@ -218,10 +218,8 @@ class UserController
         $user->setId($userId);
         $userData = $user->getUserById();
 
-        // SI LE SERVEUR REÇOIT UNE REQUÊTE POST //
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // VALIDATION DU NOM D'UTILISATEUR //
-            if (isset($_POST['username'])) {
+            if (isset($_POST['update_username'])) {
                 $username = cleanInput($_POST['username']);
                 $user->setUsername($username);
                 if (!preg_match($regexManager->getRegex('username'), $username)) {
@@ -235,26 +233,8 @@ class UserController
                 }
             }
 
-            // VALIDATION DE LA DATE DE NAISSANCE //
-            if (isset($_POST['birthdate'])) {
-                $birthdate = cleanInput($_POST['birthdate']);
-                if (!preg_match($regexManager->getRegex('date'), $birthdate)) {
-                    $errors['birthdate'] = $messageManager->getMessage('error', 'birthdate_invalid');
-                } else {
-                    // CONVERTIS LA DATE DE NAISSANCE EN OBJET DATETIME //
-                    $birthdateObject = new DateTime($birthdate);
-                    $today = new DateTime();
-                    $age = $today->diff($birthdateObject)->y;
-
-                    // SI L'AGE EST INFERIEUR A 10 ANS OU SUPERIEUR A 100 ANS ON AFFICHE UNE ERREUR //
-                    if ($age < 10 || $age > 100) {
-                        $errors['birthdate'] = $messageManager->getMessage('error', 'age_invalid');
-                    }
-                }
-            }
-
             // VALIDATION DE L'EMAIL //
-            if (isset($_POST['email'])) {
+            if (isset($_POST['update_email'])) {
                 $email = cleanInput($_POST['email']);
                 $user->setEmail($email);
                 if (!preg_match($regexManager->getRegex('email'), $email)) {
@@ -263,22 +243,25 @@ class UserController
                     $errors['email'] = $messageManager->getMessage('error', 'email_exists');
                 }
             }
+
+
             // VALIDATION DU NUMÉRO DE TÉLÉPHONE //
-            if (isset($_POST['phone'])) {
+            if (isset($_POST['update_phone'])) {
                 $phone = cleanInput($_POST['phone']);
+
                 if (!preg_match($regexManager->getRegex('phone'), $phone)) {
                     $errors['phone'] = $messageManager->getMessage('error', 'phone_invalid');
                 }
             }
             // VALIDATION DE LA TRIBU //
-            if (isset($_POST['tribe'])) {
+            if (isset($_POST['update_tribe'])) {
                 $tribe = cleanInput($_POST['tribe']);
                 if (strlen($tribe) > 25) {
                     $errors['tribe'] = $messageManager->getMessage('error', 'tribe_maxlength');
                 }
             }
             // VALIDATION DE LA DESCRIPTION //
-            if (isset($_POST['description'])) {
+            if (isset($_POST['update_description'])) {
                 $description = cleanInput($_POST['description']);
                 if (strlen($description) > 150) {
                     $errors['description'] = $messageManager->getMessage('error', 'description_maxlength');
@@ -293,13 +276,12 @@ class UserController
             }
             // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
             if (empty($errors)) {
-                // UTILISEZ LES SETTERS POUR DÉFINIR LES VALEURS DES PROPRIÉTÉS DE L'UTILISATEUR
-                $user->setEmail($email);
-                //$user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+                // UTILISEZ LES SETTERS POUR DÉFINIR LES VALEURS DES PROPRIÉTÉS DE L'UTILISATEU
+                $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
                 $user->setTribe($tribe);
                 $user->setPhone($phone);
                 $user->setDescription($description);
-                //$user->setAvatar($avatar);
+                $user->setAvatar($avatar);
                 $user->setSignature($signature);
 
                 // TENTE D'ENREGISTRER L'UTILISATEUR DANS LA BASE DE DONNÉES //
@@ -320,7 +302,7 @@ class UserController
                     exit();
                 }
             }
-        }
+
         // SI ON A DES ERREURS, ON LES AFFICHE //
         if (!empty($errors)) {
             $_SESSION['errors'] = $errors;

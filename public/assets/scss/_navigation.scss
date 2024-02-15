@@ -115,7 +115,7 @@ nav {
                     opacity: 0.3;
                 }
 
-                button.dropdown-toggle {
+                .dropdown-toggle {
                     position: relative;
                     display: flex;
                     flex-direction: column;
@@ -139,8 +139,8 @@ nav {
                 }
             }
 
-            /* STYLE POUR TOUT LES AUTRES ELEMENTS 'BUTTON-DROPDOWN' DE 'NAVIGATION-LINKS' */
-            button.dropdown-toggle {
+            /* STYLE POUR TOUT LES AUTRES ELEMENTS '-DROPDOWN' DE 'NAVIGATION-LINKS' */
+            .dropdown-toggle {
                 position: relative;
                 display: flex;
                 justify-content: center;
