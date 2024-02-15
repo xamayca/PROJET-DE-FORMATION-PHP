@@ -62,37 +62,14 @@ class Users
         }
     }
 
-    public function updateProfile()
+    /** MÉTHODE POUR METTRE A JOUR LE NOM D'UTILISATEUR */
+    public function updateUsername()
     {
-        try{
-            // REQUETE POUR METTRE A JOUR LES INFORMATIONS DE L'UTILISATEUR //
-            $sql = "UPDATE gt3f5b_users SET 
-                    username = :username, 
-                    email = :email, 
-                    password = :password, 
-                    birthdate = :birthdate, 
-                    tribe = :tribe, 
-                    phone = :phone, 
-                    description = :description, 
-                    avatar = :avatar, 
-                    signature = :signature 
-                    WHERE id = :id                                                          ";
-
-            // PREPARATION DE LA REQUETE //
+        try {
+            $sql = 'UPDATE `gt3f5b_users` SET `username` = :username WHERE `id` = :id';
             $req = $this->pdo->prepare($sql);
-
-            // LIE LES VALEURS AUX PARAMÈTRES DE LA REQUÊTE //
-            $req->bindParam(':username', $this->username, PDO::PARAM_STR);
-            $req->bindParam(':email', $this->email, PDO::PARAM_STR);
-            //$req->bindParam(':password', $this->password, PDO::PARAM_STR);
-            $req->bindParam(':tribe', $this->tribe, PDO::PARAM_STR);
-            $req->bindParam(':phone', $this->phone, PDO::PARAM_STR);
-            $req->bindParam(':description', $this->description, PDO::PARAM_STR);
-            //$req->bindParam(':avatar', $this->avatar, PDO::PARAM_STR);
-            $req->bindParam(':signature', $this->signature, PDO::PARAM_STR);
-            $req->bindParam(':id', $this->id, PDO::PARAM_INT);
-
-            // EXÉCUTE LA REQUÊTE //
+            $req->bindValue(':username', $this->username, PDO::PARAM_STR);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
             return $req->execute();
 
         } catch (PDOException $e) {
@@ -102,6 +79,107 @@ class Users
         }
     }
 
+    /** MÉTHODE POUR METTRE A JOUR L'EMAIL DE L'UTILISATEUR */
+    public function updateEmail()
+    {
+        try {
+            $sql = 'UPDATE `gt3f5b_users` SET `email` = :email WHERE `id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+            return $req->execute();
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
+
+    /** MÉTHODE POUR METTRE A JOUR LE MOT DE PASSE DE L'UTILISATEUR */
+    public function updatePhone()
+    {
+        try {
+            $sql = 'UPDATE `gt3f5b_users` SET `phone` = :phone WHERE `id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':phone', $this->phone, PDO::PARAM_STR);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+            return $req->execute();
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
+
+    /** MÉTHODE POUR METTRE A JOUR LA DESCRIPTION DE L'UTILISATEUR */
+    public function updateDescription()
+    {
+        try {
+            $sql = 'UPDATE `gt3f5b_users` SET `description` = :description WHERE `id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':description', $this->description, PDO::PARAM_STR);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+            return $req->execute();
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
+
+    /** MÉTHODE POUR METTRE A JOUR L'AVATAR DE L'UTILISATEUR */
+    public function updateSignature()
+    {
+        try {
+            $sql = 'UPDATE `gt3f5b_users
+            ` SET `signature` = :signature WHERE `id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':signature', $this->signature, PDO::PARAM_STR);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+            return $req->execute();
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
+
+    /** MÉTHODE POUR METTRE A JOUR LA TRIBU DE L'UTILISATEUR */
+    public function updateTribe()
+    {
+        try {
+            $sql = 'UPDATE `gt3f5b_users` SET `tribe` = :tribe WHERE `id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':tribe', $this->tribe, PDO::PARAM_STR);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+            return $req->execute();
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
+
+    /** REQUÊTE POUR SUPPRIMER UN UTILISATEUR DE LA BASE DE DONNÉES */
+    public function delete()
+    {
+        try {
+            $sql = 'DELETE FROM `gt3f5b_users` WHERE `id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+            return $req->execute();
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
 
     /** REQUÊTE POUR VERIFIER SI UN USERNAME EXISTE DANS LA BASE DE DONNÉES */
     public function checkUsernameAlreadyUse()

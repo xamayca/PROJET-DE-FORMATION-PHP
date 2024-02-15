@@ -19,8 +19,8 @@
             <button id="avatar-back-btn" name="Retour au profil">
                 <i class="fa fa-lg fa-rotate-left"></i>
             </button>
-            <input type="file" id="user-avatar-input" name="avatar" accept="image/*"/>
-            <button type="submit" class="validation-btn" name="update_username"><i class="fa fa-lg fa-check"></i></button>
+            <input type="file" id="user-avatar-input" name="update_avatar" accept="image/*"/>
+            <button type="submit" class="validation-btn" name="avatar"><i class="fa fa-lg fa-check"></i></button>
         </form>
     </div>
 
@@ -160,14 +160,17 @@
                 </span>
                 <form id="edit-sign-form" action="/profil" method="post">
                     <input type="text" id="signature" name="update_signature" placeholder="Entrez votre signature" value="<?= @$userData['signature']?>">
-                    <button type="submit" class="validation-btn" name="update_username"><i class="fa fa-lg fa-check"></i></button>
+                    <button type="submit" class="validation-btn" name="update_signature"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
         </ul>
     </div>
 
     <button type="submit" class="profile-pass-button">Modifier le mot de passe</button>
-    <button type="submit" class="profile-delete-button">Supprimer mon compte</button>
+
+    <form action="/test" method="post">
+        <button type="submit" name="profile-delete-button" class="profile-delete-button">Supprimer mon compte</button>
+    </form>
 
     <div class="profile-footer">
         <span class="<?= isset($userData['registerDate_fr']) && isset($userData['role_name']) ? '' : 'default-opacity'; ?>">

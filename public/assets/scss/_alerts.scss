@@ -2,11 +2,13 @@
 
 // STYLE POUR LES ALERTES //
 .alert {
+  z-index: 2;
   position: absolute;
   top: 10vh;
   width: 100%;
 
   & p {
+    z-index: 2;
     padding: 1em;
   }
 }

@@ -16,6 +16,7 @@ $router->addRoute('/inscription', 'User', 'registration');
 $router->addRoute('/connexion', 'User', 'login');
 $router->addRoute('/profil', 'User', 'profile');
 $router->addRoute('/deconnexion', 'User', 'logout');
+$router->addRoute('/test', 'User', 'deleteAccount');
 
 // CREATION DES ROUTES POUR LE TEST //
 $router->addRoute('/php-test', 'Pages', 'testPhp');

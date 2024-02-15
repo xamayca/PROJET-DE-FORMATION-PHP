@@ -30,6 +30,11 @@ class MessageManager {
                 'tribe_maxlength' => 'La tribu est trop longue.',
                 'description_maxlength' => 'La description est trop longue.',
                 'signature_maxlength' => 'La signature est trop longue.',
+                'username_updated' => 'Le nom d\'utilisateur a été mis à jour.',
+                'email_updated' => 'L\'adresse e-mail a été mise à jour.',
+                'phone_updated' => 'Le numéro de téléphone a été mis à jour.',
+                'description_updated' => 'La description a été mise à jour.',
+                'signature_updated' => 'La signature a été mise à jour.',
                 ],
             'success' => [
                 'logged_in' => 'Connexion réussie, bienvenue {{username}} !',
