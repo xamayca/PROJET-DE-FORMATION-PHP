@@ -181,10 +181,6 @@ class UserController
             }
         }
 
-        // SI ON A DES ERREURS, ON LES AFFICHE //
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-        }
         // ON AFFICHE LA VUE DE LA PAGE DE CONNEXION //
         require_once '../views/elements/header.php';
         require_once '../views/pages/account/login.php';
@@ -216,68 +212,59 @@ class UserController
         $user = new Users();
         // ON RÉCUPÈRE LES INFORMATIONS DE L'UTILISATEUR GRÂCE À SON ID //
         $user->setId($userId);
-        $userData = $user->getUserById();
+
 
             // VALIDATION DU NOM D'UTILISATEUR //
             if (isset($_POST['update_username'])) {
                 $username = cleanInput($_POST['update_username']);
                 $user->setUsername($username);
                 if (!preg_match($regexManager->getRegex('username'), $username)) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'username_invalid');
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'username_invalid');
                 } elseif ($user->checkUsernameAlreadyUse()) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'username_exists');
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'username_exists');
                 } elseif (strlen($username) < 3) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'username_minlength');
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'username_minlength');
                 } elseif (strlen($username) > 30) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'username_maxlength');
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'username_maxlength');
                 }
                 // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
-                if (empty($errors)) {
+                if (empty($_SESSION['warning'])) {
                     // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
                     $result = $user->updateUsername();
                     // SI LA MISE A JOUR A RÉUSSIE //
                     if ($result) {
+                        $_SESSION['user']['username'] = $username;
                         // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                         $_SESSION['success'] = $messageManager->getMessage('success', 'username_updated');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     } else {
                         // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
                         $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     }
                 }
             }
+
+
 
             // VALIDATION DE L'EMAIL //
             if (isset($_POST['update_email'])) {
                 $email = cleanInput($_POST['update_email']);
                 $user->setEmail($email);
                 if (!preg_match($regexManager->getRegex('email'), $email)) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'email_invalid');
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'email_invalid');
                 } elseif ($user->checkEmailAlreadyUse()) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'email_exists');
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'email_exists');
                 }
                 // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
-                if (empty($errors)) {
+                if (empty($_SESSION['warning'])) {
                     // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
                     $result = $user->updateEmail();
                     // SI LA MISE A JOUR A RÉUSSIE //
                     if ($result) {
                         // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                         $_SESSION['success'] = $messageManager->getMessage('success', 'email_updated');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     } else {
                         // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
                         $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     }
                 }
             }
@@ -288,7 +275,7 @@ class UserController
                 $phone = cleanInput($_POST['update_phone']);
                 $user->setPhone($phone);
                 if (!preg_match($regexManager->getRegex('phone'), $phone)) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'phone_invalid');
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'phone_invalid');
                 }
                 // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
                 if (empty($errors)) {
@@ -298,15 +285,9 @@ class UserController
                     if ($result) {
                         // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                         $_SESSION['success'] = $messageManager->getMessage('success', 'phone_updated');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     } else {
                         // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
                         $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     }
                 }
             }
@@ -317,7 +298,7 @@ class UserController
                 $tribe = cleanInput($_POST['update_tribe']);
                 $user->setTribe($tribe);
                 if (strlen($tribe) > 25) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'tribe_maxlength');
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'tribe_maxlength');
                 }
                 // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
                 if (empty($errors)) {
@@ -327,15 +308,9 @@ class UserController
                     if ($result) {
                         // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                         $_SESSION['success'] = $messageManager->getMessage('success', 'tribe_updated');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     } else {
                         // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
                         $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     }
                 }
             }
@@ -354,15 +329,9 @@ class UserController
                     if ($result) {
                         // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                         $_SESSION['success'] = $messageManager->getMessage('success', 'description_updated');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     } else {
                         // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
                         $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     }
                 }
             }
@@ -375,6 +344,7 @@ class UserController
                 if (strlen($signature) > 50) {
                     $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'signature_maxlength');
                 }
+
                 // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
                 if (empty($errors)) {
                     // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
@@ -383,24 +353,18 @@ class UserController
                     if ($result) {
                         // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                         $_SESSION['success'] = $messageManager->getMessage('success', 'signature_updated');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     } else {
                         // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
                         $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                        header('Location: /profil');
-                        // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                        exit();
                     }
                 }
             }
 
-        // SI ON A DES ERREURS, ON LES AFFICHE //
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-        }
+            if(isset($_POST['delete_account'])) {
+               $this->deleteAccount();
+            }
 
+        $userData = $user->getUserById();
         // ON AFFICHE LA VUE DE LA PAGE DE PROFIL //
         require_once '../views/elements/header.php';
         require_once '../views/pages/account/profile.php';
@@ -414,19 +378,14 @@ class UserController
     {
         // ON INSTANCIE LES CLASSES MessageManager POUR GERER LES MESSAGES //
         $messageManager = new MessageManager();
-
         // NETTOIE TOUTES LES DONNÉES DE LA SESSION //
         $_SESSION = [];
-
         // DETRUIT LA SESSION //
         session_destroy();
-
         // REDEMARRE LA SESSION POUR STOCKER LE MESSAGE DE SUCCÈS //
         session_start();
-
         // MESSAGE DE SUCCÈS SI L'UTILISATEUR EST DÉCONNECTÉ //
         $_SESSION['success'] = $messageManager->getMessage('success', 'logged_out');
-
         // REDIRECTION VERS LA PAGE D'ACCUEIL //
         header('Location: /');
         // FIN DE L'EXECUTION DU SCRIPT //
@@ -442,17 +401,20 @@ class UserController
 
         // ON RÉCUPÈRE L'ID DE L'UTILISATEUR CONNECTÉ //
         $messageManager = new MessageManager();
-        if(isset($_POST ['profile-delete-button'])) {
+        var_dump($_SESSION);
+        if(isset($_POST['delete_account'])) {
+            $user->setId($_SESSION['user']['id']);
             if ($user->delete()) {
                 unset ($_SESSION);
                 session_destroy();
                 $_SESSION['success'] = $messageManager->getMessage('success', 'account_deleted');
                 header('Location: /');
+                exit;
             } else {
                 $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                header('Location: /profil');
             }
-            exit;
         }
     }
 }
+
+

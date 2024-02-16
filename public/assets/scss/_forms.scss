@@ -2,7 +2,7 @@
 @use 'mixins' as *;
 
 // STYLE DU FORMULAIRE //
-#registration-form, #login-form, #edit-profile-form {
+#registration-form, #login-form, #delete-account-form, #modify-password-form, #edit-avatar-form {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -48,11 +48,11 @@
       textarea {
         width: 100%;
         padding: 1em;
-        font-size: 1.1em;
         border: none;
         background: linear-gradient(to bottom, $white-color, darken($white-color, 10%));
         color: $dark-color;
         box-sizing: border-box;
+        font-size: smaller;
 
         &:focus {
           outline: solid 3px $blue-color;
@@ -60,7 +60,7 @@
       }
 
       & input[type="file"]::file-selector-button {
-        display:none;
+        @include form-button($dark-light-color, $blue-color, lighten($dark-light-color, 10%));
       }
 
       i {

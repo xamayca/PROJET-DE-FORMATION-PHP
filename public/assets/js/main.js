@@ -75,16 +75,29 @@ const InfosBackToProfileBtnHTML = document.getElementById('infos-back-btn');
 const EditSignButtonHTML = document.getElementById('edit-sign-btn');
 const SignBackToProfileBtnHTML = document.getElementById('sign-back-btn');
 
+const DeleteAccountButtonHTML = document.getElementById('delete-account-btn');
+const DeleteAccountCancelHTML = document.getElementById('delete-account-cancel');
+
+const ModifyPasswordButtonHTML = document.getElementById('password-account-btn');
+const ModifyPasswordCancelHTML = document.getElementById('modify-password-cancel');
+
 const EditAvatarFormHTML = document.getElementById('edit-avatar-form');
 const UsernameFormHTML = document.getElementById('edit-username-form');
 const TribeFormHTML = document.getElementById('edit-tribe-form');
 const InfosFormHTML = document.getElementById('edit-infos-form');
 const DescFormHTML = document.getElementById('edit-desc-form');
 const SignFormHTML = document.getElementById('edit-sign-form');
+const DeleteAccountFormHTML = document.getElementById('delete-account-form');
+const ModifyPasswordFormHTML = document.getElementById('modify-password-form');
 
 // FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION D'AVATAR //
 EditAvatarButtonHTML.addEventListener('click', () => {
     EditAvatarFormHTML.classList.add('transform-x-0');
+});
+
+// FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION D'AVATAR //
+EditAvatarFormHTML.addEventListener('click', () => {
+    EditAvatarFormHTML.classList.remove('transform-x-0');
 });
 
 // FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION DE USERNAME //
@@ -157,6 +170,29 @@ InfosBackToProfileBtnHTML.addEventListener('click', () => {
     EditInfosButtonHTML.style.display = 'block';
 });
 
+// FAIT APPARAÎTRE LE FORMULAIRE DE SUPPRESSION DE COMPTE //
+DeleteAccountButtonHTML.addEventListener('click', () => {
+    DeleteAccountFormHTML.classList.remove('transform-y-100');
+    DeleteAccountFormHTML.classList.add('transform-y-0');
+});
+
+// FAIT DISPARAÎTRE LE FORMULAIRE DE SUPPRESSION DE COMPTE //
+DeleteAccountCancelHTML.addEventListener('click', () => {
+    DeleteAccountFormHTML.classList.remove('transform-y-0');
+    DeleteAccountFormHTML.classList.add('transform-y-100');
+});
+
+// FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION DE MOT DE PASSE //
+ModifyPasswordButtonHTML.addEventListener('click', () => {
+    ModifyPasswordFormHTML.classList.remove('transform-y-100');
+    ModifyPasswordFormHTML.classList.add('transform-y-0');
+});
+
+// FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION DE MOT DE PASSE //
+ModifyPasswordCancelHTML.addEventListener('click', () => {
+    ModifyPasswordFormHTML.classList.remove('transform-y-0');
+    ModifyPasswordFormHTML.classList.add('transform-y-100');
+});
 
 // ITEMS DE MESSAGES DE SUCCÈS & D'AVERTISSEMENT HTML //
 const messagesHTML = document.querySelectorAll('.alert-success, .alert-warning');

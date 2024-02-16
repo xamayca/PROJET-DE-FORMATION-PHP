@@ -43,6 +43,25 @@ body {
     overflow-y: hidden;
 }
 
+.validate-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    height:100%;
+    cursor:pointer;
+    position:relative;
+    padding: 1em;
+    text-transform: uppercase;
+    color: $white-color;
+    background-color: $dark-color;
+
+    &:hover {
+        background-color: $success-background;
+        color: $success-color;
+    }
+}
+
 .transform-x-100 {
     transform: translateX(100%);
 }

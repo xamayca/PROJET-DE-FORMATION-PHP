@@ -15,12 +15,21 @@
             <?= isset($userData['tribe']) ?  htmlspecialchars('Tribu ' . $userData['tribe']) : 'Tribu non définie'; ?>
         </span>
 
-        <form id="edit-avatar-form" action="/profil" method="post">
-            <button id="avatar-back-btn" name="Retour au profil">
-                <i class="fa fa-lg fa-rotate-left"></i>
-            </button>
-            <input type="file" id="user-avatar-input" name="update_avatar" accept="image/*"/>
-            <button type="submit" class="validation-btn" name="avatar"><i class="fa fa-lg fa-check"></i></button>
+        <form id="edit-avatar-form" action="/profil" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                    <label for="user-avatar-input" class="custom-file-upload">
+                        Choisir un fichier
+                    </label>
+                    <input type="file" id="user-avatar-input" name="update_avatar" accept="image/*"/>
+            </div>
+            <div class="form-btn-group">
+                <button type="submit" class="avatar_update_btn">
+                    Envoyer
+                </button>
+                <button id="avatar-back-btn" name="Retour au profil">
+                    Fermer
+                </button>
+            </div>
         </form>
     </div>
 
@@ -45,7 +54,7 @@
                 </span>
                 <form id="edit-username-form" action="/profil" method="post">
                     <input type="text" id="username" name="update_username" placeholder="Entrez votre pseudo d'utilisateur" value="<?= @$userData['username']?>">
-                    <button type="submit" class="validation-btn"><i class="fa fa-lg fa-check"></i></button>
+                    <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
         </ul>
@@ -71,7 +80,7 @@
                 </span>
                 <form id="edit-tribe-form" action="/profil" method="post">
                     <input type="text" id="tribe" name="update_tribe" placeholder="Entrez votre nom de tribu" value="<?= @$userData['tribe']?>">
-                    <button type="submit" class="validation-btn"><i class="fa fa-lg fa-check"></i></button>
+                    <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
         </ul>
@@ -110,7 +119,7 @@
             <form id="edit-infos-form" action="/profil" method="post">
                 <input type="text" id="phone" name="update_phone" placeholder="Entrez votre numéro" value="<?= @$userData['phone']?>">
                 <input type="text" id="mail" name="update_mail" placeholder="Entrez votre email" value="<?= @$userData['mail']?>">
-                <button type="submit" class="validation-btn">Mettre a jour<i class="fa fa-lg fa-check"></i></button>
+                <button type="submit" class="validate-btn">Mettre a jour<i class="fa fa-lg fa-check"></i></button>
             </form>
         </ul>
     </div>
@@ -135,7 +144,7 @@
                 </span>
                 <form id="edit-desc-form" action="/profil" method="post">
                     <input type="text" id="description" name="update_description" placeholder="Entrez votre description" value="<?= @$userData['description']?>">
-                    <button type="submit" class="validation-btn"><i class="fa fa-lg fa-check"></i></button>
+                    <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
         </ul>
@@ -159,24 +168,52 @@
                     <?= !empty($userData['signature']) ? htmlspecialchars($userData['signature']) : 'Signature non défini'; ?>
                 </span>
                 <form id="edit-sign-form" action="/profil" method="post">
-                    <input type="text" id="signature" name="update_signature" placeholder="Entrez votre signature" value="<?= @$userData['signature']?>">
-                    <button type="submit" class="validation-btn" name="update_signature"><i class="fa fa-lg fa-check"></i></button>
+                    <input type="text" id="signature" name="update_signature" placeholder="Entrez votre signature">
+                    <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
         </ul>
     </div>
 
-    <button type="submit" class="profile-pass-button">Modifier le mot de passe</button>
-
-    <form action="/test" method="post">
-        <button type="submit" name="profile-delete-button" class="profile-delete-button">Supprimer mon compte</button>
-    </form>
+    <button type="button" id="password-account-btn">Modifier le mot de passe</button>
+    <button type="button" id="delete-account-btn">Supprimer mon compte</button>
 
     <div class="profile-footer">
         <span class="<?= isset($userData['registerDate_fr']) && isset($userData['role_name']) ? '' : 'default-opacity'; ?>">
             <?= isset($userData['registerDate_fr']) && isset($userData['role_name']) ? ucfirst(htmlspecialchars($userData['role_name'])) . ' inscrit depuis le ' . htmlspecialchars($userData['registerDate_fr']) : 'Rôle ou date d\'inscription non définis'; ?>
         </span>
     </div>
+
+    <form id="delete-account-form" action="/profil" method="post">
+        <h2>Confirmé la suppression</h2>
+        <input type="hidden" name="delete_account" value="1">
+        <div class="form-btn-group">
+            <button type="submit" id="delete-account-confirm">Oui</button>
+            <button type="button" id="delete-account-cancel">Non</button>
+        </div>
+    </form>
+
+    <form id="modify-password-form" action="/profil" method="post">
+        <h2>Modifier le mot de passe</h2>
+        <div class="form-group">
+            <div class="input-with-icon">
+                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div class="input-with-icon">
+                <input type="password" id="new_password" name="new_password" placeholder="Entrez votre nouveau mot de passe">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div class="input-with-icon">
+                <input type="password" id="new_password_confirm" name="new_password_confirm" placeholder="Confirmez votre nouveau mot de passe">
+                <i class="fas fa-lock"></i>
+            </div>
+        </div>
+        <div class="form-btn-group">
+            <button type="submit" id="modify-password-confirm" name="modify_password">Confirmer</button>
+            <button type="button" id="modify-password-cancel">Annuler</button>
+        </div>
+    </form>
 
 </div>
 

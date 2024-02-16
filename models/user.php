@@ -134,8 +134,7 @@ class Users
     public function updateSignature()
     {
         try {
-            $sql = 'UPDATE `gt3f5b_users
-            ` SET `signature` = :signature WHERE `id` = :id';
+            $sql = 'UPDATE `gt3f5b_users` SET `signature` = :signature WHERE `id` = :id';
             $req = $this->pdo->prepare($sql);
             $req->bindValue(':signature', $this->signature, PDO::PARAM_STR);
             $req->bindValue(':id', $this->id, PDO::PARAM_INT);
