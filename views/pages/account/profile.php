@@ -17,6 +17,7 @@
 
         <form id="edit-avatar-form" action="/profil" method="post" enctype="multipart/form-data">
             <div class="form-group">
+                    <h2>Modifier l'avatar</h2>
                     <label for="user-avatar-input" class="custom-file-upload">
                         Choisir un fichier
                     </label>
@@ -49,9 +50,9 @@
         <ul class="profile-info">
             <li>
                 <i class="info-icon fa fa-user"></i>
-                <span class="<?= isset($userData['username']) ? '' : 'default-opacity'; ?>">
+                <label for="username" class="<?= isset($userData['username']) ? '' : 'default-opacity'; ?>">
                     <?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'Username non défini'; ?>
-                </span>
+                </label>
                 <form id="edit-username-form" action="/profil" method="post">
                     <input type="text" id="username" name="update_username" placeholder="Entrez votre pseudo d'utilisateur" value="<?= @$userData['username']?>">
                     <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
@@ -75,9 +76,9 @@
         <ul class="profile-info">
             <li>
                 <i class="info-icon fa fa-users"></i>
-                <span class="<?= isset($userData['tribe']) ? '' : 'default-opacity'; ?>">
-                    <?= isset($userData['tribe']) ? htmlspecialchars($userData['tribe']) : 'Tribu non définie'; ?>
-                </span>
+                <label for="tribe" class="<?= isset($userData['tribe']) ? '' : 'default-opacity'; ?>">
+                    <?= isset($userData['tribe']) ? htmlspecialchars($userData['tribe']) : 'Tribu non défini'; ?>
+                </label>
                 <form id="edit-tribe-form" action="/profil" method="post">
                     <input type="text" id="tribe" name="update_tribe" placeholder="Entrez votre nom de tribu" value="<?= @$userData['tribe']?>">
                     <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
@@ -100,15 +101,15 @@
         <ul class="profile-info">
             <li>
                 <i class="info-icon fa fa-phone"></i>
-                <span class="<?= !empty($userData['phone']) ? '' : 'default-opacity'; ?>">
-                    <?= !empty($userData['phone']) ? htmlspecialchars($userData['phone']) : 'Numéro non défini'; ?>
-                </span>
+                <label for="phone" class="<?= isset($userData['phone']) ? '' : 'default-opacity'; ?>">
+                    <?= isset($userData['phone']) ? htmlspecialchars($userData['phone']) : 'Numéro non défini'; ?>
+                </label>
             </li>
             <li>
                 <i class="info-icon fa fa-envelope"></i>
-                <span class="<?= isset($userData['email']) ? '' : 'default-opacity'; ?>">
+                <label for="email" class="<?= isset($userData['email']) ? '' : 'default-opacity'; ?>">
                     <?= isset($userData['email']) ? htmlspecialchars($userData['email']) : 'Email non défini'; ?>
-                </span>
+                </label>
             </li>
             <li>
                 <i class="info-icon fa fa-calendar"></i>
@@ -118,7 +119,7 @@
             </li>
             <form id="edit-infos-form" action="/profil" method="post">
                 <input type="text" id="phone" name="update_phone" placeholder="Entrez votre numéro" value="<?= @$userData['phone']?>">
-                <input type="text" id="mail" name="update_mail" placeholder="Entrez votre email" value="<?= @$userData['mail']?>">
+                <input type="text" id="email" name="update_mail" placeholder="Entrez votre email" value="<?= @$userData['mail']?>">
                 <button type="submit" class="validate-btn">Mettre a jour<i class="fa fa-lg fa-check"></i></button>
             </form>
         </ul>
@@ -139,11 +140,11 @@
         <ul class="profile-info">
             <li>
                 <i class="info-icon fa fa-message"></i>
-                <span class="<?= !empty($userData['description']) ? '' : 'default-opacity'; ?>">
-                    <?= !empty($userData['description']) ? htmlspecialchars($userData['description']) : 'Description non défini'; ?>
-                </span>
+                <label for="description" class="<?= isset($userData['description']) ? '' : 'default-opacity'; ?>">
+                        <?= isset($userData['description']) ? htmlspecialchars($userData['description']) : 'Description non définie'; ?>
+                </label>
                 <form id="edit-desc-form" action="/profil" method="post">
-                    <input type="text" id="description" name="update_description" placeholder="Entrez votre description" value="<?= @$userData['description']?>">
+                    <textarea id="description" name="update_description" placeholder="Entrez votre description" value="<?= @$userData['description']?>"></textarea>
                     <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
@@ -164,9 +165,9 @@
         <ul class="profile-info">
             <li>
                 <i class="info-icon fa fa-signature"></i>
-                <span class="<?= !empty($userData['signature']) ? '' : 'default-opacity'; ?>">
-                    <?= !empty($userData['signature']) ? htmlspecialchars($userData['signature']) : 'Signature non défini'; ?>
-                </span>
+                <label for="signature" class="<?= isset($userData['signature']) ? '' : 'default-opacity'; ?>">
+                    <?= isset($userData['signature']) ? htmlspecialchars($userData['signature']) : 'Signature non définie'; ?>
+                </label>
                 <form id="edit-sign-form" action="/profil" method="post">
                     <input type="text" id="signature" name="update_signature" placeholder="Entrez votre signature">
                     <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
@@ -197,16 +198,36 @@
         <h2>Modifier le mot de passe</h2>
         <div class="form-group">
             <div class="input-with-icon">
-                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
+                <label for="current_password">Mot de passe actuel :</label>
+                <input type="password" id="current_password" name="current_password" placeholder="Entrez votre mot de passe actuel">
                 <i class="fas fa-lock"></i>
+                <?php if (isset($errors['current_password'])): ?>
+                    <div class="form-error">
+                        <p><?= $errors['current_password'] ?></p>
+                    </div>
+                <?php endif; ?>
             </div>
+
             <div class="input-with-icon">
+                <label for="new_password">Nouveau mot de passe :</label>
                 <input type="password" id="new_password" name="new_password" placeholder="Entrez votre nouveau mot de passe">
                 <i class="fas fa-lock"></i>
+                <?php if (isset($errors['new_password'])): ?>
+                    <div class="form-error">
+                        <p><?= $errors['new_password'] ?></p>
+                    </div>
+                <?php endif; ?>
             </div>
+
             <div class="input-with-icon">
-                <input type="password" id="new_password_confirm" name="new_password_confirm" placeholder="Confirmez votre nouveau mot de passe">
+                <label for="password_confirm">Confirmez le mot de passe :</label>
+                <input type="password" id="password_confirm" name="password_confirm" placeholder="Confirmez votre nouveau mot de passe">
                 <i class="fas fa-lock"></i>
+                <?php if (isset($errors['password_confirm'])): ?>
+                    <div class="form-error">
+                        <p><?= $errors['password_confirm'] ?></p>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
         <div class="form-btn-group">

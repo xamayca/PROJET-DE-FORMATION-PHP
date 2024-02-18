@@ -47,14 +47,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
-    height:100%;
     cursor:pointer;
     position:relative;
-    padding: 1em;
+    height: 100%;
+    border: solid 1px $white-color;
+    padding: 0.9em;
     text-transform: uppercase;
     color: $white-color;
-    background-color: $dark-color;
+    background-color: $blue-color;
 
     &:hover {
         background-color: $success-background;

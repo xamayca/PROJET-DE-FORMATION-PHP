@@ -147,6 +147,20 @@ class Users
         }
     }
 
+    /** MÉTHODE POUR METTRE A JOUR LE MOT DE PASSE DE L'UTILISATEUR */
+    public function updateUserPassword($userId, $newPassword) {
+        try {
+            $sql = 'UPDATE `gt3f5b_users` SET `password` = :password WHERE `id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':password', $newPassword, PDO::PARAM_STR); // Utilisez le nouveau mot de passe ici
+            $req->bindValue(':id', $userId, PDO::PARAM_INT);
+            return $req->execute();
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            exit();
+        }
+    }
+
     /** MÉTHODE POUR METTRE A JOUR LA TRIBU DE L'UTILISATEUR */
     public function updateTribe()
     {
@@ -399,4 +413,5 @@ class Users
     {
         $this->id_roles = $id_roles;
     }
+
 }

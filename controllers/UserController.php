@@ -360,9 +360,60 @@ class UserController
                 }
             }
 
-            if(isset($_POST['delete_account'])) {
-               $this->deleteAccount();
+        // VALIDATION DES MOTS DE PASSE //
+        if (isset($_POST['modify_password'])) {
+            $current_password = cleanInput($_POST['password']);
+            $new_password = cleanInput($_POST['new_password']);
+            $confirm_password = cleanInput($_POST['password_confirm']);
+
+            // RÉCUPÉRATION DES DONNÉES DE L'UTILISATEUR //
+            $user->setId($_SESSION['user']['id']);
+
+            $userData = $user->getUserById();
+
+            // VALIDATION DU MOT DE PASSE ACTUEL //
+            if (empty($current_password)) {
+                $errors['password'] = $messageManager->getMessage('error', 'password_required');
+            } elseif (!password_verify($current_password, $userData['password'])) {
+                $errors['password'] = $messageManager->getMessage('error', 'password_invalid');
             }
+            var_dump($userData);
+            // VALIDATION DU NOUVEAU MOT DE PASSE //
+            if (empty($new_password)) {
+                $errors['new_password'] = $messageManager->getMessage('error', 'new_password_required');
+            } elseif (!preg_match($regexManager->getRegex('password'), $new_password)) {
+                $errors['new_password'] = $messageManager->getMessage('error', 'new_password_invalid');
+            } elseif (strlen($new_password) < 8) {
+                $errors['new_password'] = $messageManager->getMessage('error', 'password_minlength');
+            }
+
+            // VALIDATION DE LA CONFIRMATION DU MOT DE PASSE //
+            if (empty($confirm_password)) {
+                $errors['password_confirm'] = $messageManager->getMessage('error', 'password_confirm_required');
+            } elseif ($new_password !== $confirm_password) {
+                $errors['password_confirm'] = $messageManager->getMessage('error', 'password_confirm_invalid');
+            }
+
+            // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU MOT DE PASSE //
+            if (empty($errors)) {
+                // Mise à jour du mot de passe
+                $result = $user->updateUserPassword($_SESSION['user']['id'], $new_password);
+                if ($result) {
+                    // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
+                    $_SESSION['success'] = $messageManager->getMessage('success', 'password_updated');
+                } else {
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
+                }
+            }
+        }
+
+
+        // SUPPRESSION DU COMPTE DE L'UTILISATEUR (APPEL DE LA MÉTHODE deleteAccount()) //
+        if(isset($_POST['delete_account'])) {
+            $this->deleteAccount();
+        }
+
 
         $userData = $user->getUserById();
         // ON AFFICHE LA VUE DE LA PAGE DE PROFIL //
@@ -415,6 +466,7 @@ class UserController
             }
         }
     }
+
 }
 
 

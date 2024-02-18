@@ -23,6 +23,9 @@ class MessageManager {
                 'password_minlength' => 'Le mot de passe est trop petit.',
                 'password_confirm_required' => 'La confirmation du mot de passe est requise.',
                 'password_confirm_invalid' => 'La confirmation du mot de passe est invalide.',
+                'new_password_required' => 'Le nouveau mot de passe est requis.',
+                'new_password_invalid' => 'Le nouveau mot de passe est invalide.',
+                'new_password_minlength' => 'Le nouveau mot de passe est trop petit.',
                 'birthdate_required' => 'La date de naissance est requise.',
                 'birthdate_invalid' => 'La date de naissance doit être une date valide.',
                 'description_maxlength' => 'La description est trop longue.',
@@ -30,6 +33,9 @@ class MessageManager {
                 'age_invalid' => 'Vous devez entrer une date de naissance valide.',
                 'unexpected_error' => 'Une erreur s\'est produite, veuillez réessayer plus tard.',
                 'must_be_logged_in' => 'Vous devez être connecté pour accéder à cette page.',
+                'image_not_uploaded' => 'L\'image n\'a pas été téléchargée.',
+                'image_invalid' => 'Le fichier n\'est pas une image valide.',
+                'image_maxsize' => 'L\'image ne doit pas dépasser 3 Mo.',
                 ],
             'success' => [
                 'logged_in' => 'Connexion réussie, bienvenue {{username}} !',
@@ -41,6 +47,8 @@ class MessageManager {
                 'phone_updated' => 'Le numéro de téléphone a été mis à jour.',
                 'signature_updated' => 'La signature a été mise à jour.',
                 'description_updated' => 'La description a été mise à jour.',
+                'password_updated' => 'Le mot de passe a été mis à jour.',
+                'avatar_updated' => 'L\'avatar a été mis à jour.',
             ],
         ];
     }

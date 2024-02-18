@@ -1,3 +1,5 @@
+const bodyHTML = document.querySelector('body');
+
 // ITEMS DE LA NAVIGATION & MENU MOBILE //
 const navOpenHTML = document.getElementById('nav-open');
 const navCloseHTML = document.getElementById('nav-close');
@@ -38,6 +40,7 @@ navOpenHTML.addEventListener('click', () => {
     navigationLinksHTML.classList.add('transform-x-0');
     navShadowHTML.style.opacity = '1';
     navShadowHTML.style.transition = 'opacity 1s ease-in-out';
+    bodyHTML.style.overflow = 'hidden';
 });
 
 // ANIMATION DU MENU MOBILE A LA FERMETURE //
@@ -46,6 +49,7 @@ navCloseHTML.addEventListener('click', () => {
     navOpenHTML.style.display = 'block';
     navigationLinksHTML.classList.remove('transform-x-0');
     navShadowHTML.style.opacity = '0';
+    bodyHTML.style.overflow = 'auto';
 });
 
 // FERMETURE DU MENU MOBILE AU CLIQUE SUR L'OMBRE //
@@ -92,80 +96,80 @@ const ModifyPasswordFormHTML = document.getElementById('modify-password-form');
 
 // FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION D'AVATAR //
 EditAvatarButtonHTML.addEventListener('click', () => {
-    EditAvatarFormHTML.classList.add('transform-x-0');
+    EditAvatarFormHTML.classList.add('transform-y-0');
 });
 
 // FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION D'AVATAR //
 EditAvatarFormHTML.addEventListener('click', () => {
-    EditAvatarFormHTML.classList.remove('transform-x-0');
+    EditAvatarFormHTML.classList.remove('transform-y-0');
 });
 
 // FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION DE USERNAME //
 EditUsernameButtonHTML.addEventListener('click', () => {
-    UsernameFormHTML.classList.add('transform-x-0');
+    UsernameFormHTML.classList.add('transform-y-0');
     EditUsernameButtonHTML.style.display = 'none';
     UsernameBackToProfileBtnHTML.style.display = 'block';
 });
 
 // FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION DE PROFIL //
 UsernameBackToProfileBtnHTML.addEventListener('click', () => {
-    UsernameFormHTML.classList.remove('transform-x-0');
+    UsernameFormHTML.classList.remove('transform-y-0');
     UsernameBackToProfileBtnHTML.style.display = 'none';
     EditUsernameButtonHTML.style.display = 'block';
 });
 
 // FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION DE TRIBE //
 EditTribeButtonHTML.addEventListener('click', () => {
-    TribeFormHTML.classList.add('transform-x-0');
+    TribeFormHTML.classList.add('transform-y-0');
     EditTribeButtonHTML.style.display = 'none';
     TribeBackToProfileBtnHTML.style.display = 'block';
 });
 
 // FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION DE TRIBE //
 TribeBackToProfileBtnHTML.addEventListener('click', () => {
-    TribeFormHTML.classList.remove('transform-x-0');
+    TribeFormHTML.classList.remove('transform-y-0');
     TribeBackToProfileBtnHTML.style.display = 'none';
     EditTribeButtonHTML.style.display = 'block';
 });
 
 // FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION DE DESCRIPTION //
 EditDescButtonHTML.addEventListener('click', () => {
-    DescFormHTML.classList.add('transform-x-0');
+    DescFormHTML.classList.add('transform-y-0');
     EditDescButtonHTML.style.display = 'none';
     DescBackToProfileBtnHTML.style.display = 'block';
 });
 
 // FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION DE DESCRIPTION //
 DescBackToProfileBtnHTML.addEventListener('click', () => {
-    DescFormHTML.classList.remove('transform-x-0');
+    DescFormHTML.classList.remove('transform-y-0');
     DescBackToProfileBtnHTML.style.display = 'none';
     EditDescButtonHTML.style.display = 'block';
 });
 
 // FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION DE SIGNATURE //
 EditSignButtonHTML.addEventListener('click', () => {
-    SignFormHTML.classList.add('transform-x-0');
+    SignFormHTML.classList.add('transform-y-0');
     EditSignButtonHTML.style.display = 'none';
     SignBackToProfileBtnHTML.style.display = 'block';
 });
 
 // FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION DE SIGNATURE //
 SignBackToProfileBtnHTML.addEventListener('click', () => {
-    SignFormHTML.classList.remove('transform-x-0');
+    SignFormHTML.classList.remove('transform-y-0');
     SignBackToProfileBtnHTML.style.display = 'none';
     EditSignButtonHTML.style.display = 'block';
 });
 
 // FAIT APPARAÎTRE LE FORMULAIRE DE MODIFICATION DES INFORMATIONS //
 EditInfosButtonHTML.addEventListener('click', () => {
-    InfosFormHTML.classList.add('transform-x-0');
+    InfosFormHTML.classList.add('transform-y-0');
     EditInfosButtonHTML.style.display = 'none';
     InfosBackToProfileBtnHTML.style.display = 'block';
 });
 
 // FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION DES INFORMATIONS //
 InfosBackToProfileBtnHTML.addEventListener('click', () => {
-    InfosFormHTML.classList.remove('transform-x-0');
+    InfosFormHTML.classList.remove('transform-y-0');
     InfosBackToProfileBtnHTML.style.display = 'none';
     EditInfosButtonHTML.style.display = 'block';
 });

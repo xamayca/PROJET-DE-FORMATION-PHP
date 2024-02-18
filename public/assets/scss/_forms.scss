@@ -53,6 +53,7 @@
         color: $dark-color;
         box-sizing: border-box;
         font-size: smaller;
+        height: fit-content(100%);
 
         &:focus {
           outline: solid 3px $blue-color;
