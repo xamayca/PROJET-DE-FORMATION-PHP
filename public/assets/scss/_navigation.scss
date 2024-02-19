@@ -109,7 +109,7 @@ nav {
                     right: 0;
                     bottom: 0;
                     left: 0;
-                    background: url('../img/asa.webp') center/cover;
+                    background: url('../img/community/asa.webp') center/cover;
                     opacity: 0.3;
                 }
 
@@ -122,6 +122,7 @@ nav {
                     .avatar {
                         width: 64px;
                         height: 64px;
+                        object-fit: cover;
                         margin-bottom: 1em;
                         border: solid 3px white;
                         border-radius: 50%;

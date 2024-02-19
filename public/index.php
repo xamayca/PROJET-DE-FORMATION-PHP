@@ -17,6 +17,8 @@ $router->addRoute('/connexion', 'User', 'login');
 $router->addRoute('/profil', 'User', 'profile');
 $router->addRoute('/deconnexion', 'User', 'logout');
 
+// CREATION DES ROUTES POUR LA PAGE PANEL ADMINISTRATEUR //
+$router->addRoute('/admin', 'Admin', 'adminPanel');
 
 // CREATION DES ROUTES POUR LE TEST //
 $router->addRoute('/php-test', 'Pages', 'testPhp');

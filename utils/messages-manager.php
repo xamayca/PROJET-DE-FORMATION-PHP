@@ -5,6 +5,7 @@ class MessageManager {
 
     public function __construct() {
         $this->messages = [
+            
             'error' => [
                 'user_not_found' => 'L\'utilisateur n\'éxiste pas dans la base de données.',
                 'invalid_credentials' => 'Identifiant ou mot de passe incorrect.',
@@ -36,7 +37,10 @@ class MessageManager {
                 'image_not_uploaded' => 'L\'image n\'a pas été téléchargée.',
                 'image_invalid' => 'Le fichier n\'est pas une image valide.',
                 'image_maxsize' => 'L\'image ne doit pas dépasser 3 Mo.',
+                'image_required' => 'L\'image est requise.',
+                'image_move_error' => 'Une erreur s\'est produite lors du téléchargement de l\'image.',
                 ],
+
             'success' => [
                 'logged_in' => 'Connexion réussie, bienvenue {{username}} !',
                 'logged_out' => 'Déconnexion réussie, à bientôt !',

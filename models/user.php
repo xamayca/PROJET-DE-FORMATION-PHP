@@ -3,6 +3,7 @@
 require_once '../private/database.php';
 require_once '../utils/messages-manager.php';
 
+
 class Users
 {
     private $pdo;
@@ -58,6 +59,22 @@ class Users
         } catch (PDOException $e) {
             $this->handleDatabaseError($e);
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
+
+    /** MÉTHODE POUR METTRE A JOUR L'AVATAR DE L'UTILISATEUR */
+    public function updateUserAvatar()
+    {
+        try {
+            $sql = 'UPDATE `gt3f5b_users` SET `avatar` = :avatar WHERE `id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+            return $req->execute();
+
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
             exit();
         }
     }
@@ -232,7 +249,10 @@ class Users
     public function getUserByEmail()
     {
         try {
-            $sql = 'SELECT `id`, `username`, `email`, `id_roles` FROM `gt3f5b_users` WHERE `email` = :email';
+            $sql = 'SELECT u.id, u.username, u.email, u.id_roles, r.name as role_name, u.avatar
+                    FROM gt3f5b_users u
+                    JOIN gt3f5b_roles r ON u.id_roles = r.id
+                    WHERE u.email = :email';
             $req = $this->pdo->prepare($sql);
             $req->bindValue(':email', $this->email, PDO::PARAM_STR);
             $req->execute();

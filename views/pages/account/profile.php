@@ -5,7 +5,11 @@
             <i class="fa fa-xl fa-image"></i>
         </button>
 
-        <img class="avatar" src="<?= !empty($userData['avatar']) ? htmlspecialchars($userData['avatar']) : 'assets/img/avatar-default.png'; ?>" alt="Avatar de l'utilisateur">
+        <?php if (!empty($userData['avatar'])): ?>
+            <img class="avatar" src="<?= htmlspecialchars(str_replace('../public', '', $userData['avatar'])); ?>" alt="Avatar de l'utilisateur">
+        <?php else: ?>
+            <img class="avatar" src="assets/img/community/avatar-default.svg" alt="Avatar par défaut">
+        <?php endif; ?>
 
         <h1 class="<?= isset($userData['username']) ? '' : 'default-opacity'; ?>">
             <?= !empty($userData['username']) ? htmlspecialchars($userData['username']) : 'Utilisateur'; ?>

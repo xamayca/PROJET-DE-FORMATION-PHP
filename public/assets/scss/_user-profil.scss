@@ -35,7 +35,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background: url('../img/asa.webp') center/cover;
+      background: url('../img/community/asa.webp') center/cover;
       opacity: 0.3;
       z-index: -1;
     }
@@ -58,6 +58,7 @@
     .avatar {
       width: 100px;
       height: 100px;
+      object-fit: cover;
       margin-bottom: 1em;
       border: solid 2px white;
       border-radius: 50%;
@@ -246,9 +247,13 @@
   .profile-footer{
     font-size: smaller;
     border-top: solid 1px darken($hover-color, 50%);
-    padding:0.5em;
+    padding:1em;
     width:100%;
     background-color: darken($dark-color, 5%);
+
+    span{
+      text-transform: uppercase;
+    }
   }
 
   #delete-account-form, #modify-password-form{

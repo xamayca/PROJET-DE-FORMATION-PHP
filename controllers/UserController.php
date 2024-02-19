@@ -5,6 +5,7 @@ require_once '../private/database.php';
 require_once '../utils/clean-input.php';
 require_once '../utils/messages-manager.php';
 require_once '../utils/regex-manager.php';
+require_once '../utils/validate-image.php';
 
 class UserController
 {
@@ -167,6 +168,8 @@ class UserController
                         'id' => $userData['id'],
                         'username' => $userData['username'],
                         'email' => $userData['email'],
+                        'role_name' => $userData['role_name'],
+                        'avatar' => $userData['avatar']
                     ];
 
                     // SI LA CONNEXION EST REUSSIE, ON REDIRIGE VERS LA PAGE D'ACCUEIL AVEC UN MESSAGE ET SON NOM D'UTILISATEUR //
@@ -200,7 +203,7 @@ class UserController
         $errors = [];
 
         // SI L'UTILISATEUR N'EST PAS CONNECTÉ, ON LE REDIRIGE VERS LA PAGE DE CONNEXION //
-        if(!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user'])) {
             $_SESSION['warning'] = $messageManager->getMessage('error', 'must_be_logged_in');
             header('Location: /connexion');
             exit;
@@ -214,151 +217,150 @@ class UserController
         $user->setId($userId);
 
 
-            // VALIDATION DU NOM D'UTILISATEUR //
-            if (isset($_POST['update_username'])) {
-                $username = cleanInput($_POST['update_username']);
-                $user->setUsername($username);
-                if (!preg_match($regexManager->getRegex('username'), $username)) {
-                    $_SESSION['warning'] = $messageManager->getMessage('error', 'username_invalid');
-                } elseif ($user->checkUsernameAlreadyUse()) {
-                    $_SESSION['warning'] = $messageManager->getMessage('error', 'username_exists');
-                } elseif (strlen($username) < 3) {
-                    $_SESSION['warning'] = $messageManager->getMessage('error', 'username_minlength');
-                } elseif (strlen($username) > 30) {
-                    $_SESSION['warning'] = $messageManager->getMessage('error', 'username_maxlength');
-                }
-                // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
-                if (empty($_SESSION['warning'])) {
-                    // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
-                    $result = $user->updateUsername();
-                    // SI LA MISE A JOUR A RÉUSSIE //
-                    if ($result) {
-                        $_SESSION['user']['username'] = $username;
-                        // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
-                        $_SESSION['success'] = $messageManager->getMessage('success', 'username_updated');
-                    } else {
-                        // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
-                        $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                    }
+        // VALIDATION DU NOM D'UTILISATEUR //
+        if (isset($_POST['update_username'])) {
+            $username = cleanInput($_POST['update_username']);
+            $user->setUsername($username);
+            if (!preg_match($regexManager->getRegex('username'), $username)) {
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'username_invalid');
+            } elseif ($user->checkUsernameAlreadyUse()) {
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'username_exists');
+            } elseif (strlen($username) < 3) {
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'username_minlength');
+            } elseif (strlen($username) > 30) {
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'username_maxlength');
+            }
+            // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
+            if (empty($_SESSION['warning'])) {
+                // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
+                $result = $user->updateUsername();
+                // SI LA MISE A JOUR A RÉUSSIE //
+                if ($result) {
+                    $_SESSION['user']['username'] = $username;
+                    // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
+                    $_SESSION['success'] = $messageManager->getMessage('success', 'username_updated');
+                } else {
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
             }
+        }
 
 
-
-            // VALIDATION DE L'EMAIL //
-            if (isset($_POST['update_email'])) {
-                $email = cleanInput($_POST['update_email']);
-                $user->setEmail($email);
-                if (!preg_match($regexManager->getRegex('email'), $email)) {
-                    $_SESSION['warning'] = $messageManager->getMessage('error', 'email_invalid');
-                } elseif ($user->checkEmailAlreadyUse()) {
-                    $_SESSION['warning'] = $messageManager->getMessage('error', 'email_exists');
-                }
-                // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
-                if (empty($_SESSION['warning'])) {
-                    // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
-                    $result = $user->updateEmail();
-                    // SI LA MISE A JOUR A RÉUSSIE //
-                    if ($result) {
-                        // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
-                        $_SESSION['success'] = $messageManager->getMessage('success', 'email_updated');
-                    } else {
-                        // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
-                        $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                    }
+        // VALIDATION DE L'EMAIL //
+        if (isset($_POST['update_email'])) {
+            $email = cleanInput($_POST['update_email']);
+            $user->setEmail($email);
+            if (!preg_match($regexManager->getRegex('email'), $email)) {
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'email_invalid');
+            } elseif ($user->checkEmailAlreadyUse()) {
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'email_exists');
+            }
+            // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
+            if (empty($_SESSION['warning'])) {
+                // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
+                $result = $user->updateEmail();
+                // SI LA MISE A JOUR A RÉUSSIE //
+                if ($result) {
+                    // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
+                    $_SESSION['success'] = $messageManager->getMessage('success', 'email_updated');
+                } else {
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
             }
+        }
 
 
-            // VALIDATION DU NUMÉRO DE TÉLÉPHONE //
-            if (isset($_POST['update_phone'])) {
-                $phone = cleanInput($_POST['update_phone']);
-                $user->setPhone($phone);
-                if (!preg_match($regexManager->getRegex('phone'), $phone)) {
-                    $_SESSION['warning'] = $messageManager->getMessage('error', 'phone_invalid');
-                }
-                // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
-                if (empty($errors)) {
-                    // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
-                    $result = $user->updatePhone();
-                    // SI LA MISE A JOUR A RÉUSSIE //
-                    if ($result) {
-                        // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
-                        $_SESSION['success'] = $messageManager->getMessage('success', 'phone_updated');
-                    } else {
-                        // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
-                        $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                    }
+        // VALIDATION DU NUMÉRO DE TÉLÉPHONE //
+        if (isset($_POST['update_phone'])) {
+            $phone = cleanInput($_POST['update_phone']);
+            $user->setPhone($phone);
+            if (!preg_match($regexManager->getRegex('phone'), $phone)) {
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'phone_invalid');
+            }
+            // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
+            if (empty($errors)) {
+                // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
+                $result = $user->updatePhone();
+                // SI LA MISE A JOUR A RÉUSSIE //
+                if ($result) {
+                    // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
+                    $_SESSION['success'] = $messageManager->getMessage('success', 'phone_updated');
+                } else {
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
             }
+        }
 
 
-            // VALIDATION DE LA TRIBU //
-            if (isset($_POST['update_tribe'])) {
-                $tribe = cleanInput($_POST['update_tribe']);
-                $user->setTribe($tribe);
-                if (strlen($tribe) > 25) {
-                    $_SESSION['warning'] = $messageManager->getMessage('error', 'tribe_maxlength');
-                }
-                // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
-                if (empty($errors)) {
-                    // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
-                    $result = $user->updateTribe();
-                    // SI LA MISE A JOUR A RÉUSSIE //
-                    if ($result) {
-                        // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
-                        $_SESSION['success'] = $messageManager->getMessage('success', 'tribe_updated');
-                    } else {
-                        // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
-                        $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                    }
+        // VALIDATION DE LA TRIBU //
+        if (isset($_POST['update_tribe'])) {
+            $tribe = cleanInput($_POST['update_tribe']);
+            $user->setTribe($tribe);
+            if (strlen($tribe) > 25) {
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'tribe_maxlength');
+            }
+            // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
+            if (empty($errors)) {
+                // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
+                $result = $user->updateTribe();
+                // SI LA MISE A JOUR A RÉUSSIE //
+                if ($result) {
+                    // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
+                    $_SESSION['success'] = $messageManager->getMessage('success', 'tribe_updated');
+                } else {
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
             }
-            // VALIDATION DE LA DESCRIPTION //
-            if (isset($_POST['update_description'])) {
-                $description = cleanInput($_POST['update_description']);
-                $user->setDescription($description);
-                if (strlen($description) > 150) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'description_maxlength');
-                }
-                // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
-                if (empty($errors)) {
-                    // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
-                    $result = $user->updateDescription();
-                    // SI LA MISE A JOUR A RÉUSSIE //
-                    if ($result) {
-                        // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
-                        $_SESSION['success'] = $messageManager->getMessage('success', 'description_updated');
-                    } else {
-                        // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
-                        $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                    }
+        }
+        // VALIDATION DE LA DESCRIPTION //
+        if (isset($_POST['update_description'])) {
+            $description = cleanInput($_POST['update_description']);
+            $user->setDescription($description);
+            if (strlen($description) > 150) {
+                $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'description_maxlength');
+            }
+            // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
+            if (empty($errors)) {
+                // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
+                $result = $user->updateDescription();
+                // SI LA MISE A JOUR A RÉUSSIE //
+                if ($result) {
+                    // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
+                    $_SESSION['success'] = $messageManager->getMessage('success', 'description_updated');
+                } else {
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
             }
+        }
 
 
-            // VALIDATION DE LA SIGNATURE //
-            if (isset($_POST['update_signature'])) {
-                $signature = cleanInput($_POST['update_signature']);
-                $user->setSignature($signature);
-                if (strlen($signature) > 50) {
-                    $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'signature_maxlength');
-                }
+        // VALIDATION DE LA SIGNATURE //
+        if (isset($_POST['update_signature'])) {
+            $signature = cleanInput($_POST['update_signature']);
+            $user->setSignature($signature);
+            if (strlen($signature) > 50) {
+                $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'signature_maxlength');
+            }
 
-                // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
-                if (empty($errors)) {
-                    // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
-                    $result = $user->updateSignature();
-                    // SI LA MISE A JOUR A RÉUSSIE //
-                    if ($result) {
-                        // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
-                        $_SESSION['success'] = $messageManager->getMessage('success', 'signature_updated');
-                    } else {
-                        // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
-                        $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-                    }
+            // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU PROFIL //
+            if (empty($errors)) {
+                // APPEL DE LA MÉTHODE updateUsername() POUR METTRE À JOUR LE NOM D'UTILISATEUR //
+                $result = $user->updateSignature();
+                // SI LA MISE A JOUR A RÉUSSIE //
+                if ($result) {
+                    // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
+                    $_SESSION['success'] = $messageManager->getMessage('success', 'signature_updated');
+                } else {
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
             }
+        }
 
         // VALIDATION DES MOTS DE PASSE //
         if (isset($_POST['modify_password'])) {
@@ -412,6 +414,46 @@ class UserController
                     // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
                     $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
+            }
+        }
+
+        // VALIDATION DE L'IMAGE DE PROFIL
+        if (isset($_FILES['update_avatar'])) {
+            $avatar = $_FILES['update_avatar'];
+            $result = validateImage($avatar, $messageManager);
+
+            if ($result === true) {
+                // GENERATION D'UN NOM UNIQUE POUR L'AVATAR //
+                $avatarFileName = uniqid() . '.' . pathinfo($avatar['name'], PATHINFO_EXTENSION);
+
+                // CHEMIN DE STOCKAGE DE L'AVATAR //
+                $avatarPath = '../public/assets/img/uploads/' . $avatarFileName;
+                // DEPLACEMENT DU FICHIER DANS LE DOSSIER DE STOCKAGE //
+                if (move_uploaded_file($avatar['tmp_name'], $avatarPath)) {
+
+                    // SET DE L'AVATAR DANS L'OBJET USER //
+                    $user->setAvatar($avatarPath);
+                    // MISE A JOUR DE L'AVATAR DE L'UTILISATEUR DANS LA BASE DE DONNÉES //
+                    $result = $user->updateUserAvatar();
+
+                    // SI LA MISE A JOUR A RÉUSSIE //
+                    if ($result) {
+                        $_SESSION['user']['avatar'] = $avatarPath;
+                        $_SESSION['success'] = $messageManager->getMessage('success', 'avatar_updated');
+                    } else {
+                        $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
+                        // SUPPRESSION DE L'AVATAR SI LA MISE A JOUR A ÉCHOUÉ //
+                        if (file_exists($avatarPath)) {
+                            unlink($avatarPath);
+                        }
+                    }
+                } else {
+                    // GERER L'ERREUR DE DEPLACEMENT DU FICHIER //
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'image_move_error');
+                }
+            } else {
+                // MESSAGE D'ERREUR SI L'IMAGE N'EST PAS VALIDE PAR LA FONCTION validateImage() //
+                $_SESSION['warning'] = $result;
             }
         }
 
