@@ -31,7 +31,8 @@ body {
     font-weight: bold;
     font-size: small;
     margin-top:10vh;
-    background-color: $dark-light-color;
+    background: linear-gradient(to top, $dark-light-color, darken($dark-blue-color, 10%)) no-repeat;
+    background-size: cover;
 }
 
 .container{
@@ -76,4 +77,8 @@ body {
 
 .transform-y-0 {
     transform: translateY(0%);
+}
+
+.default-opacity {
+    opacity: 0.5;
 }

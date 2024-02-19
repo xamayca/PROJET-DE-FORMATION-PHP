@@ -39,6 +39,7 @@ navOpenHTML.addEventListener('click', () => {
     navCloseHTML.style.display = 'block';
     navigationLinksHTML.classList.add('transform-x-0');
     navShadowHTML.style.opacity = '1';
+    navShadowHTML.style.zIndex = "10"
     navShadowHTML.style.transition = 'opacity 1s ease-in-out';
     bodyHTML.style.overflow = 'hidden';
 });
@@ -49,6 +50,7 @@ navCloseHTML.addEventListener('click', () => {
     navOpenHTML.style.display = 'block';
     navigationLinksHTML.classList.remove('transform-x-0');
     navShadowHTML.style.opacity = '0';
+    navShadowHTML.style.zIndex = "0"
     bodyHTML.style.overflow = 'auto';
 });
 
@@ -58,6 +60,8 @@ navShadowHTML.addEventListener('click', () => {
     navCloseHTML.style.display = 'none';
     navigationLinksHTML.classList.remove('transform-x-0');
     navShadowHTML.style.opacity = '0';
+    navShadowHTML.style.zIndex = "0"
+    bodyHTML.style.overflow = 'auto';
 });
 
 

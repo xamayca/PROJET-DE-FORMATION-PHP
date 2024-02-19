@@ -1,0 +1,91 @@
+@import "colors";
+
+footer {
+  overflow: visible; // Add this line
+  margin-top: 5em;
+  width: 100%;
+  color: $dark-color;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, $white-color, darken($white-color, 10%));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-between;
+
+  #footer-header {
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: smaller;
+    width: 100%;
+    padding: 1em;
+    position: relative;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
+  }
+
+  #footer-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, $dark-light-color, darken($dark-light-color, 10%));
+    padding: 1em;
+
+    .footer-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+      align-items: center;
+      gap: 1em;
+      margin-bottom: 5em;
+
+      &.footer-section:last-child {
+        margin-bottom: 0;
+        border-bottom: 0.3em solid;
+        border-image: linear-gradient(to right, transparent, #1A1D24, transparent) 1;
+
+        #footer-logo {
+          width: 20%;
+          height: 100%;
+          object-fit: contain;
+        }
+
+        h6 {
+          color: $white-color;
+          font-size: 1.5em;
+          margin-bottom: 1em;
+          text-transform: uppercase;
+          font-weight: bolder;
+        }
+      }
+
+      .footer-categorie {
+        color: $white-color;
+        text-transform: uppercase;
+        text-decoration: underline;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-bottom: 1em;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 1em;
+
+        a {
+          color: $white-color;
+          text-decoration: none;
+          transition: 0.3s;
+
+          &:hover {
+            color: $blue-color;
+          }
+        }
+      }
+    }
+  }
+}

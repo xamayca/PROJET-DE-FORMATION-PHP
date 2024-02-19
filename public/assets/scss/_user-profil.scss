@@ -107,10 +107,9 @@
     ul.profile-info {
       width: 100%;
       background-color: darken($dark-light-color, 5%);
-      border: solid 1px darken($hover-color, 50%);
+      border-top: solid 1px darken($hover-color, 50%);
       overflow: hidden;
       position:relative;
-
 
       li {
         padding: 1em;
@@ -129,6 +128,7 @@
         & label{
           padding: 1em;
           word-wrap: break-word;
+          width: 100%;
         }
       }
     }
@@ -209,6 +209,7 @@
     input[type="text"], textarea {
       position: relative;
       padding: 1em;
+      outline: none;
       border: none;
       background: linear-gradient(to bottom, $white-color, darken($white-color, 10%));
       color: $dark-color;

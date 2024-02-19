@@ -5,14 +5,14 @@
             <i class="fa fa-xl fa-image"></i>
         </button>
 
-        <img class="avatar" src="<?= isset($userData['avatar']) ? htmlspecialchars($userData['avatar']) : 'assets/img/avatar-default.png'; ?>" alt="Avatar de l'utilisateur">
+        <img class="avatar" src="<?= !empty($userData['avatar']) ? htmlspecialchars($userData['avatar']) : 'assets/img/avatar-default.png'; ?>" alt="Avatar de l'utilisateur">
 
         <h1 class="<?= isset($userData['username']) ? '' : 'default-opacity'; ?>">
-            <?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'Utilisateur'; ?>
+            <?= !empty($userData['username']) ? htmlspecialchars($userData['username']) : 'Utilisateur'; ?>
         </h1>
 
         <span class="tribe <?= isset($userData['tribe']) ? '' : 'default-opacity'; ?>">
-            <?= isset($userData['tribe']) ?  htmlspecialchars('Tribu ' . $userData['tribe']) : 'Tribu non définie'; ?>
+            <?= !empty($userData['tribe']) ?  htmlspecialchars('Tribu ' . $userData['tribe']) : 'Tribu non définie'; ?>
         </span>
 
         <form id="edit-avatar-form" action="/profil" method="post" enctype="multipart/form-data">
@@ -50,8 +50,8 @@
         <ul class="profile-info">
             <li>
                 <i class="info-icon fa fa-user"></i>
-                <label for="username" class="<?= isset($userData['username']) ? '' : 'default-opacity'; ?>">
-                    <?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'Username non défini'; ?>
+                <label for="username" class="<?= !empty($userData['username']) ? '' : 'default-opacity'; ?>">
+                    <?= !empty($userData['username']) ? htmlspecialchars($userData['username']) : 'Nom d\'utilisateur non défini'; ?>
                 </label>
                 <form id="edit-username-form" action="/profil" method="post">
                     <input type="text" id="username" name="update_username" placeholder="Entrez votre pseudo d'utilisateur" value="<?= @$userData['username']?>">
@@ -76,8 +76,8 @@
         <ul class="profile-info">
             <li>
                 <i class="info-icon fa fa-users"></i>
-                <label for="tribe" class="<?= isset($userData['tribe']) ? '' : 'default-opacity'; ?>">
-                    <?= isset($userData['tribe']) ? htmlspecialchars($userData['tribe']) : 'Tribu non défini'; ?>
+                <label for="tribe" class="<?= !empty($userData['tribe']) ? '' : 'default-opacity'; ?>">
+                    <?= !empty($userData['tribe']) ? htmlspecialchars($userData['tribe']) : 'Tibu non définie'; ?>
                 </label>
                 <form id="edit-tribe-form" action="/profil" method="post">
                     <input type="text" id="tribe" name="update_tribe" placeholder="Entrez votre nom de tribu" value="<?= @$userData['tribe']?>">
@@ -101,21 +101,21 @@
         <ul class="profile-info">
             <li>
                 <i class="info-icon fa fa-phone"></i>
-                <label for="phone" class="<?= isset($userData['phone']) ? '' : 'default-opacity'; ?>">
-                    <?= isset($userData['phone']) ? htmlspecialchars($userData['phone']) : 'Numéro non défini'; ?>
+                <label for="phone" class="<?= !empty($userData['phone']) ? '' : 'default-opacity'; ?>">
+                    <?= !empty($userData['phone']) ? htmlspecialchars($userData['phone']) : 'Téléphone non défini'; ?>
                 </label>
             </li>
             <li>
                 <i class="info-icon fa fa-envelope"></i>
-                <label for="email" class="<?= isset($userData['email']) ? '' : 'default-opacity'; ?>">
-                    <?= isset($userData['email']) ? htmlspecialchars($userData['email']) : 'Email non défini'; ?>
+                <label for="email" class="<?= !empty($userData['email']) ? '' : 'default-opacity'; ?>">
+                    <?= !empty($userData['email']) ? htmlspecialchars($userData['email']) : 'Email non défini'; ?>
                 </label>
             </li>
             <li>
                 <i class="info-icon fa fa-calendar"></i>
-                <span class="<?= isset($userData['birthdate_fr']) ? '' : 'default-opacity'; ?>">
-                    <?= isset($userData['birthdate_fr']) ? ucfirst(htmlspecialchars($userData['birthdate_fr'])) : 'Date de naissance non définie'; ?>
-                </span>
+                <label for="description" class="<?= !empty($userData['birthdate_fr']) ? '' : 'default-opacity'; ?>">
+                    <?= !empty($userData['birthdate_fr']) ? htmlspecialchars($userData['birthdate_fr']) : 'Date de naissance non définie'; ?>
+                </label>
             </li>
             <form id="edit-infos-form" action="/profil" method="post">
                 <input type="text" id="phone" name="update_phone" placeholder="Entrez votre numéro" value="<?= @$userData['phone']?>">
@@ -140,8 +140,8 @@
         <ul class="profile-info">
             <li>
                 <i class="info-icon fa fa-message"></i>
-                <label for="description" class="<?= isset($userData['description']) ? '' : 'default-opacity'; ?>">
-                        <?= isset($userData['description']) ? htmlspecialchars($userData['description']) : 'Description non définie'; ?>
+                <label for="description" class="<?= !empty($userData['description']) ? '' : 'default-opacity'; ?>">
+                    <?= !empty($userData['description']) ? htmlspecialchars($userData['description']) : 'Description non définie'; ?>
                 </label>
                 <form id="edit-desc-form" action="/profil" method="post">
                     <textarea id="description" name="update_description" placeholder="Entrez votre description" value="<?= @$userData['description']?>"></textarea>

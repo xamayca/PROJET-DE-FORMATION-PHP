@@ -362,22 +362,25 @@ class UserController
 
         // VALIDATION DES MOTS DE PASSE //
         if (isset($_POST['modify_password'])) {
-            $current_password = cleanInput($_POST['password']);
+            $current_password = cleanInput($_POST['current_password']);
             $new_password = cleanInput($_POST['new_password']);
             $confirm_password = cleanInput($_POST['password_confirm']);
 
             // RÉCUPÉRATION DES DONNÉES DE L'UTILISATEUR //
             $user->setId($_SESSION['user']['id']);
-
             $userData = $user->getUserById();
+
+            // RÉCUPÉRATION DU MOT DE PASSE DE L'UTILISATEUR //
+            $user->setEmail($userData['email']);
+            $user_password = $user->getUserPassword();
 
             // VALIDATION DU MOT DE PASSE ACTUEL //
             if (empty($current_password)) {
-                $errors['password'] = $messageManager->getMessage('error', 'password_required');
-            } elseif (!password_verify($current_password, $userData['password'])) {
-                $errors['password'] = $messageManager->getMessage('error', 'password_invalid');
+                $errors['current_password'] = $messageManager->getMessage('error', 'password_required');
+            } elseif (!password_verify($current_password, $user_password)) {
+                $errors['current_password'] = $messageManager->getMessage('error', 'password_invalid');
             }
-            var_dump($userData);
+
             // VALIDATION DU NOUVEAU MOT DE PASSE //
             if (empty($new_password)) {
                 $errors['new_password'] = $messageManager->getMessage('error', 'new_password_required');
@@ -396,8 +399,12 @@ class UserController
 
             // SI AUCUNE ERREUR N'A ÉTÉ TROUVÉE, PROCÉDEZ À LA MISE À JOUR DU MOT DE PASSE //
             if (empty($errors)) {
-                // Mise à jour du mot de passe
-                $result = $user->updateUserPassword($_SESSION['user']['id'], $new_password);
+                // ON HASHE LE MOT DE PASSE AVANT DE L'ENREGISTRER DANS LA BASE DE DONNÉES //
+                $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+                // ON SET LE MOT DE PASSE HASHE DANS L'OBJET USER //
+                $user->setPassword($hashed_password);
+                // ICI ON MET À JOUR LE MOT DE PASSE DE L'UTILISATEUR //
+                $result = $user->updateUserPassword($_SESSION['user']['id'], $hashed_password);
                 if ($result) {
                     // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                     $_SESSION['success'] = $messageManager->getMessage('success', 'password_updated');
@@ -444,7 +451,7 @@ class UserController
     }
 
 
-    // LOGIQUE POUR SUPPRIMER LE COMPTE DE L'UTILISATEUR //
+// LOGIQUE POUR SUPPRIMER LE COMPTE DE L'UTILISATEUR //
     public function deleteAccount()
     {
         // ON INSTANCIE LA CLASSE Users POUR UTILISER LES MÉTHODES DE LA CLASSE //
@@ -452,13 +459,18 @@ class UserController
 
         // ON RÉCUPÈRE L'ID DE L'UTILISATEUR CONNECTÉ //
         $messageManager = new MessageManager();
-        var_dump($_SESSION);
         if(isset($_POST['delete_account'])) {
             $user->setId($_SESSION['user']['id']);
             if ($user->delete()) {
+                // ON STOCKE LE MESSAGE DE SUCCÈS DANS UNE VARIABLE POUR L'AFFICHER PLUS TARD //
+                $successMessage = $messageManager->getMessage('success', 'account_deleted');
+                // ON DETRUIT LA SESSION //
                 unset ($_SESSION);
                 session_destroy();
-                $_SESSION['success'] = $messageManager->getMessage('success', 'account_deleted');
+                // ON REDEMARRE LA SESSION POUR STOCKER LE MESSAGE DE SUCCÈS //
+                session_start();
+                // ON RENVOIS L'UTILISATEUR VERS LA PAGE D'ACCUEIL AVEC UN MESSAGE DE SUCCÈS //
+                $_SESSION['success'] = $successMessage;
                 header('Location: /');
                 exit;
             } else {
