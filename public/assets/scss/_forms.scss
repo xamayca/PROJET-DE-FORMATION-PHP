@@ -2,7 +2,7 @@
 @use 'mixins' as *;
 
 // STYLE DU FORMULAIRE //
-#registration-form, #login-form, #delete-account-form, #modify-password-form, #edit-avatar-form {
+#registration-form, #login-form, #delete-account-form, #modify-password-form, #edit-avatar-form, #create-article-form {
   display: flex;
   flex-direction: column;
   gap: 1em;

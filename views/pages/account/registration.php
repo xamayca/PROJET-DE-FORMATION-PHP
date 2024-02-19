@@ -8,7 +8,7 @@
         <label for="email">Adresse mail</label>
         <div class="input-with-icon">
             <input type="email" name="email" id="email" placeholder="Entrez votre adresse mail" value="<?= htmlspecialchars($email ?? '') ?>">
-            <i class="fas fa-envelope"></i> <!-- Icone Font Awesome -->
+            <i class="fas fa-envelope"></i>
         </div>
         <?php if (isset($errors['email'])): ?>
             <div class="form-error">
@@ -22,7 +22,7 @@
         <label for="username">Nom d'utilisateur</label>
         <div class="input-with-icon">
             <input type="text" name="username" id="username" placeholder="Entrez votre nom d'utilisateur" value="<?= htmlspecialchars($username ?? '') ?>">
-            <i class="fas fa-user"></i> <!-- Icone Font Awesome -->
+            <i class="fas fa-user"></i>
         </div>
         <?php if (isset($errors['username'])): ?>
             <div class="form-error">
@@ -36,7 +36,7 @@
         <label for="password">Mot de passe</label>
         <div class="input-with-icon">
             <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe">
-            <i class="fas fa-lock"></i> <!-- Icone Font Awesome -->
+            <i class="fas fa-lock"></i>
         </div>
         <?php if (isset($errors['password'])): ?>
             <div class="form-error">
@@ -50,7 +50,7 @@
         <label for="password_confirm">Confirmation du mot de passe</label>
         <div class="input-with-icon">
             <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirmez votre mot de passe">
-            <i class="fas fa-lock"></i> <!-- Icone Font Awesome -->
+            <i class="fas fa-lock"></i>
         </div>
         <?php if (isset($errors['password_confirm'])): ?>
             <div class="form-error">

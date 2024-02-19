@@ -4,7 +4,7 @@ require_once '../private/database.php';
 require_once '../utils/messages-manager.php';
 
 
-class Users
+class User
 {
     private $pdo;
     private int $id;
@@ -27,7 +27,7 @@ class Users
         $this->pdo = $database->getDatabase();
     }
 
-    /** FONCTION POUR GÉRER LES ERREURS DE LA BASE DE DONNÉES POUR PAS REECRIRE LE CODE À CHAQUE FOIS */
+    /** MÉTHODE POUR GÉRER LES ERREURS DE LA BASE DE DONNÉES POUR PAS REECRIRE LE CODE À CHAQUE FOIS */
     private function handleDatabaseError(PDOException $e)
     {
         // ON INSTANCIE MESSAGE MANAGER POUR AFFICHER LES MESSAGES D'ERREURS //

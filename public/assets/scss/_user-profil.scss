@@ -245,13 +245,13 @@
   }
 
   .profile-footer{
-    font-size: smaller;
     border-top: solid 1px darken($hover-color, 50%);
     padding:1em;
     width:100%;
     background-color: darken($dark-color, 5%);
 
     span{
+      font-size: smaller;
       text-transform: uppercase;
     }
   }

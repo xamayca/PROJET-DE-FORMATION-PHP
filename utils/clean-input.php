@@ -1,8 +1,12 @@
 <?php
 
-/** NETTOIE LA CHAÎNE DE DONNÉES EN SUPPRIMANT LES ESPACES VIDES ET LES BALISES HTML. */
+/** NETTOIE LA CHAÎNE DE DONNÉES EN SUPPRIMANT LES ESPACES VIDES, LES BALISES HTML ET EN ÉCHAPPANT LES CARACTÈRES SPÉCIAUX EN HTML. */
 function cleanInput($data): string
 {
+    // SUPPRIME LES BALISES HTML DE LA CHAÎNE DE CARACTÈRES. //
     $data = strip_tags($data);
-    return trim($data);
+    // SUPPRIME LES ESPACES VIDES AU DÉBUT ET À LA FIN DE LA CHAÎNE DE CARACTÈRES.
+    $data = trim($data);
+    // RETOURNE LA CHAÎNE DE CARACTÈRES NETTOYÉE ET ÉCHAPPÉE. //
+    return htmlspecialchars($data, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 }

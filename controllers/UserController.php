@@ -19,8 +19,8 @@ class UserController
         // TABLEAU POUR STOCKER LES ERREURS //
         $errors = [];
 
-        // INSTANCIATION DE LA CLASSE Users POUR UTILISER LES MÉTHODES DE LA CLASSE //
-        $user = new Users();
+        // INSTANCIATION DE LA CLASSE User POUR UTILISER LES MÉTHODES DE LA CLASSE //
+        $user = new User();
 
         // SI LE SERVEUR REÇOIT UNE REQUÊTE POST //
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -74,7 +74,7 @@ class UserController
             // VALIDATION DE LA DATE DE NAISSANCE //
             if (empty($birthdate)) {
                 $errors['birthdate'] = $messageManager->getMessage('error', 'birthdate_required');
-            } elseif (!preg_match($regexManager->getRegex('date'), $birthdate)) {
+            } elseif (!preg_match($regexManager->getRegex('birthdate'), $birthdate)) {
                 $errors['birthdate'] = $messageManager->getMessage('error', 'birthdate_invalid');
             } else {
                 // CONVERTIS LA DATE DE NAISSANCE EN OBJET DATETIME //
@@ -135,7 +135,7 @@ class UserController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // INITIALISE UNE NOUVELLE SESSION //
-            $user = new Users();
+            $user = new User();
             $email = cleanInput($_POST['email']);
             $password = cleanInput($_POST['password']);
 
@@ -211,15 +211,15 @@ class UserController
 
         // ON RÉCUPÈRE L'ID DE L'UTILISATEUR CONNECTÉ //
         $userId = $_SESSION['user']['id'];
-        // ON INSTANCIE LA CLASSE Users POUR RÉCUPÉRER LES INFORMATIONS DE L'UTILISATEUR //
-        $user = new Users();
+        // ON INSTANCIE LA CLASSE User POUR RÉCUPÉRER LES INFORMATIONS DE L'UTILISATEUR //
+        $user = new User();
         // ON RÉCUPÈRE LES INFORMATIONS DE L'UTILISATEUR GRÂCE À SON ID //
         $user->setId($userId);
 
 
         // VALIDATION DU NOM D'UTILISATEUR //
-        if (isset($_POST['update_username'])) {
-            $username = cleanInput($_POST['update_username']);
+        if (isset($_POST['username'])) {
+            $username = cleanInput($_POST['username']);
             $user->setUsername($username);
             if (!preg_match($regexManager->getRegex('username'), $username)) {
                 $_SESSION['warning'] = $messageManager->getMessage('error', 'username_invalid');
@@ -248,8 +248,8 @@ class UserController
 
 
         // VALIDATION DE L'EMAIL //
-        if (isset($_POST['update_email'])) {
-            $email = cleanInput($_POST['update_email']);
+        if (isset($_POST['email'])) {
+            $email = cleanInput($_POST['email']);
             $user->setEmail($email);
             if (!preg_match($regexManager->getRegex('email'), $email)) {
                 $_SESSION['warning'] = $messageManager->getMessage('error', 'email_invalid');
@@ -273,8 +273,8 @@ class UserController
 
 
         // VALIDATION DU NUMÉRO DE TÉLÉPHONE //
-        if (isset($_POST['update_phone'])) {
-            $phone = cleanInput($_POST['update_phone']);
+        if (isset($_POST['phone'])) {
+            $phone = cleanInput($_POST['phone']);
             $user->setPhone($phone);
             if (!preg_match($regexManager->getRegex('phone'), $phone)) {
                 $_SESSION['warning'] = $messageManager->getMessage('error', 'phone_invalid');
@@ -296,8 +296,8 @@ class UserController
 
 
         // VALIDATION DE LA TRIBU //
-        if (isset($_POST['update_tribe'])) {
-            $tribe = cleanInput($_POST['update_tribe']);
+        if (isset($_POST['tribe'])) {
+            $tribe = cleanInput($_POST['tribe']);
             $user->setTribe($tribe);
             if (strlen($tribe) > 25) {
                 $_SESSION['warning'] = $messageManager->getMessage('error', 'tribe_maxlength');
@@ -317,8 +317,8 @@ class UserController
             }
         }
         // VALIDATION DE LA DESCRIPTION //
-        if (isset($_POST['update_description'])) {
-            $description = cleanInput($_POST['update_description']);
+        if (isset($_POST['description'])) {
+            $description = cleanInput($_POST['description']);
             $user->setDescription($description);
             if (strlen($description) > 150) {
                 $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'description_maxlength');
@@ -332,7 +332,7 @@ class UserController
                     // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                     $_SESSION['success'] = $messageManager->getMessage('success', 'description_updated');
                 } else {
-                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR //
                     $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
             }
@@ -340,8 +340,8 @@ class UserController
 
 
         // VALIDATION DE LA SIGNATURE //
-        if (isset($_POST['update_signature'])) {
-            $signature = cleanInput($_POST['update_signature']);
+        if (isset($_POST['signature'])) {
+            $signature = cleanInput($_POST['signature']);
             $user->setSignature($signature);
             if (strlen($signature) > 50) {
                 $errors = $_SESSION['warning'] = $messageManager->getMessage('error', 'signature_maxlength');
@@ -356,7 +356,7 @@ class UserController
                     // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                     $_SESSION['success'] = $messageManager->getMessage('success', 'signature_updated');
                 } else {
-                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR //
                     $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
             }
@@ -411,15 +411,15 @@ class UserController
                     // REDIRIGE VERS LA PAGE DE PROFIL AVEC UN MESSAGE DE SUCCÈS //
                     $_SESSION['success'] = $messageManager->getMessage('success', 'password_updated');
                 } else {
-                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR ET REDIRIGE VERS LA PAGE PROFIL //
+                    // SI L'ENREGISTREMENT A ÉCHOUÉ, AFFICHE UN MESSAGE D'ERREUR //
                     $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
                 }
             }
         }
 
         // VALIDATION DE L'IMAGE DE PROFIL
-        if (isset($_FILES['update_avatar'])) {
-            $avatar = $_FILES['update_avatar'];
+        if (isset($_FILES['avatar'])) {
+            $avatar = $_FILES['avatar'];
             $result = validateImage($avatar, $messageManager);
 
             if ($result === true) {
@@ -427,7 +427,7 @@ class UserController
                 $avatarFileName = uniqid() . '.' . pathinfo($avatar['name'], PATHINFO_EXTENSION);
 
                 // CHEMIN DE STOCKAGE DE L'AVATAR //
-                $avatarPath = '../public/assets/img/uploads/' . $avatarFileName;
+                $avatarPath = '../public/assets/img/uploads/users-avatars/' . $avatarFileName;
                 // DEPLACEMENT DU FICHIER DANS LE DOSSIER DE STOCKAGE //
                 if (move_uploaded_file($avatar['tmp_name'], $avatarPath)) {
 
@@ -496,8 +496,8 @@ class UserController
 // LOGIQUE POUR SUPPRIMER LE COMPTE DE L'UTILISATEUR //
     public function deleteAccount()
     {
-        // ON INSTANCIE LA CLASSE Users POUR UTILISER LES MÉTHODES DE LA CLASSE //
-        $user = new Users();
+        // ON INSTANCIE LA CLASSE User POUR UTILISER LES MÉTHODES DE LA CLASSE //
+        $user = new User();
 
         // ON RÉCUPÈRE L'ID DE L'UTILISATEUR CONNECTÉ //
         $messageManager = new MessageManager();
@@ -516,6 +516,7 @@ class UserController
                 header('Location: /');
                 exit;
             } else {
+                // SI LA SUPPRESSION DU COMPTE A ÉCHOUÉ, ON AFFICHE UN MESSAGE D'ERREUR //
                 $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
             }
         }

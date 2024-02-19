@@ -25,10 +25,10 @@
                     <label for="user-avatar-input" class="custom-file-upload">
                         Choisir un fichier
                     </label>
-                    <input type="file" id="user-avatar-input" name="update_avatar" accept="image/*"/>
+                    <input type="file" id="user-avatar-input" name="avatar" accept="image/*"/>
             </div>
             <div class="form-btn-group">
-                <button type="submit" class="avatar_update_btn">
+                <button type="submit" class="avatar_btn">
                     Envoyer
                 </button>
                 <button id="avatar-back-btn" name="Retour au profil">
@@ -58,7 +58,7 @@
                     <?= !empty($userData['username']) ? htmlspecialchars($userData['username']) : 'Nom d\'utilisateur non défini'; ?>
                 </label>
                 <form id="edit-username-form" action="/profil" method="post">
-                    <input type="text" id="username" name="update_username" placeholder="Entrez votre pseudo d'utilisateur" value="<?= @$userData['username']?>">
+                    <input type="text" id="username" name="username" placeholder="Entrez votre pseudo d'utilisateur" value="<?= @$userData['username']?>">
                     <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
@@ -84,7 +84,7 @@
                     <?= !empty($userData['tribe']) ? htmlspecialchars($userData['tribe']) : 'Tibu non définie'; ?>
                 </label>
                 <form id="edit-tribe-form" action="/profil" method="post">
-                    <input type="text" id="tribe" name="update_tribe" placeholder="Entrez votre nom de tribu" value="<?= @$userData['tribe']?>">
+                    <input type="text" id="tribe" name="tribe" placeholder="Entrez votre nom de tribu" value="<?= @$userData['tribe']?>">
                     <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
@@ -122,8 +122,8 @@
                 </label>
             </li>
             <form id="edit-infos-form" action="/profil" method="post">
-                <input type="text" id="phone" name="update_phone" placeholder="Entrez votre numéro" value="<?= @$userData['phone']?>">
-                <input type="text" id="email" name="update_mail" placeholder="Entrez votre email" value="<?= @$userData['mail']?>">
+                <input type="text" id="phone" name="phone" placeholder="Entrez votre numéro" value="<?= @$userData['phone']?>">
+                <input type="text" id="email" name="mail" placeholder="Entrez votre email" value="<?= @$userData['mail']?>">
                 <button type="submit" class="validate-btn">Mettre a jour<i class="fa fa-lg fa-check"></i></button>
             </form>
         </ul>
@@ -148,7 +148,7 @@
                     <?= !empty($userData['description']) ? htmlspecialchars($userData['description']) : 'Description non définie'; ?>
                 </label>
                 <form id="edit-desc-form" action="/profil" method="post">
-                    <textarea id="description" name="update_description" placeholder="Entrez votre description" value="<?= @$userData['description']?>"></textarea>
+                    <textarea id="description" name="description" placeholder="Entrez votre description" value="<?= @$userData['description']?>"></textarea>
                     <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
@@ -173,7 +173,7 @@
                     <?= isset($userData['signature']) ? htmlspecialchars($userData['signature']) : 'Signature non définie'; ?>
                 </label>
                 <form id="edit-sign-form" action="/profil" method="post">
-                    <input type="text" id="signature" name="update_signature" placeholder="Entrez votre signature">
+                    <input type="text" id="signature" name="signature" placeholder="Entrez votre signature">
                     <button type="submit" class="validate-btn"><i class="fa fa-lg fa-check"></i></button>
                 </form>
             </li>
@@ -185,7 +185,7 @@
 
     <div class="profile-footer">
         <span class="<?= isset($userData['registerDate_fr']) && isset($userData['role_name']) ? '' : 'default-opacity'; ?>">
-            <?= isset($userData['registerDate_fr']) && isset($userData['role_name']) ? ucfirst(htmlspecialchars($userData['role_name'])) . ' inscrit depuis le ' . htmlspecialchars($userData['registerDate_fr']) : 'Rôle ou date d\'inscription non définis'; ?>
+            <small><?= isset($userData['registerDate_fr']) && isset($userData['role_name']) ? ucfirst(htmlspecialchars($userData['role_name'])) . ' inscrit depuis le ' . htmlspecialchars($userData['registerDate_fr']) : 'Rôle ou date d\'inscription non définis'; ?></small>
         </span>
     </div>
 
