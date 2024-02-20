@@ -46,11 +46,12 @@ class MessageManager {
                 'content_invalid' => 'Le contenu de l\'article est invalide.',
                 'categories_required' => 'La catégorie de l\'article est requise.',
                 'categories_invalid' => 'La catégorie de l\'article est invalide.',
+                'categories_not_found' => 'La catégorie de l\'article n\'a pas été trouvée.',
                 'cover_invalid' => 'L\'image de couverture de l\'article est invalide.',
                 'cover_required' => 'L\'image de couverture de l\'article est requise.',
                 'cover_maxsize' => 'L\'image de couverture de l\'article ne doit pas dépasser 3 Mo.',
                 'cover_move_error' => 'Une erreur s\'est produite lors du téléchargement de l\'image de couverture de l\'article.',
-
+                'no_article_found' => 'Aucun article n\'a été trouvé.',
                 // ERREURS POUR LES IMAGES //
                 'image_not_uploaded' => 'L\'image n\'a pas été téléchargée.',
                 'image_invalid' => 'Le fichier n\'est pas une image valide.',
@@ -76,6 +77,7 @@ class MessageManager {
                 'password_updated' => 'Le mot de passe a été mis à jour avec succès.',
                 'avatar_updated' => 'L\'avatar a été mis à jour avec succès.',
                 'account_deleted' => 'Votre compte a été supprimé avec succès.',
+                'article_created' => 'L\'article a été créé avec succès.',
             ],
         ];
     }

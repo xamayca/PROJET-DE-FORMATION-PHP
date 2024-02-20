@@ -9,6 +9,7 @@ require_once '../utils/validate-image.php';
 
 class ArticlesController
 {
+    /** MÉTHODE POUR CRÉER UN ARTICLE */
     public function createArticle()
     {
         // INSTANCIATION DE LA CLASSES MessageManager POUR GERER LES MESSAGES //
@@ -30,6 +31,7 @@ class ArticlesController
 
             // VALIDATION DU TITRE DE L'ARTICLE //
             if (!empty($_POST['title'])) {
+                $title = $_POST['title'];
                 if (!preg_match($regexManager->getRegex('title'), $title)) {
                     $errors['title'] = $messageManager->getMessage('error', 'title_invalid');
                 } elseif (strlen($title) < 3) {
@@ -43,7 +45,8 @@ class ArticlesController
 
             // VALIDATION DU CONTENU DE L'ARTICLE //
             if (!empty($_POST['content'])) {
-                if (!preg_match($regexManager->getRegex('content'), $content)) {
+                $content = $_POST['content'];
+                if (preg_match($regexManager->getRegex('content'), $content)) {
                     $errors['content'] = $messageManager->getMessage('error', 'content_invalid');
                 } elseif (strlen($content) < 3) {
                     $errors['content'] = $messageManager->getMessage('error', 'content_minlength');
@@ -80,18 +83,57 @@ class ArticlesController
             // VALIDATION DE LA CATEGORIE DE L'ARTICLE //
             if (!empty($_POST['categories'])) {
                 $categoryId = $_POST['categories'];
-                $article->setId($categoryId);
-                if (!$article->checkCategoryExistById()) {
+                $article->setCategory($categoryId);
+                if ($article->checkCategoryExistById() === 0) {
                     $errors['categories'] = $messageManager->getMessage('error', 'categories_invalid');
                 }
             } else {
                 $errors['categories'] = $messageManager->getMessage('error', 'categories_required');
             }
+
+            if (empty($errors)) {
+                $article->setTitle($title);
+                $article->setContent($content);
+                $article->setCategory($categoryId);
+                $article->setAuthor($_SESSION['user']['id']);
+                $article->setPublicationDate(date('Y-m-d H:i:s'));
+                $result = $article->create();
+                if ($result) {
+                    $_SESSION['success'] = $messageManager->getMessage('success', 'article_created');
+                } else {
+                    $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
+                }
+            }
         }
+
+        $categories = $article->getCategoriesList();
+
         require_once '../views/elements/header.php';
         require_once '../views/pages/articles/create-article.php';
         require_once '../views/elements/footer.php';
+    }
 
-        var_dump($errors);
+    /** MÉTHODE POUR AFFICHER UN ARTICLE PAR SA CATEGORIE *//** MÉTHODE POUR AFFICHER UN ARTICLE PAR SA CATEGORIE */
+    public function displayArticlesByCategory($params)
+    {
+        $categoryId = $params[0];
+        $messageManager = new MessageManager();
+
+        $article = new Article();
+
+        $categories = $article->getCategoriesList();
+        $article->setCategory($categoryId);
+
+        // RECUPERE DES ARTICLES PAR CATEGORIE //
+        $articles = $article->getArticlesByCategory();
+
+        // SI PAS D'ARTICLES POUR CETTE CATEGORIE //
+        if (empty($articles)) {
+            $_SESSION['warning'] = $messageManager->getMessage('error', 'no_article_found');
+        }
+
+        require_once '../views/elements/header.php';
+        require_once '../views/pages/articles/display-articles.php';
+        require_once '../views/elements/footer.php';
     }
 }

@@ -5,12 +5,15 @@ class Router
     private array $routeMappings = [];
 
     /** AJOUTEZ UNE ROUTE AU ROUTEUR EN L'AJOUTANT AU TABLEAU DES ROUTES */
-    public function addRoute(string $uri, string $controllerName, string $methodName)
+    public function addRoute(string $uri, string $controllerName, string $methodName, array $params = [])
     {
         $this->routeMappings[$uri] = [
             'controller' => $controllerName,
-            'method' => $methodName
+            'method' => $methodName,
         ];
+        if(!empty($params)){
+            $this->routeMappings[$uri]['params'] = $params;
+        }
     }
 
     /** DETERMINE LE CONTROLLER ET LA METHOD A UTILISER EN FONCTION DE L'URI DEMANDER */
@@ -30,8 +33,18 @@ class Router
 
         // INSTANCIE LE CONTROLLER ET APPEL LA FONCTION DEMANDER //
         require_once __DIR__ . '/../controllers/' . $controllerName . 'Controller.php';
+
         $controllerInstance = $controllerName . 'Controller';
-        $controllerInstance = new $controllerInstance();
-        $controllerInstance->$methodName();
+
+        if(isset($this->routeMappings[$requestedUri]['params'])){
+            $params = $this->routeMappings[$requestedUri]['params'];
+            $controllerInstance = new $controllerInstance();
+            $controllerInstance->$methodName($params);
+            } else {
+            $controllerInstance = new $controllerInstance();
+            $controllerInstance->$methodName();
+        }
+
+
     }
 }

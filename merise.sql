@@ -269,4 +269,10 @@ INSERT INTO `gt3f5b_roles` (`id`, `name`)
 VALUES (1, 'membre');
 
 INSERT INTO `gt3f5b_articles_categories` (`id`, `name`)
-VALUES (1, 'Actualités');
+VALUES (1, 'Communauté');
+
+INSERT INTO `gt3f5b_articles_categories` (`id`, `name`)
+VALUES (2, 'ARK: Survival Ascended');
+
+INSERT INTO `gt3f5b_articles_categories` (`id`, `name`)
+VALUES (3, 'ARK II');

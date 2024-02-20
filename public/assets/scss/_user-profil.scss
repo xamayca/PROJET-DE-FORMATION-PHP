@@ -186,7 +186,7 @@
         border:solid 1px darken($error-color, 20%);
       }
 
-      .avatar_update_btn{
+      #avatar_btn{
         @include form-button($dark-light-color, $blue-color, lighten($dark-light-color, 10%));
       }
 

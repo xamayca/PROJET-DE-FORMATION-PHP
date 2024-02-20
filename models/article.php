@@ -37,7 +37,7 @@ class Article
     }
 
     /** MÉTHODE POUR CRÉER UN ARTICLE */
-    public function create($userId)
+    public function create()
     {
         try {
             // PRÉPARE LA REQUETE //
@@ -53,7 +53,7 @@ class Article
             $req->bindValue(':id_articles_categories', $this->id_articles_categories, PDO::PARAM_INT);
 
             // EXECUTE LA REQUETE //
-            $req->execute();
+            return $req->execute();
         } catch (PDOException $e) {
             $this->handleDatabaseError($e);
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
@@ -83,11 +83,53 @@ class Article
     {
         $sql = 'SELECT COUNT(*) FROM `gt3f5b_articles_categories` WHERE `id` = :id';
         $req = $this->pdo->prepare($sql);
-        $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $req->bindValue(':id', $this->id_articles_categories, PDO::PARAM_INT);
         $req->execute();
         return $req->fetch(PDO::FETCH_COLUMN);
     }
 
+    /** MÉTHODE POUR RÉCUPÉRER LES ARTICLES PAR CATÉGORIE */
+    public function getArticlesByCategory()
+    {
+        try {
+            // PREPARATION DE LA REQUETE //
+            $sql = 'SELECT `gt3f5b_articles`.`id`, `title`,`content`,`views`,`cover`,`date`,`id_users`, `name`, `gt3f5b_users`.`username` AS author FROM `gt3f5b_articles` 
+            INNER JOIN `gt3f5b_articles_categories` ON `id_articles_categories` = `gt3f5b_articles_categories`.`id`
+            INNER JOIN `gt3f5b_users` ON `gt3f5b_articles`.`id_users` = `gt3f5b_users`.`id`
+            WHERE `id_articles_categories` = :category';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':category', $this->id_articles_categories, PDO::PARAM_INT);
+            $req->execute();
+
+            // FETCH ALL RETOURNE UN TABLEAU CONTENANT TOUTES LES LIGNES DE LA TABLE //
+            return $req->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
+
+    /** RECUPERE LE NOM DE L'AUTEUR DE L'ARTICLE */
+    public function getAuthorName()
+    {
+        try {
+            $sql = 'SELECT `username` FROM `gt3f5b_users` WHERE `id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':id', $this->id_users, PDO::PARAM_INT);
+            $req->execute();
+            return $req->fetch(PDO::FETCH_COLUMN);
+        } catch (PDOException $e) {
+            $this->handleDatabaseError($e);
+            exit();
+        }
+    }
+
+    /** SETTER POUR LE NOM DE L'AUTEUR DE L'ARTICLE */
+    public function setAuthorName($username)
+    {
+        $this->username = $username;
+    }
 
     /** SETTER POUR ARTICLE ID */
     public function setId($id)
@@ -167,12 +209,6 @@ class Article
         $this->id_users = $userId;
     }
 
-    /** GETTER POUR ARTICLE ID USERS */
-    public function getAuthor()
-    {
-        return $this->id_users;
-    }
-
     /** SETTER POUR ARTICLE ID ARTICLES CATEGORIES */
     public function setCategory($category)
     {
@@ -185,4 +221,8 @@ class Article
         return $this->id_articles_categories;
     }
 
+    public function setPublicationDate(bool $date)
+    {
+        $this->date = $date;
+    }
 }

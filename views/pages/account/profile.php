@@ -28,7 +28,7 @@
                     <input type="file" id="user-avatar-input" name="avatar" accept="image/*"/>
             </div>
             <div class="form-btn-group">
-                <button type="submit" class="avatar_btn">
+                <button type="submit" id="avatar_btn">
                     Envoyer
                 </button>
                 <button id="avatar-back-btn" name="Retour au profil">

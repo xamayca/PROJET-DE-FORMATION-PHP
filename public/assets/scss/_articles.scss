@@ -1,0 +1,53 @@
+@use "colors" as *;
+@use 'mixins' as *;
+
+// STYLE DES ARTICLES //
+#create-article-form{
+  .form-group{
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .custom-file-upload {
+      text-align: center;
+      width:100%;
+      @include form-button($blue-color, $white-color, lighten($dark-light-color, 10%));
+      border: solid 1px $white-color;
+    }
+
+    .input-with-icon{
+      position: relative;
+
+      #categories {
+        border: none;
+        background: linear-gradient(to bottom, $white-color, darken($white-color, 10%));
+        color: $dark-color;
+        font-size: smaller;
+        padding: 1em;
+        width: 100%;
+
+        &:focus {
+          outline: solid 3px $blue-color;
+          background-color: lighten($white-color, 20%);
+        }
+
+        option {
+          background-color: $dark-light-color;
+          border: solid 1px $white-color;
+          color: $white-color;
+          padding: 1em;
+
+          &:hover {
+            background-color: lighten($dark-light-color, 10%);
+          }
+        }
+      }
+
+    }
+  }
+
+  .validate-btn {
+    @include form-button($dark-light-color, $blue-color, lighten($dark-light-color, 10%));
+  }
+}

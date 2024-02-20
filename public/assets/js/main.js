@@ -67,6 +67,7 @@ navShadowHTML.addEventListener('click', () => {
 
 // ITEMS DE MODIFICATION DE PROFIL HTML //
 const EditAvatarButtonHTML = document.getElementById('edit-avatar-btn');
+const AvatarBackToProfileBtnHTML = document.getElementById('avatar-back-btn');
 
 const EditUsernameButtonHTML = document.getElementById('edit-username-btn');
 const UsernameBackToProfileBtnHTML = document.getElementById('username-back-btn');
@@ -104,7 +105,7 @@ EditAvatarButtonHTML.addEventListener('click', () => {
 });
 
 // FAIT DISPARAÎTRE LE FORMULAIRE DE MODIFICATION D'AVATAR //
-EditAvatarFormHTML.addEventListener('click', () => {
+AvatarBackToProfileBtnHTML.addEventListener('click', () => {
     EditAvatarFormHTML.classList.remove('transform-y-0');
 });
 

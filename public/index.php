@@ -21,7 +21,10 @@ $router->addRoute('/deconnexion', 'User', 'logout');
 $router->addRoute('/admin', 'Admin', 'adminPanel');
 
 // CREATION DES ROUTES POUR LES ARTICLES //
-$router->addRoute('/article', 'Articles', 'createArticle');
+$router->addRoute('/creer-un-article', 'Articles', 'createArticle');
+$router->addRoute('/actualites-communaute', 'Articles', 'displayArticlesByCategory', [1]);
+$router->addRoute('/actualites-ark-survival-ascended', 'Articles', 'displayArticlesByCategory', [2]);
+$router->addRoute('/actualites-ark-2', 'Articles', 'displayArticlesByCategory', [3]);
 
 // CREATION DES ROUTES POUR LE TEST //
 $router->addRoute('/php-test', 'Pages', 'testPhp');
@@ -29,4 +32,3 @@ $router->addRoute('/database-test', 'Pages', 'testDatabase');
 
 // ROUTE LA REQUETE HTTP VERS LE CONTROLEUR ET L'ACTION CORRESPONDANTS //
 $router->dispatch();
-
