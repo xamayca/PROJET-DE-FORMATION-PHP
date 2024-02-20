@@ -50,7 +50,7 @@ navCloseHTML.addEventListener('click', () => {
     navOpenHTML.style.display = 'block';
     navigationLinksHTML.classList.remove('transform-x-0');
     navShadowHTML.style.opacity = '0';
-    navShadowHTML.style.zIndex = "0"
+    navShadowHTML.style.zIndex = "-1"
     bodyHTML.style.overflow = 'auto';
 });
 
@@ -60,7 +60,7 @@ navShadowHTML.addEventListener('click', () => {
     navCloseHTML.style.display = 'none';
     navigationLinksHTML.classList.remove('transform-x-0');
     navShadowHTML.style.opacity = '0';
-    navShadowHTML.style.zIndex = "0"
+    navShadowHTML.style.zIndex = "-1"
     bodyHTML.style.overflow = 'auto';
 });
 

@@ -432,7 +432,7 @@ class UserController
                 if (move_uploaded_file($avatar['tmp_name'], $avatarPath)) {
 
                     // SET DE L'AVATAR DANS L'OBJET USER //
-                    $user->setAvatar($avatarPath);
+                    $user->setAvatar($avatarFileName);
                     // MISE A JOUR DE L'AVATAR DE L'UTILISATEUR DANS LA BASE DE DONNÉES //
                     $result = $user->updateUserAvatar();
 

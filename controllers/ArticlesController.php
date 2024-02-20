@@ -50,7 +50,7 @@ class ArticlesController
                     $errors['content'] = $messageManager->getMessage('error', 'content_invalid');
                 } elseif (strlen($content) < 3) {
                     $errors['content'] = $messageManager->getMessage('error', 'content_minlength');
-                } elseif (strlen($content) > 100) {
+                } elseif (strlen($content) > 500) {
                     $errors['content'] = $messageManager->getMessage('error', 'content_maxlength');
                 }
             } else {
@@ -81,7 +81,7 @@ class ArticlesController
             }
 
             // VALIDATION DE LA CATEGORIE DE L'ARTICLE //
-            if (!empty($_POST['categories'])) {
+            if (isset($_POST['categories'])) {
                 $categoryId = $_POST['categories'];
                 $article->setCategory($categoryId);
                 if ($article->checkCategoryExistById() === 0) {
@@ -96,7 +96,7 @@ class ArticlesController
                 $article->setContent($content);
                 $article->setCategory($categoryId);
                 $article->setAuthor($_SESSION['user']['id']);
-                $article->setPublicationDate(date('Y-m-d H:i:s'));
+                $article->setAuthorAvatar($_SESSION['user']['avatar']);
                 $result = $article->create();
                 if ($result) {
                     $_SESSION['success'] = $messageManager->getMessage('success', 'article_created');
@@ -116,24 +116,28 @@ class ArticlesController
     /** MÉTHODE POUR AFFICHER UN ARTICLE PAR SA CATEGORIE *//** MÉTHODE POUR AFFICHER UN ARTICLE PAR SA CATEGORIE */
     public function displayArticlesByCategory($params)
     {
-        $categoryId = $params[0];
-        $messageManager = new MessageManager();
+        if (isset($params[0])) {
 
-        $article = new Article();
 
-        $categories = $article->getCategoriesList();
-        $article->setCategory($categoryId);
+            $categoryId = $params[0];
+            $messageManager = new MessageManager();
 
-        // RECUPERE DES ARTICLES PAR CATEGORIE //
-        $articles = $article->getArticlesByCategory();
+            $article = new Article();
 
-        // SI PAS D'ARTICLES POUR CETTE CATEGORIE //
-        if (empty($articles)) {
-            $_SESSION['warning'] = $messageManager->getMessage('error', 'no_article_found');
+            $categories = $article->getCategoriesList();
+            $article->setCategory($categoryId);
+
+            // RECUPERE DES ARTICLES PAR CATEGORIE //
+            $articles = $article->getArticlesByCategory();
+
+            // SI PAS D'ARTICLES POUR CETTE CATEGORIE //
+            if (empty($articles)) {
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'no_article_found');
+            }
+            require_once '../views/elements/header.php';
+            require_once '../views/pages/articles/display-articles.php';
+            require_once '../views/elements/footer.php';
+
         }
-
-        require_once '../views/elements/header.php';
-        require_once '../views/pages/articles/display-articles.php';
-        require_once '../views/elements/footer.php';
     }
 }

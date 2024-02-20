@@ -1,17 +1,36 @@
-<h1>Articles in the category: <?=  (!empty($articles)) ? $articles[0]->name : 'No Articles in this Category Available' ?></h1>
+    <h1>Articles dans la catégorie: <?=  (!empty($articles)) ? $articles[0]->name : 'Aucun article disponible.' ?></h1>
 
-<?php if (empty($articles)): ?>
-    <p>No articles were found for this category.</p>
-<?php else: ?>
+    <button id="create-article-button" onclick="window.location.href = '/creer-un-article'">Crée un article</button>
+
+    <?php if (empty($articles)): ?>
+        <p>Aucun article disponible dans cette catégorie.</p>
+    <?php else: ?>
+
+
     <?php foreach ($articles as $article): ?>
-        <div class="article">
-            <h2><?= htmlspecialchars($article->title) ?></h2>
-            <div>
-                <img src="<?= htmlspecialchars($article->cover) ?>" alt="Article cover">
-            </div>
-            <p><?= htmlspecialchars($article->content) ?></p>
-            <p>Published on: <?= date('F j, Y', strtotime($article->date)) ?></p>
-        </div>
-    <?php endforeach; ?>
-<?php endif; ?>
+    <div id="article">
 
+        <div class="article-header">
+            <h2 class="article-title">
+                <?= htmlspecialchars($article->title) ?>
+                <img id="author-avatar" src="/assets/img/uploads/users-avatars/<?= htmlspecialchars($article->authorAvatar) ?>" alt="Avatar de l'auteur">
+            </h2>
+
+            <div class="article-cover">
+                <img src="/assets/img/uploads/covers-articles/<?= htmlspecialchars($article->cover) ?>" alt="Image de l'article">
+            </div>
+
+
+            <div class="article-content">
+                <p>
+                    <?= htmlspecialchars($article->content) ?>
+                </p>
+            </div>
+
+            <p class="article-footer">Publié <?= htmlspecialchars($article->published_date_fr) ?> par <?= htmlspecialchars($article->author) ?></p>
+
+        </div>
+
+        <?php endforeach; ?>
+    <?php endif; ?>
+    </div>

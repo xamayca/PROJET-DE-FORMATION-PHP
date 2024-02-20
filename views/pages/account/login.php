@@ -1,6 +1,3 @@
-
-<div class="container">
-
 <!-- FORMULAIRE DE CONNEXION -->
 <form id="login-form" action="/connexion" method="POST">
 
@@ -34,5 +31,3 @@
 
     <input class="form-button" type="submit" value="Se connecter">
 </form>
-
-</div>

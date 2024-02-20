@@ -81,7 +81,7 @@
         </section>
 
         <section class="footer-section">
-            <img src="../assets/img/navigation/icon-francesurvival.svg" alt="Logo France Survival" id="footer-logo">
+            <img src="/assets/img/community/icon-francesurvival.svg" alt="Logo France Survival" id="footer-logo">
             <h6>France Survival</h6>
         </section>
 

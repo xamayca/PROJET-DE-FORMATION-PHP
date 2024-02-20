@@ -9,12 +9,14 @@ class Article
     private $id;
     private $title;
     private $content;
-    private $views;
     private $cover;
+    private $authorAvatar;
     private $date;
     private $id_users;
     private $id_articles_categories;
-
+    /**
+     * @var mixed
+     */
 
 
 
@@ -26,7 +28,7 @@ class Article
     }
 
     /** MÉTHODE POUR GÉRER LES ERREURS DE LA BASE DE DONNÉES POUR PAS REECRIRE LE CODE À CHAQUE FOIS */
-    private function handleDatabaseError(PDOException $e)
+    private function handleDatabaseError()
     {
         // ON INSTANCIE MESSAGE MANAGER POUR AFFICHER LES MESSAGES D'ERREURS //
         $messageManager = new MessageManager();
@@ -55,7 +57,7 @@ class Article
             // EXECUTE LA REQUETE //
             return $req->execute();
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -72,7 +74,7 @@ class Article
             // FETCH ALL RETOURNE UN TABLEAU CONTENANT TOUTES LES LIGNES DE LA TABLE //
             return $req->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -93,7 +95,7 @@ class Article
     {
         try {
             // PREPARATION DE LA REQUETE //
-            $sql = 'SELECT `gt3f5b_articles`.`id`, `title`,`content`,`views`,`cover`,`date`,`id_users`, `name`, `gt3f5b_users`.`username` AS author FROM `gt3f5b_articles` 
+            $sql = 'SELECT `gt3f5b_articles`.`id`, `title`,`content`,`views`,`cover`, DATE_FORMAT(`date`, "le %d/%m/%Y à %Hh%i") AS published_date_fr, `id_users`, `name`, `gt3f5b_users`.`username` AS author, `gt3f5b_users`.`avatar` AS authorAvatar FROM `gt3f5b_articles`
             INNER JOIN `gt3f5b_articles_categories` ON `id_articles_categories` = `gt3f5b_articles_categories`.`id`
             INNER JOIN `gt3f5b_users` ON `gt3f5b_articles`.`id_users` = `gt3f5b_users`.`id`
             WHERE `id_articles_categories` = :category';
@@ -104,43 +106,10 @@ class Article
             // FETCH ALL RETOURNE UN TABLEAU CONTENANT TOUTES LES LIGNES DE LA TABLE //
             return $req->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
-    }
-
-    /** RECUPERE LE NOM DE L'AUTEUR DE L'ARTICLE */
-    public function getAuthorName()
-    {
-        try {
-            $sql = 'SELECT `username` FROM `gt3f5b_users` WHERE `id` = :id';
-            $req = $this->pdo->prepare($sql);
-            $req->bindValue(':id', $this->id_users, PDO::PARAM_INT);
-            $req->execute();
-            return $req->fetch(PDO::FETCH_COLUMN);
-        } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
-            exit();
-        }
-    }
-
-    /** SETTER POUR LE NOM DE L'AUTEUR DE L'ARTICLE */
-    public function setAuthorName($username)
-    {
-        $this->username = $username;
-    }
-
-    /** SETTER POUR ARTICLE ID */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /** GETTER POUR ARTICLE ID */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /** SETTER POUR ARTICLE TITLE */
@@ -149,58 +118,16 @@ class Article
         $this->title = $title;
     }
 
-    /** GETTER POUR ARTICLE TITLE */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
     /** SETTER POUR ARTICLE CONTENT */
     public function setContent($content)
     {
         $this->content = $content;
     }
 
-    /** GETTER POUR ARTICLE CONTENT */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /** SETTER POUR ARTICLE VIEWS */
-    public function setViews($views)
-    {
-        $this->views = $views;
-    }
-
-    /** GETTER POUR ARTICLE VIEWS */
-    public function getViews()
-    {
-        return $this->views;
-    }
-
     /** SETTER POUR ARTICLE COVER */
     public function setArticleCover(string $coverFileName)
     {
         $this->cover = $coverFileName;
-    }
-
-    /** GETTER POUR ARTICLE COVER */
-    public function getCover()
-    {
-        return $this->cover;
-    }
-
-    /** SETTER POUR ARTICLE DATE */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    /** GETTER POUR ARTICLE DATE */
-    public function getDate()
-    {
-        return $this->date;
     }
 
     /** SETTER POUR ARTICLE ID USERS */
@@ -215,14 +142,9 @@ class Article
         $this->id_articles_categories = $category;
     }
 
-    /** GETTER POUR ARTICLE ID ARTICLES CATEGORIES */
-    public function getCategory()
-    {
-        return $this->id_articles_categories;
-    }
 
-    public function setPublicationDate(bool $date)
+    public function setAuthorAvatar($authorAvatar)
     {
-        $this->date = $date;
+        $this->authorAvatar = $authorAvatar;
     }
 }

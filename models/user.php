@@ -28,7 +28,7 @@ class User
     }
 
     /** MÉTHODE POUR GÉRER LES ERREURS DE LA BASE DE DONNÉES POUR PAS REECRIRE LE CODE À CHAQUE FOIS */
-    private function handleDatabaseError(PDOException $e)
+    private function handleDatabaseError()
     {
         // ON INSTANCIE MESSAGE MANAGER POUR AFFICHER LES MESSAGES D'ERREURS //
         $messageManager = new MessageManager();
@@ -57,7 +57,7 @@ class User
             return $req->execute();
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -74,7 +74,7 @@ class User
             return $req->execute();
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             exit();
         }
     }
@@ -90,7 +90,7 @@ class User
             return $req->execute();
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -107,7 +107,7 @@ class User
             return $req->execute();
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -124,7 +124,7 @@ class User
             return $req->execute();
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -141,7 +141,7 @@ class User
             return $req->execute();
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -158,7 +158,7 @@ class User
             return $req->execute();
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -173,7 +173,7 @@ class User
             $req->bindValue(':id', $userId, PDO::PARAM_INT);
             return $req->execute();
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             exit();
         }
     }
@@ -189,7 +189,7 @@ class User
             return $req->execute();
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -205,7 +205,7 @@ class User
             return $req->execute();
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -222,7 +222,7 @@ class User
             return $req->fetch(PDO::FETCH_COLUMN);
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -239,7 +239,7 @@ class User
             return $req->fetch(PDO::FETCH_COLUMN);
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
             exit();
         }
@@ -259,7 +259,7 @@ class User
             return $req->fetch(PDO::FETCH_ASSOC);
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             exit();
         }
     }
@@ -275,7 +275,7 @@ class User
             return $req->fetch(PDO::FETCH_COLUMN);
 
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             exit();
         }
     }
@@ -297,7 +297,7 @@ class User
             $req->execute();
             return $req->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $this->handleDatabaseError($e);
+            $this->handleDatabaseError();
             exit();
         }
     }
@@ -308,22 +308,10 @@ class User
         $this->id = $id;
     }
 
-    /** GETTER POUR USER Username */
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
     /** SETTER POUR USER Username */
     public function setUsername($username)
     {
         $this->username = $username;
-    }
-
-    /** GETTER POUR USER Email */
-    public function getEmail(): string
-    {
-        return $this->email;
     }
 
     /** SETTER POUR USER Email */
@@ -338,34 +326,16 @@ class User
         $this->password = $password;
     }
 
-    /** GETTER POUR USER Birthdate */
-    public function getBirthdate(): string
-    {
-        return $this->birthdate;
-    }
-
     /** SETTER POUR USER Birthdate */
     public function setBirthdate($birthdate)
     {
         $this->birthdate = $birthdate;
     }
 
-    /** GETTER POUR USER Tribe */
-    public function getTribe(): string
-    {
-        return $this->tribe;
-    }
-
     /** SETTER POUR USER Tribe */
     public function setTribe($tribe)
     {
         $this->tribe = $tribe;
-    }
-
-    /** GETTER POUR USER Phone */
-    public function getPhone(): string
-    {
-        return $this->phone;
     }
 
     /** SETTER POUR USER Phone */
@@ -386,52 +356,16 @@ class User
         $this->description = $description;
     }
 
-    /** GETTER POUR USER Avatar */
-    public function getAvatar(): string
-    {
-        return $this->avatar;
-    }
-
     /** SETTER POUR USER Avatar */
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
     }
 
-    /** GETTER POUR USER Signature */
-    public function getSignature(): string
-    {
-        return $this->signature;
-    }
-
     /** SETTER POUR USER Signature */
     public function setSignature($signature)
     {
         $this->signature = $signature;
-    }
-
-    /** GETTER POUR USER RegisterDate */
-    public function getRegisterDate(): string
-    {
-        return $this->registerDate;
-    }
-
-    /** SETTER POUR USER RegisterDate */
-    public function setRegisterDate($registerDate)
-    {
-        $this->registerDate = $registerDate;
-    }
-
-    /** GETTER POUR USER id_roles */
-    public function getid_roles(): int
-    {
-        return $this->id_roles;
-    }
-
-    /** SETTER POUR USER id_roles */
-    public function setid_roles($id_roles)
-    {
-        $this->id_roles = $id_roles;
     }
 
 }

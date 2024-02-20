@@ -22,7 +22,7 @@
 
     <!-- NAVIGATION BAR / NAVIGATION LINKS -->
     <nav>
-        <a class="brand" href="/"><img src="assets/img/navigation/icon-francesurvival.svg" class="brand-logo" alt="ARK: France Survival logo">France survival</a>
+        <a class="brand" href="/"><img src="assets/img/community/icon-francesurvival.svg" class="brand-logo" alt="ARK: France Survival logo">France survival</a>
 
         <i class="fa fa-2xl fa-bars" id="nav-open" aria-label="Ouvrir le menu de navigation"></i>
         <i class="fa fa-2xl fa-times" id="nav-close" aria-label="Fermer le menu de navigation"></i>
@@ -38,7 +38,7 @@
                             <img class="avatar" src="<?= htmlspecialchars(str_replace('../public', '',$_SESSION['user']['avatar'])); ?>" alt="Avatar de l'utilisateur">
                         <?php else: ?>
                             <!-- SINON, AFFICHEZ L'AVATAR PAR DÉFAUT -->
-                            <img class="avatar" src="../assets/img/community/avatar-default.svg" alt="Avatar par défaut">
+                            <img class="avatar" src="/assets/img/community/avatar-default.svg" alt="Avatar par défaut">
                         <?php endif; ?>
                         <!-- AFFICHEZ LE NOM D'UTILISATEUR -->
                         <i class="fa-solid fa-chevron-down"></i><?= htmlspecialchars($_SESSION['user']['username']) ?>
@@ -77,7 +77,7 @@
                     </button>
                     <ul class="sub-items">
                         <li>
-                            <a href="/actualites-communaute"><img src="assets/img/navigation/icon-francesurvival.svg" class="game-logo" alt="ARK: France Survival logo">Communauté</a>
+                            <a href="/actualites-communaute"><img src="assets/img/community/icon-francesurvival.svg" class="game-logo" alt="ARK: France Survival logo">Communauté</a>
                         </li>
                         <li>
                             <a href="/actualites-ark-survival-ascended"><img src="assets/img/navigation/icon-ASA.svg" class="game-logo" alt="ARK: Survival Ascended logo">ARK: Survival Ascended</a>
