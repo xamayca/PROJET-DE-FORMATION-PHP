@@ -6,7 +6,7 @@
         </button>
 
         <?php if (!empty($userData['avatar'])): ?>
-            <img class="avatar" src="<?= htmlspecialchars(str_replace('../public', '', $userData['avatar'])); ?>" alt="Avatar de l'utilisateur">
+            <img class="avatar" src="assets/img/uploads/users-avatars/<?php echo $userData['avatar']; ?>" alt="Avatar de l'utilisateur">
         <?php else: ?>
             <img class="avatar" src="assets/img/community/avatar-default.svg" alt="Avatar par défaut">
         <?php endif; ?>

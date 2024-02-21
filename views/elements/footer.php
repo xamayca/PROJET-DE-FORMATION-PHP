@@ -1,3 +1,4 @@
+</div>
 <!-- FOOTER -->
 <footer>
     <div id="footer-header">

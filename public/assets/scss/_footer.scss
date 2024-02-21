@@ -1,9 +1,9 @@
 @import "colors";
 
 footer {
+  width: 100%;
   overflow: visible;
   margin-top: 5em;
-  width: 100%;
   color: $dark-color;
   text-align: center;
   font-family: Arial, sans-serif;
@@ -24,6 +24,7 @@ footer {
   }
 
   #footer-body {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
@@ -39,6 +40,10 @@ footer {
       align-items: center;
       gap: 1em;
       margin-bottom: 5em;
+
+      &:first-child {
+        margin-top: 5em;
+      }
 
       &.footer-section:last-child {
         margin-bottom: 0;

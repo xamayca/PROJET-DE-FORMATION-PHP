@@ -109,7 +109,7 @@ class ArticlesController
         $categories = $article->getCategoriesList();
 
         require_once '../views/elements/header.php';
-        require_once '../views/pages/articles/create-article.php';
+        require_once '../views/pages/articles/create.php';
         require_once '../views/elements/footer.php';
     }
 
@@ -135,9 +135,44 @@ class ArticlesController
                 $_SESSION['warning'] = $messageManager->getMessage('error', 'no_article_found');
             }
             require_once '../views/elements/header.php';
-            require_once '../views/pages/articles/display-articles.php';
+            require_once '../views/pages/articles/list.php';
             require_once '../views/elements/footer.php';
 
+        }
+    }
+
+    public function displayArticle($params)
+    {
+        // VERIFIER SI UN ID D'ARTICLE EST FOURNI DANS L'URL //
+        if (isset($params[0])) {
+            $articleId = $params[0];
+
+            // Instancie les gestionnaires nécessaires
+            $messageManager = new MessageManager();
+            $article = new Article();
+
+            // RECUPERE LES DONNEES DE L'ARTICLE PAR SON ID //
+            $articleData = $article->getArticleById($articleId);
+
+            // SI L'ARTICLE EXISTE //
+            if ($articleData) {
+                require_once '../views/elements/header.php';
+                require_once '../views/pages/articles/article.php';
+                require_once '../views/elements/footer.php';
+            } else {
+                // SI L'ARTICLE N'EXISTE PAS, REDIRIGE VERS LA PAGE D'ACCUEIL
+                $_SESSION['warning'] = $messageManager->getMessage('error', 'no_article_found');
+                header('Location: /');
+                // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+                exit;
+            }
+        } else {
+            // SI AUCUN ID D'ARTICLE N'EST FOURNI, REDIRIGE VERS LA PAGE D'ACCUEIL
+            $messageManager = new MessageManager();
+            $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
+            header('Location: /');
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit;
         }
     }
 }

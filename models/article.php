@@ -6,19 +6,12 @@ require_once '../utils/messages-manager.php';
 class Article
 {
     private $pdo;
-    private $id;
     private $title;
     private $content;
     private $cover;
     private $authorAvatar;
-    private $date;
     private $id_users;
     private $id_articles_categories;
-    /**
-     * @var mixed
-     */
-
-
 
     /** MÉTHODE POUR INITIALISER LA CONNEXION A LA BASE DE DONNÉES */
     public function __construct()
@@ -95,7 +88,7 @@ class Article
     {
         try {
             // PREPARATION DE LA REQUETE //
-            $sql = 'SELECT `gt3f5b_articles`.`id`, `title`,`content`,`views`,`cover`, DATE_FORMAT(`date`, "le %d/%m/%Y à %Hh%i") AS published_date_fr, `id_users`, `name`, `gt3f5b_users`.`username` AS author, `gt3f5b_users`.`avatar` AS authorAvatar FROM `gt3f5b_articles`
+            $sql = 'SELECT `gt3f5b_articles`.`id`, `title`, SUBSTR(`content`, 1, 100) AS `content`, `views`, `cover`, DATE_FORMAT(`date`, "le %d/%m/%Y à %Hh%i") AS published_date_fr, `id_users`, `name`, `gt3f5b_users`.`username` AS author, `gt3f5b_users`.`avatar` AS authorAvatar FROM `gt3f5b_articles`
             INNER JOIN `gt3f5b_articles_categories` ON `id_articles_categories` = `gt3f5b_articles_categories`.`id`
             INNER JOIN `gt3f5b_users` ON `gt3f5b_articles`.`id_users` = `gt3f5b_users`.`id`
             WHERE `id_articles_categories` = :category';
@@ -105,6 +98,28 @@ class Article
 
             // FETCH ALL RETOURNE UN TABLEAU CONTENANT TOUTES LES LIGNES DE LA TABLE //
             return $req->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            $this->handleDatabaseError();
+            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
+            exit();
+        }
+    }
+
+    /** MÉTHODE POUR RÉCUPÉRER UN ARTICLE PAR SON ID */
+    public function getArticleById()
+    {
+        try {
+            // PRÉPARE LA REQUETE //
+            $sql = 'SELECT `gt3f5b_articles`.`id`, `title`, `content`, `views`, `cover`, DATE_FORMAT(`date`, "le %d/%m/%Y à %Hh%i") AS published_date_fr, `id_users`, `name`, `gt3f5b_users`.`username` AS author, `gt3f5b_users`.`avatar` AS authorAvatar FROM `gt3f5b_articles`
+            INNER JOIN `gt3f5b_articles_categories` ON `id_articles_categories` = `gt3f5b_articles_categories`.`id`
+            INNER JOIN `gt3f5b_users` ON `gt3f5b_articles`.`id_users` = `gt3f5b_users`.`id`
+            WHERE `gt3f5b_articles`.`id` = :id';
+            $req = $this->pdo->prepare($sql);
+            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $req->execute();
+
+            // FETCH RETOURNE LA LIGNE SUIVANT LA REQUETE //
+            return $req->fetch(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
             $this->handleDatabaseError();
             // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
