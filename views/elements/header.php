@@ -77,13 +77,13 @@
                     </button>
                     <ul class="sub-items">
                         <li>
-                            <a href="/actualites-communaute"><img src="assets/img/community/icon-francesurvival.svg" class="game-logo" alt="ARK: France Survival logo">Communauté</a>
+                            <a href="/articles/communaute"><img src="assets/img/community/icon-francesurvival.svg" class="game-logo" alt="ARK: France Survival logo">Communauté</a>
                         </li>
                         <li>
-                            <a href="/actualites-ark-survival-ascended"><img src="assets/img/navigation/icon-ASA.svg" class="game-logo" alt="ARK: Survival Ascended logo">ARK: Survival Ascended</a>
+                            <a href="/actualites/ark-survival-ascended"><img src="assets/img/navigation/icon-ASA.svg" class="game-logo" alt="ARK: Survival Ascended logo">ARK: Survival Ascended</a>
                         </li>
                         <li>
-                            <a href="/actualites-ark-2"><img src="assets/img/navigation/icon-ARK2.svg" class="game-logo" alt="ARK: II logo">ARK: II</a>
+                            <a href="/actualites/ark-2"><img src="assets/img/navigation/icon-ARK2.svg" class="game-logo" alt="ARK: II logo">ARK: II</a>
                         </li>
                     </ul>
                 </li>

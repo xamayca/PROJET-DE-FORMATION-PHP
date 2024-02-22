@@ -25,8 +25,7 @@ $router->addRoute('/creer-un-article', 'Articles', 'createArticle');
 $router->addRoute('/actualites-communaute', 'Articles', 'displayArticlesByCategory', [1]);
 $router->addRoute('/actualites-ark-survival-ascended', 'Articles', 'displayArticlesByCategory', [2]);
 $router->addRoute('/actualites-ark-2', 'Articles', 'displayArticlesByCategory', [3]);
-// CREATION DE LA ROUTE POUR AFFICHER UN ARTICLE PAR SON ID
-$router->addRoute('/article', 'Articles', 'displayArticle');
+
 
 // CREATION DES ROUTES POUR LE TEST //
 $router->addRoute('/php-test', 'Pages', 'testPhp');
