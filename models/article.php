@@ -13,6 +13,7 @@ class Article
     private $id_users;
     private $id_articles_categories;
 
+
     /** MÉTHODE POUR INITIALISER LA CONNEXION A LA BASE DE DONNÉES */
     public function __construct()
     {
@@ -105,26 +106,14 @@ class Article
         }
     }
 
-    /** MÉTHODE POUR RÉCUPÉRER UN ARTICLE PAR SON ID */
-    public function getArticleById()
+    /** MÉTHODE POUR SETTER LA CATEGORIE PAR SON NOM */
+    public function setCategoryByName($categoryName)
     {
-        try {
-            // PRÉPARE LA REQUETE //
-            $sql = 'SELECT `gt3f5b_articles`.`id`, `title`, `content`, `views`, `cover`, DATE_FORMAT(`date`, "le %d/%m/%Y à %Hh%i") AS published_date_fr, `id_users`, `name`, `gt3f5b_users`.`username` AS author, `gt3f5b_users`.`avatar` AS authorAvatar FROM `gt3f5b_articles`
-            INNER JOIN `gt3f5b_articles_categories` ON `id_articles_categories` = `gt3f5b_articles_categories`.`id`
-            INNER JOIN `gt3f5b_users` ON `gt3f5b_articles`.`id_users` = `gt3f5b_users`.`id`
-            WHERE `gt3f5b_articles`.`id` = :id';
-            $req = $this->pdo->prepare($sql);
-            $req->bindValue(':id', $this->id, PDO::PARAM_INT);
-            $req->execute();
-
-            // FETCH RETOURNE LA LIGNE SUIVANT LA REQUETE //
-            return $req->fetch(PDO::FETCH_OBJ);
-        } catch (PDOException $e) {
-            $this->handleDatabaseError();
-            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-            exit();
-        }
+        $sql = 'SELECT `id` FROM `gt3f5b_articles_categories` WHERE `name` = :name';
+        $req = $this->pdo->prepare($sql);
+        $req->bindValue(':name', $categoryName, PDO::PARAM_STR);
+        $req->execute();
+        $this->id_articles_categories = $req->fetch(PDO::FETCH_COLUMN);
     }
 
     /** SETTER POUR ARTICLE TITLE */
@@ -158,6 +147,7 @@ class Article
     }
 
 
+    /** SETTER POUR L'AVATAR DE L'AUTEUR */
     public function setAuthorAvatar($authorAvatar)
     {
         $this->authorAvatar = $authorAvatar;

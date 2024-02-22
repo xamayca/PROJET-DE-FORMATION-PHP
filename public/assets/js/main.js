@@ -1,4 +1,3 @@
-const bodyHTML = document.querySelector('body');
 
 // ITEMS DE LA NAVIGATION & MENU MOBILE //
 const navOpenHTML = document.getElementById('nav-open');
@@ -41,7 +40,7 @@ navOpenHTML.addEventListener('click', () => {
     navShadowHTML.style.opacity = '1';
     navShadowHTML.style.zIndex = "10"
     navShadowHTML.style.transition = 'opacity 1s ease-in-out';
-    bodyHTML.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
 });
 
 // ANIMATION DU MENU MOBILE A LA FERMETURE //
@@ -51,7 +50,7 @@ navCloseHTML.addEventListener('click', () => {
     navigationLinksHTML.classList.remove('transform-x-0');
     navShadowHTML.style.opacity = '0';
     navShadowHTML.style.zIndex = "-1"
-    bodyHTML.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
 });
 
 // FERMETURE DU MENU MOBILE AU CLIQUE SUR L'OMBRE //
@@ -61,7 +60,7 @@ navShadowHTML.addEventListener('click', () => {
     navigationLinksHTML.classList.remove('transform-x-0');
     navShadowHTML.style.opacity = '0';
     navShadowHTML.style.zIndex = "-1"
-    bodyHTML.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
 });
 
 

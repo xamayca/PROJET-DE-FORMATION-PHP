@@ -11,14 +11,14 @@
         <div id="article">
             <div class="article-header">
                 <h2 class="article-title">
-                    <?= htmlspecialchars($article->title) ?>
-                    <img id="author-avatar" src="/assets/img/uploads/users-avatars/<?= htmlspecialchars($article->authorAvatar) ?>" alt="Avatar de l'auteur">
+                    <?= $article->title ?>
+                    <img id="author-avatar" src="/assets/img/uploads/users-avatars/<?= $article->authorAvatar ?>" alt="Avatar de l'auteur">
                 </h2>
 
                 <div class="article-cover">
-                    <img src="/assets/img/uploads/covers-articles/<?= htmlspecialchars($article->cover) ?>" alt="Image de l'article">
+                    <img src="/assets/img/uploads/covers-articles/<?= $article->cover ?>" alt="Image de l'article">
                     <span id="categories">
-                        <?= htmlspecialchars($articles[0]->name) ?>
+                        <?= $articles[0]->name ?>
                     </span>
                 </div>
 
@@ -26,17 +26,16 @@
                 <div class="article-content">
 
                     <p>
-                        <?= htmlspecialchars(strip_tags($article->content)) ?>...
+                        <?= strip_tags($article->content) ?>...
 
                         <span id="article-info">
-                            Publié <?= htmlspecialchars($article->published_date_fr) ?> par <?= htmlspecialchars($article->author) ?>
+                            Publié <?= $article->published_date_fr ?> par <?= $article->author ?>
                         </span>
                     </p>
 
 
 
-                    <a id="read-more-button" href='/articles/<?= $article->id ?>'>Lire l'article</a>
-
+                    <a id="read-more-button" href="/actualite/<?= urlencode($article->name) ?>/<?= $article->id ?>">Lire l'article</a>
                 </div>
 
 

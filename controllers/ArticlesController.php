@@ -114,18 +114,18 @@ class ArticlesController
     }
 
     /** MÉTHODE POUR AFFICHER UN ARTICLE PAR SA CATEGORIE *//** MÉTHODE POUR AFFICHER UN ARTICLE PAR SA CATEGORIE */
-    public function displayArticlesByCategory($params)
+    public function displayArticlesByCategory($params=[])
     {
-        if (isset($params[0])) {
+        if (isset($params['categoryName'])) {
+            $categoryName = $params['categoryName'];
 
-
-            $categoryId = $params[0];
             $messageManager = new MessageManager();
 
             $article = new Article();
 
             $categories = $article->getCategoriesList();
-            $article->setCategory($categoryId);
+
+            $article->setCategoryByName($categoryName);
 
             // RECUPERE DES ARTICLES PAR CATEGORIE //
             $articles = $article->getArticlesByCategory();
@@ -134,45 +134,37 @@ class ArticlesController
             if (empty($articles)) {
                 $_SESSION['warning'] = $messageManager->getMessage('error', 'no_article_found');
             }
-            require_once '../views/elements/header.php';
-            require_once '../views/pages/articles/list.php';
-            require_once '../views/elements/footer.php';
-
         }
+        require_once '../views/elements/header.php';
+        require_once '../views/pages/articles/list.php';
+        require_once '../views/elements/footer.php';
     }
 
-    public function displayArticle($params)
-    {
-        // VERIFIER SI UN ID D'ARTICLE EST FOURNI DANS L'URL //
-        if (isset($params[0])) {
-            $articleId = $params[0];
+    public function displayArticle($params){
+        if (isset($params['categoryName']) && isset($params['articleId'])) {
+            $categoryName = $params['categoryName'];
+            $articleId = $params['articleId'];
 
-            // Instancie les gestionnaires nécessaires
             $messageManager = new MessageManager();
+
             $article = new Article();
 
-            // RECUPERE LES DONNEES DE L'ARTICLE PAR SON ID //
-            $articleData = $article->getArticleById($articleId);
+            $categories = $article->getCategoriesList();
 
-            // SI L'ARTICLE EXISTE //
-            if ($articleData) {
-                require_once '../views/elements/header.php';
-                require_once '../views/pages/articles/article.php';
-                require_once '../views/elements/footer.php';
-            } else {
-                // SI L'ARTICLE N'EXISTE PAS, REDIRIGE VERS LA PAGE D'ACCUEIL
+            $article->setCategoryByName($categoryName);
+
+            // RECUPERE UN ARTICLE PAR SON ID ET SA CATEGORIE //
+            $article->setId($articleId);
+            $article->setCategoryByName($categoryName);
+            $article = $article->getArticleByIdAndCategory();
+
+            // SI PAS D'ARTICLE POUR CETTE CATEGORIE //
+            if (empty($article)) {
                 $_SESSION['warning'] = $messageManager->getMessage('error', 'no_article_found');
-                header('Location: /');
-                // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-                exit;
             }
-        } else {
-            // SI AUCUN ID D'ARTICLE N'EST FOURNI, REDIRIGE VERS LA PAGE D'ACCUEIL
-            $messageManager = new MessageManager();
-            $_SESSION['warning'] = $messageManager->getMessage('error', 'unexpected_error');
-            header('Location: /');
-            // ON ARRÊTE L'EXÉCUTION DU SCRIPT //
-            exit;
         }
+        require_once '../views/elements/header.php';
+        require_once '../views/pages/articles/single.php';
+        require_once '../views/elements/footer.php';
     }
 }

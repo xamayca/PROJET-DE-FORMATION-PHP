@@ -1,4 +1,4 @@
-<div>
-    <h1 style="color: #9e9e9e">PAGE 404 MAGGLE</h1>
-    <p>La page que vous cherchez n'existe pas</p>
-</div>
+
+    <h1 id="title-404">PAGE 404</h1>
+    <p id="text-404">La page que vous cherchez n'existe pas</p>
+

@@ -22,10 +22,9 @@ $router->addRoute('/admin', 'Admin', 'adminPanel');
 
 // CREATION DES ROUTES POUR LES ARTICLES //
 $router->addRoute('/creer-un-article', 'Articles', 'createArticle');
-$router->addRoute('/actualites-communaute', 'Articles', 'displayArticlesByCategory', [1]);
-$router->addRoute('/actualites-ark-survival-ascended', 'Articles', 'displayArticlesByCategory', [2]);
-$router->addRoute('/actualites-ark-2', 'Articles', 'displayArticlesByCategory', [3]);
-
+$router->addRoute('/actualite/:string', 'Articles', 'displayArticlesByCategory', ['categoryName']);
+// CREATION DES ROUTES POUR UN ARTICLE //
+$router->addRoute('/actualite/:string/:number', 'Articles', 'displayArticle', ['categoryName', 'articleId']);
 
 // CREATION DES ROUTES POUR LE TEST //
 $router->addRoute('/php-test', 'Pages', 'testPhp');

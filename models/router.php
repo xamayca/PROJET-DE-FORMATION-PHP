@@ -4,47 +4,60 @@ class Router
 {
     private array $routeMappings = [];
 
-    /** AJOUTEZ UNE ROUTE AU ROUTEUR EN L'AJOUTANT AU TABLEAU DES ROUTES */
-    public function addRoute(string $uri, string $controllerName, string $methodName, array $params = [])
+    public function addRoute(string $uri, string $controllerName, string $methodName, array $uriParams = [], array $params = [])
     {
         $this->routeMappings[$uri] = [
             'controller' => $controllerName,
             'method' => $methodName,
+            'uriParams' => $uriParams
         ];
-        if(!empty($params)){
+        if (!empty($params)) {
             $this->routeMappings[$uri]['params'] = $params;
         }
     }
 
-    /** DETERMINE LE CONTROLLER ET LA METHOD A UTILISER EN FONCTION DE L'URI DEMANDER */
     public function dispatch()
     {
-        // OBTIENT L'URL DEMANDER //
+
+        // ON RECUPERE L'URI DE LA REQUETE //
         $requestedUri = $_SERVER['REQUEST_URI'];
 
-        // SI LA ROUTE EST DANS LE TABLEAU DES ROUTES, RÉCUPÈRE LE CONTROLLER ET LA FONCTION LIER //
-        if (array_key_exists($requestedUri, $this->routeMappings)) {
-            $controllerName = $this->routeMappings[$requestedUri]['controller'];
-            $methodName = $this->routeMappings[$requestedUri]['method'];
-        } else {
-            $controllerName = 'Pages';
-            $methodName = 'error404';
-        };
+        // POUR CHAQUE ROUTE, ON COMPARE L'URI DE LA REQUETE AVEC L'URI DE LA ROUTE //
+        foreach ($this->routeMappings as $uri => $route) {
 
-        // INSTANCIE LE CONTROLLER ET APPEL LA FONCTION DEMANDER //
-        require_once __DIR__ . '/../controllers/' . $controllerName . 'Controller.php';
+            // ON CONSTRUIT LE PATTERN DE LA ROUTE AVEC LES PARAMETRES DYNAMIQUES EN UTILISANT DES EXPRESSIONS REGULIERES //
+            $pattern = "@^" . str_replace([':string', ':number'], ['([a-zA-Z0-9-_]+)', '([0-9]+)'], $uri) . "$@D";
 
-        $controllerInstance = $controllerName . 'Controller';
+            // ON COMPARE L'URI DE LA REQUETE AVEC LE PATTERN DE LA ROUTE //
+            if (preg_match($pattern, $requestedUri, $matches)) {
 
-        if(isset($this->routeMappings[$requestedUri]['params'])){
-            $params = $this->routeMappings[$requestedUri]['params'];
-            $controllerInstance = new $controllerInstance();
-            $controllerInstance->$methodName($params);
-            } else {
-            $controllerInstance = new $controllerInstance();
-            $controllerInstance->$methodName();
+                // SI UNE CORRESPONDANCE EST TROUVÉE, ON EXTRAIT LES PARAMETRES DE L'URI //
+                array_shift($matches);
+
+                // ON RECUPERE LE NOM DU CONTROLEUR ET DE LA METHODE //
+                $controllerName = $route['controller'];
+                $methodName = $route['method'];
+
+                // ON INCLUT LE FICHIER DU CONTROLEUR ET ON INSTANCIE LE CONTROLEUR //
+                require_once __DIR__ . '/../controllers/' . $controllerName . 'Controller.php';
+                $controllerInstance = $controllerName . 'Controller';
+                $controllerInstance = new $controllerInstance();
+
+                // ON APPELLE LA METHODE DU CONTROLEUR AVEC LES PARAMETRES //
+                $params = array_combine($route['uriParams'], $matches);
+
+                // SI DES PARAMETRES SONT FOURNIS, ON LES PASSE A LA METHODE //
+                if (isset($route['params'])) {
+                    $controllerInstance->$methodName($params, $route['params']);
+                } else {
+                    $controllerInstance->$methodName($params);
+                }
+                return;
+            }
         }
-
-
+        // SI PAS DE ROUTE TROUVÉE, AFFICHEZ UNE ERREUR 404 //
+        require_once __DIR__ . '/../controllers/PagesController.php';
+        $controllerInstance = new PagesController();
+        $controllerInstance->error404();
     }
 }

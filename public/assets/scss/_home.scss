@@ -1,0 +1,46 @@
+@use "colors" as *;
+@use "mixins" as *;
+
+header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 90dvh;
+  width:100%;
+  background-image: url('../../assets/img/community/header-wallpaper.svg');
+  z-index: 1;
+  background-position: bottom right;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+    section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+      .logo-header{
+        margin-top:10vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 75%;
+
+        #logo{
+          margin-top:2em;
+          width: calc(min(70vw, 50vh));
+          height: calc(min(70vw, 50vh));
+          background-image: url('../../assets/img/community/icon-francesurvival.svg');
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+    }
+  }
+
+  .donate-btn{
+      position:absolute;
+      @include form-button($dark-light-color, $blue-color, lighten($dark-light-color, 10%));
+  }
+}
+
