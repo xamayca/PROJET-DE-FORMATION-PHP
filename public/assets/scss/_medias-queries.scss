@@ -2,6 +2,12 @@
 
 @media screen and (min-width: 1600px) {
 
+    #registration-form, #login-form, #user-profile{
+        margin-top: 5em!important;
+        margin-bottom: 5em;
+        width: 50%;
+    }
+
     #nav-shadow {
         display: none;
     }
@@ -67,7 +73,7 @@
                     }
 
                     /* STYLE POUR LE SOUS MENU 'COMPTE' CENTRAGE DU SOUS MENU */
-                    .sub-items{
+                    .sub-items {
                         transform: translateX(-1em);
                     }
                 }
@@ -124,10 +130,12 @@
                 &:nth-child(3) .sub-items {
                     transform: translateX(-4em);
                 }
+
                 /* STYLE POUR LE SOUS MENU 'CLUSTERS' CENTRAGE DU SOUS MENU */
                 &:nth-child(5) .sub-items {
                     transform: translateX(-1.5em);
                 }
+
                 /* STYLE POUR LE SOUS MENU 'GUIDES' CENTRAGE DU SOUS MENU */
                 &:nth-child(7) .sub-items {
                     transform: translateX(-2.5em);
@@ -135,7 +143,47 @@
             }
         }
     }
+
+    header {
+        position: relative;
+
+        section {
+            position: absolute;
+            left: 10%;
+
+            h1{
+                font-size: 3em;
+            }
+        }
+
+        .donate-btn {
+            padding: 1.3em;
+            font-size: 1.2em;
+            position: absolute;
+            bottom: 10%;
+        }
+    }
+
+    #footer-body {
+        justify-content: space-around;
+
+        #footer-logo {
+            width: 25%!important;
+            height: 25%!important;
+            object-fit: contain;
+        }
+    }
+
+    #about-us{
+        width:70%;
+
+        #about-img{
+            display:block!important;
+        }
+    }
+
 }
+
 
 @media screen and (min-width: 1400px) {
 
