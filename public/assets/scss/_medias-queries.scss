@@ -1,6 +1,12 @@
 @use "colors" as *;
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1000px) {
+
+    #registration-form, #login-form, #user-profile{
+        margin-top: 5em!important;
+        margin-bottom: 5em;
+        width: 50%;
+    }
 
     #nav-shadow {
         display: none;
@@ -18,142 +24,6 @@
             }
         }
 
-
-        #navigation-links {
-            width: 65%;
-            position: initial;
-            background: none;
-            padding: 0;
-            transform: none;
-            height: initial;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: none;
-
-            li a {
-                color: $dark-color;
-            }
-
-            li.dropdown {
-                &:first-child {
-                    position: initial;
-                    order: 1;
-                    margin-bottom: 0;
-                    background-image: none;
-                    box-shadow: none;
-                    border: none;
-
-                    button.dropdown-toggle {
-                        position: initial;
-                        display: flex;
-                        flex-direction: row;
-                        gap: 1em;
-                        color: $dark-color;
-                        justify-content: center;
-                        padding-right: 1em;
-
-                        .avatar {
-                            width: 32px;
-                            height: 32px;
-                            margin-bottom: 0;
-                        }
-
-                        .fa-chevron-down {
-                            position: initial;
-                            order: 1;
-                            bottom: initial;
-                        }
-                    }
-
-                    /* STYLE POUR LE SOUS MENU 'COMPTE' CENTRAGE DU SOUS MENU */
-                    .sub-items{
-                        transform: translateX(-1em);
-                    }
-                }
-
-                button.dropdown-toggle {
-                    position: relative;
-                    width: fit-content;
-                    color: $dark-color;
-                    padding-right: 2em;
-
-                    .fa-chevron-down {
-                        font-size: 1em;
-                        right: 0;
-                        z-index: 1;
-                    }
-                }
-
-                .sub-items {
-                    position: absolute;
-                    top: 100%;
-                    background: linear-gradient(to bottom, $dark-light-color, darken($dark-light-color, 10%));
-
-
-                    li a {
-                        position: relative;
-                        overflow: hidden;
-                        padding: 2em;
-                        gap: 1em;
-                        color: white;
-                        z-index: 1;
-                        font-size: 1em;
-                        font-weight: bold;
-
-                        .game-logo {
-                            position: absolute;
-                            left: 1em;
-                            width: 64px;
-                            height: 64px;
-                            z-index: -1;
-                            transform: rotate(20deg) scale(1) translateX(-50%);
-                            opacity: 0;
-                            transition: all 1s ease-in-out;
-                        }
-
-                        &:hover .game-logo {
-                            opacity: 0.4;
-                            transform: rotate(30deg) scale(3) translateX(0%);
-                            transition: all 1s ease-in-out;
-                        }
-                    }
-                }
-
-                /* STYLE POUR LE SOUS MENU 'ACTUALITÉS' CENTRAGE DU SOUS MENU */
-                &:nth-child(3) .sub-items {
-                    transform: translateX(-4em);
-                }
-                /* STYLE POUR LE SOUS MENU 'CLUSTERS' CENTRAGE DU SOUS MENU */
-                &:nth-child(5) .sub-items {
-                    transform: translateX(-1.5em);
-                }
-                /* STYLE POUR LE SOUS MENU 'GUIDES' CENTRAGE DU SOUS MENU */
-                &:nth-child(7) .sub-items {
-                    transform: translateX(-2.5em);
-                }
-            }
-        }
-    }
-}
-
-@media screen and (min-width: 1400px) {
-
-    #nav-shadow {
-        display: none;
-    }
-
-    nav {
-        #nav-open,
-        #nav-close {
-            display: none;
-        }
-
-        .brand:first-child {
-            .brand-logo {
-                display: initial;
-            }
-        }
 
         #navigation-links {
             position: initial;
@@ -257,16 +127,19 @@
 
                 /* STYLE POUR LE SOUS MENU 'COMPTE' CENTRAGE DU SOUS MENU */
                 &:nth-child(1) .sub-items {
-                    transform: translateX(-0.5em);
+                    transform: translateX(2em);
                 }
+
                 /* STYLE POUR LE SOUS MENU 'ACTUALITÉS' CENTRAGE DU SOUS MENU */
                 &:nth-child(3) .sub-items {
                     transform: translateX(-4em);
                 }
+
                 /* STYLE POUR LE SOUS MENU 'CLUSTERS' CENTRAGE DU SOUS MENU */
                 &:nth-child(5) .sub-items {
                     transform: translateX(-1.5em);
                 }
+
                 /* STYLE POUR LE SOUS MENU 'GUIDES' CENTRAGE DU SOUS MENU */
                 &:nth-child(7) .sub-items {
                     transform: translateX(-2.5em);
@@ -274,4 +147,43 @@
             }
         }
     }
+
+    header {
+        position: relative;
+
+        section {
+            position: absolute;
+            left: 10%;
+
+            h1{
+                font-size: 3em;
+            }
+        }
+
+        .donate-btn {
+            padding: 1.3em;
+            font-size: 1.2em;
+            position: absolute;
+            bottom: 10%;
+        }
+    }
+
+    #footer-body {
+        justify-content: space-around;
+
+        #footer-logo {
+            width: 25%!important;
+            height: 25%!important;
+            object-fit: contain;
+        }
+    }
+
+    #about-us{
+        width:70%;
+
+        #about-img{
+            display:block!important;
+        }
+    }
+
 }

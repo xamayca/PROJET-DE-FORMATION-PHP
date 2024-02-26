@@ -14,13 +14,24 @@ header{
   background-size: contain;
   background-repeat: no-repeat;
 
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2em;
+    border-bottom: 0.5em solid;
+    border-image: linear-gradient(to right, transparent, $dark-color, transparent);
+    border-image-slice: 1;
+  }
+
     section{
         display: flex;
         flex-direction: column;
         align-items: center;
 
       .logo-header{
-        margin-top:10vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -39,8 +50,103 @@ header{
   }
 
   .donate-btn{
-      position:absolute;
-      @include form-button($dark-light-color, $blue-color, lighten($dark-light-color, 10%));
+      @include form-button($dark-color, $white-color, lighten($dark-light-color, 10%));
+    width: auto;
+    border: solid 1px $white-color;
+    box-shadow: 0 5px 5px 0 $dark-color;
   }
 }
 
+#about-us{
+  margin-top: 5em;
+  margin-bottom: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:90%;
+  padding: 1em;
+
+  h3{
+    margin-bottom: 3em;
+    font-size: 3em;
+    color: $white-color;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  #about-us-body{
+    margin-top: 5em;
+    margin-bottom: 5em;
+    display: flex;
+    align-items: center;
+    gap:1em;
+
+    #about-img{
+      display: none;
+      margin-right: 5em;
+      object-fit: contain;
+      width:50%;
+      height: 50%;
+      transition: all 0.3s ease-in-out;
+
+      &:hover{
+        transform: scale(1.1);
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    #about-us-content{
+      display: flex;
+      flex-direction: column;
+
+      p{
+        line-height: 2em;
+        color: $white-color;
+        font-size: 1.2em;
+        text-align: left;
+      }
+    }
+  }
+}
+
+#social{
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5em;
+  margin-bottom: 5em;
+
+  h4{
+    margin-bottom: 3em;
+    font-size: 3em;
+    color: $white-color;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  #social-links{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5em;
+
+    a{
+      padding: 5em;
+      width: auto;
+
+      .social-img{
+        width: 5em;
+        height: 5em;
+        transition: all 0.3s ease-in-out;
+
+        &:hover{
+          transform: scale(1.4);
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+}

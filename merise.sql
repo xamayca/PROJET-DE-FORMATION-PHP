@@ -24,7 +24,7 @@ CREATE TABLE gt3f5b_users(
                              birthdate       Date ,
                              email           Varchar (100) NOT NULL ,
                              password        Varchar (255) NOT NULL ,
-                             phone           Varchar (15) NOT NULL ,
+                             phone           Varchar (15) ,
                              registerDate    Datetime NOT NULL ,
                              signature       Varchar (50) ,
                              avatar          Varchar (255) ,
